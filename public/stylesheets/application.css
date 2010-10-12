@@ -1,0 +1,141 @@
+body { font-size: 13px; }
+
+h1 { font-size: 1.8em; text-shadow: 1px 1px 4px #999; }
+h2 { font-size: 1.5em; }
+h3 { font-size: 1.4em; }
+h4 { font-size: 1.2em; }
+h5 { font-size: 1.1em; }
+
+h1 img, h2 img { vertical-align:middle; }
+
+h4 { font-weight: bold; }
+
+a:link, a:visited, a:active { text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+textarea { vertical-align: top; font-size: 13px; font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; }
+
+p + p { margin-top: -0.8em; text-indent: 0; }
+
+legend { font-size: 1.0em }
+
+input[type="checkbox"], input[type="radio"], input.checkbox, input.radio { top: 0 }
+.small_text input[type="checkbox"], input[type="radio"], input.checkbox, input.radio { top: 0.25em }
+
+.error, .notice, .success { margin: 10px; }
+
+.caps { font-size: 1em; font-variant: normal; letter-spacing: 0; padding: 0; text-transform: none; }
+
+/* elements and classes likely to be customized/overridden */
+.base_content {
+  background: #fff;
+}
+
+.inner_content { 
+  padding: 16px;
+}
+
+.top-banner { 
+  background: #336;
+  /* margin: 10px; */
+  -webkit-border-bottom-left-radius: 8px;
+  -moz-border-radius-bottomleft: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.header h1 { font-size: 2.0em; color: #CCC; padding: 12px 12px 0; }
+
+#main_menu { 
+  background: #CCF; color: #223; font-size: 20px;
+  -webkit-border-bottom-right-radius: 8px;
+  -webkit-border-bottom-left-radius: 8px;
+  -moz-border-radius-bottomright: 8px;
+  -moz-border-radius-bottomleft: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border: 3px #336 solid;
+  border-top: none;
+}
+
+#main_menu ul { list-style: none; padding-top: 8px; margin-left: 18px; margin-bottom: 12px; line-height: 175%; }
+#main_menu a:link, #main_menu a:visited { color: #339; }
+#main_menu a:hover { color: #66C; }
+
+#user_box { 
+  float: right; padding: 6px 12px; font-size: 11px; background: #EEE;
+  -moz-border-radius: 8px; -webkit-border-radius: 8px; margin: 10px;
+}
+
+.sidebar { padding: 3px 6px; font-size: 11px; margin-top: 40px; }
+.sidebar h4 { color: #666; }
+
+/* end customizable elements and classes */
+
+
+
+
+/* embeds the openid image in the text field */
+input#user_openid_identifier, input#user_session_openid_identifier {
+    background: url(http://openid.net/images/login-bg.gif) no-repeat;
+    background-color: #fff;
+    background-position: 0 50%;
+    color: #000;
+    padding-left: 18px;
+}
+
+ul.contact_attributes { list-style-type: none; }
+ul.contact_attributes li { clear:both; }
+ul.contact_attributes li strong { padding-right: 5px; }
+ul.contact_attributes div { padding: 0 5px }
+
+
+div.select_popper_box ul li:hover { background: #EEE; }
+
+
+/* pagination */
+
+.pagination {
+  padding: 3px;
+  margin: 3px;
+}
+.pagination a {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  border: 1px solid #aaaadd;
+  text-decoration: none;
+  color: #000099;
+  background-color: #FFF;
+}
+.pagination a:hover, .pagination a:active {
+  border: 1px solid #000099;
+  color: #000;
+}
+.pagination span.current {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  border: 1px solid #000099;
+  font-weight: bold;
+  background-color: #000099;
+  color: #FFF;
+}
+.pagination span.disabled {
+  display:none;
+}
+
+
+/* event calendars */
+.calendars { width: 260px; float: left; padding-right: 20px; }
+/* #event_description { position: absolute; width: 150px; background: #EEE; border: 1px solid #999; z-index: 99; } */
+#event_quick_description { clear: both; border: 1px solid #999; background: #FFC; padding: 12px; margin-top: 15px; }
+.fc-grid table { margin-bottom: 0 }
+.fc table { margin-bottom: 0; }
+#calendar_front_page { font-size: 12px; }
+#calendar_front_page h2 { font-size: 1.3em }
+
+/* look like a button */
+.fake_button {
+  font-size: 11px;
+  font-weight: bold;
+  border: 1px solid #2f4f4f;
+  padding: 0 3px 0 3px;
+}

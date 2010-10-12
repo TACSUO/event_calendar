@@ -1,0 +1,35 @@
+<div style="width: 550px;">
+<%= semantic_form_for @event do |form| %>
+  <%= form.inputs do %>
+    <%= form.input :name, :hint => "the name of the event" %>
+    <%= form.input :event_type, :hint => "conference, meeting, training, etc" %>
+    <%= form.input :start_on, :required => false, :label => "Starting date of event", :as => :string,
+          :input_html => { :value => @event.start_on.to_s } %>
+    <%= form.input :end_on, :required => false, :label => "Ending date of event", :as => :string,
+          :input_html => { :value => @event.end_on.to_s } %>
+    <%= form.input :location, :required => false, :label => 'Location' %>
+    <%= form.input :description, :required => false, :label => 'Description' %>
+    <% unless @event.new_record? %>
+      <%= form.input :notes, :required => false, :label => 'Notes' %>
+    <% end %>
+  <% end %>
+
+  <%= form.submit %>
+<% end %>
+
+</div>
+
+
+<% content_for :javascript do %>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#event_event_type').attach(SelectPopper, <%= Event.existing_event_types.to_json %>);
+    
+    $('form.formtastic fieldset ol li.text textarea').attach(TextareaExpander, 40, 300);
+
+    $('#event_start_on').datepicker();
+    $('#event_end_on').datepicker();
+  });
+</script>
+
+<% end %>

@@ -1,0 +1,26 @@
+<p>
+  <strong><%= event_details.name %></strong><br/>
+  <em><%= event_details.event_type %></em>
+</p>
+
+<p>
+  <strong>When:</strong>
+  <%= event_details.start_on %>
+  <% if event_details.end_on %>
+    - <%=  event_details.end_on %>
+  <% end %>
+</p>
+
+<% unless event_details.location.blank? %>
+<p>
+  <strong>Where:</strong><br/>
+  <%= textilize_without_paragraph event_details.location %>
+</p>
+<% end %>
+
+<% unless event_details.description.blank? %>
+<p>
+  <strong>Description/Other Details:</strong>
+  <%= textilize_without_paragraph event_details.description %>
+</p>
+<% end %>

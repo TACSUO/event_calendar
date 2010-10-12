@@ -1,4 +1,7 @@
 EventCalendar::Application.routes.draw do
+  root :to => "events#index"
+  resources :events
+  resources :event_revisions, :only => [:show, :index]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

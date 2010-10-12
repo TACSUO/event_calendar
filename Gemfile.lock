@@ -1,72 +1,41 @@
-GIT
-  remote: git://github.com/inertialbit/acts_as_revisable.git
-  revision: 7d113031899913e0ecd6048792a00f56b0e54506
-  branch: rails3
+PATH
+  remote: /Users/jf/work/rails/gh/acts_as_revisable
   specs:
     acts_as_revisable (1.1.2)
-
-GIT
-  remote: git://github.com/rack/rack.git
-  revision: 1598f873c891288954981435e707de26cf49395d
-  specs:
-    rack (1.2.1)
-
-GIT
-  remote: git://github.com/rails/arel.git
-  revision: 9742785d5c0c076056daf346bf4f37a8348fa412
-  specs:
-    arel (2.0.0.dev.20100924164835)
-
-GIT
-  remote: git://github.com/rails/rails.git
-  revision: e0b76d6151821527f16b3f163abde3ebea1b2a50
-  specs:
-    actionmailer (3.1.0.beta)
-      actionpack (= 3.1.0.beta)
-      mail (~> 2.2.6.1)
-    actionpack (3.1.0.beta)
-      activemodel (= 3.1.0.beta)
-      activesupport (= 3.1.0.beta)
-      builder (~> 2.1.2)
-      erubis (~> 2.6.6)
-      i18n (~> 0.4.1)
-      rack (~> 1.2.1)
-      rack-cache (~> 0.5.3)
-      rack-cache-purge (~> 0.0.1)
-      rack-mount (~> 0.6.13)
-      rack-test (~> 0.5.6)
-      tzinfo (~> 0.3.23)
-    activemodel (3.1.0.beta)
-      activesupport (= 3.1.0.beta)
-      builder (~> 2.1.2)
-      i18n (~> 0.4.1)
-    activerecord (3.1.0.beta)
-      activemodel (= 3.1.0.beta)
-      activesupport (= 3.1.0.beta)
-      arel (~> 2.0.0)
-      tzinfo (~> 0.3.23)
-    activeresource (3.1.0.beta)
-      activemodel (= 3.1.0.beta)
-      activesupport (= 3.1.0.beta)
-    activesupport (3.1.0.beta)
-    rails (3.1.0.beta)
-      actionmailer (= 3.1.0.beta)
-      actionpack (= 3.1.0.beta)
-      activerecord (= 3.1.0.beta)
-      activeresource (= 3.1.0.beta)
-      activesupport (= 3.1.0.beta)
-      bundler (~> 1.0.0)
-      railties (= 3.1.0.beta)
-    railties (3.1.0.beta)
-      actionpack (= 3.1.0.beta)
-      activesupport (= 3.1.0.beta)
-      rake (>= 0.8.7)
-      thor (~> 0.14.3)
 
 GEM
   remote: http://rubygems.org/
   specs:
+    RedCloth (4.2.3)
     abstract (1.0.0)
+    actionmailer (3.0.0)
+      actionpack (= 3.0.0)
+      mail (~> 2.2.5)
+    actionpack (3.0.0)
+      activemodel (= 3.0.0)
+      activesupport (= 3.0.0)
+      builder (~> 2.1.2)
+      erubis (~> 2.6.6)
+      i18n (~> 0.4.1)
+      rack (~> 1.2.1)
+      rack-mount (~> 0.6.12)
+      rack-test (~> 0.5.4)
+      tzinfo (~> 0.3.23)
+    activemodel (3.0.0)
+      activesupport (= 3.0.0)
+      builder (~> 2.1.2)
+      i18n (~> 0.4.1)
+    activerecord (3.0.0)
+      activemodel (= 3.0.0)
+      activesupport (= 3.0.0)
+      arel (~> 1.0.0)
+      tzinfo (~> 0.3.23)
+    activeresource (3.0.0)
+      activemodel (= 3.0.0)
+      activesupport (= 3.0.0)
+    activesupport (3.0.0)
+    arel (1.0.1)
+      activesupport (~> 3.0.0)
     builder (2.1.2)
     capybara (0.3.9)
       culerity (>= 0.2.4)
@@ -101,34 +70,48 @@ GEM
     i18n (0.4.1)
     json (1.4.6)
     json_pure (1.4.6)
-    mail (2.2.6.1)
+    mail (2.2.7)
       activesupport (>= 2.3.6)
       mime-types
       treetop (>= 1.4.5)
     mime-types (1.16)
     nokogiri (1.4.3.1)
     polyglot (0.3.1)
-    rack-cache (0.5.3)
-      rack (>= 0.4)
-    rack-cache-purge (0.0.2)
-      rack-cache (~> 0.5)
+    prarupa (0.1.2)
+      RedCloth (~> 4.2)
+      rdiscount (~> 1.6)
+    rack (1.2.1)
     rack-mount (0.6.13)
       rack (>= 1.0.0)
     rack-test (0.5.6)
       rack (>= 1.0)
+    rails (3.0.0)
+      actionmailer (= 3.0.0)
+      actionpack (= 3.0.0)
+      activerecord (= 3.0.0)
+      activeresource (= 3.0.0)
+      activesupport (= 3.0.0)
+      bundler (~> 1.0.0)
+      railties (= 3.0.0)
+    railties (3.0.0)
+      actionpack (= 3.0.0)
+      activesupport (= 3.0.0)
+      rake (>= 0.8.4)
+      thor (~> 0.14.0)
     rake (0.8.7)
-    rspec (2.0.0.beta.22)
-      rspec-core (= 2.0.0.beta.22)
-      rspec-expectations (= 2.0.0.beta.22)
-      rspec-mocks (= 2.0.0.beta.22)
-    rspec-core (2.0.0.beta.22)
-    rspec-expectations (2.0.0.beta.22)
+    rdiscount (1.6.5)
+    rspec (2.0.0.rc)
+      rspec-core (= 2.0.0.rc)
+      rspec-expectations (= 2.0.0.rc)
+      rspec-mocks (= 2.0.0.rc)
+    rspec-core (2.0.0.rc)
+    rspec-expectations (2.0.0.rc)
       diff-lcs (>= 1.1.2)
-    rspec-mocks (2.0.0.beta.22)
-      rspec-core (= 2.0.0.beta.22)
-      rspec-expectations (= 2.0.0.beta.22)
-    rspec-rails (2.0.0.beta.22)
-      rspec (= 2.0.0.beta.22)
+    rspec-mocks (2.0.0.rc)
+      rspec-core (= 2.0.0.rc)
+      rspec-expectations (= 2.0.0.rc)
+    rspec-rails (2.0.0.rc)
+      rspec (= 2.0.0.rc)
     rubyzip (0.9.4)
     selenium-webdriver (0.0.29)
       childprocess (>= 0.0.7)
@@ -147,13 +130,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  RedCloth
   acts_as_revisable!
-  arel!
   capybara
   cucumber-rails
   formtastic
-  rack!
-  rails!
-  rspec-rails (= 2.0.0.beta.22)
+  prarupa
+  rails (= 3.0.0)
+  rspec-rails (= 2.0.0.rc)
   sqlite3-ruby
   will_paginate (~> 3.0.pre2)

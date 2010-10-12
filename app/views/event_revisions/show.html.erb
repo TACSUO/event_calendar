@@ -1,0 +1,5 @@
+<p>
+  <%= link_to "< Current Version", event_calendar.event_path(@event_revision.current_revision), :class => 'fake_button' %>
+</p>
+<h1>Event - Version: <%= @event_revision.revision_number %><hr /></h1>
+<%= render :partial => 'events/event_details', :object => @event_revision %>

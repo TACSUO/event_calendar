@@ -1,0 +1,11 @@
+<div class="span-16">
+  <h1>Search Results</h1>
+  
+  <% unless @events.empty? %>
+    <%= render :partial => 'event', :collection => @events %>
+  <% else %>
+    <p>Sorry no events could be located, try broadening your search terms or using partial words.</p>
+  <% end %>
+</div>
+
+<%= render :partial => 'sidebar' %>
