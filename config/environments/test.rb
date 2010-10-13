@@ -32,4 +32,7 @@ EventCalendar::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # require all spec_helpers/*
+  Dir[File.expand_path(File.join(File.dirname(__FILE__),'..','..','spec','spec_helpers','**','*.rb'))].each {|f| require f}
 end

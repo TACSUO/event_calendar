@@ -16,7 +16,7 @@ class Event < ActiveRecord::Base
   
   searchable_by :name, :event_type, :location, :description
   
-  acts_as_revisable :revision_class_name => 'EventRevision', :on_destroy => :revise
+  acts_as_revisable :revision_class_name => 'EventRevision', :on_delete => :revise
   
   validate :sane_dates
 

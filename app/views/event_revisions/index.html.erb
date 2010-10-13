@@ -1,0 +1,31 @@
+<table class="nice_table tablesorter">
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Location</th>
+      <th>Description</th>
+      <th style="border: 1px #CCF dashed; text-align:center">Manage</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% for event in @deleted_events %>
+    <tr style="background-color: #f5c6d7;">
+      <td><%= link_to event.name, event_calendar.event_path(event) %></td>
+      <td><%= truncate(event.location, :length => 100) %></td>
+      <td><%= truncate(event.description, :length => 100) %></td>
+      <td><%= link_to 'restore', event_calendar.restore_event_revision_path(event),
+                  :confirm => 'Are you sure you want to restore this deleted event?',
+                  :method => "post",
+                  :class => 'fake_button' %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<script type="text/javascript">
+$(document).ready(function()
+  {
+    $(".nice_table").tablesorter( { widgets: ['zebra'], headers: { 3:{sorter: false}, 4:{sorter: false}, 5:{sorter: false}} });
+  }
+);
+</script>

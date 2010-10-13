@@ -1,0 +1,8 @@
+editable_event:
+  id: <%= Fixtures.identify :editable_event %>
+  name: Editable Event
+  event_type: Conference
+  location: "Eugene, Oregon"
+  description: "Will be great! Lots of good info, food and drinks!"
+  start_on: "10/14/2010"
+  end_on: "10/15/2010"

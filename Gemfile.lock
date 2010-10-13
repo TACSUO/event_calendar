@@ -34,6 +34,9 @@ GEM
       activemodel (= 3.0.0)
       activesupport (= 3.0.0)
     activesupport (3.0.0)
+    acts_as_fu (0.0.7.2)
+      activerecord
+      sqlite3-ruby
     arel (1.0.1)
       activesupport (~> 3.0.0)
     builder (2.1.2)
@@ -131,12 +134,13 @@ PLATFORMS
 
 DEPENDENCIES
   RedCloth
+  acts_as_fu
   acts_as_revisable!
   capybara
   cucumber-rails
   formtastic
   prarupa
-  rails (= 3.0.0)
+  rails (>= 3.0.0)
   rspec-rails (= 2.0.0.rc)
   sqlite3-ruby
   will_paginate (~> 3.0.pre2)

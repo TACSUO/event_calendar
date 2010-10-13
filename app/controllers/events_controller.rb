@@ -77,7 +77,6 @@ class EventsController < ApplicationController
         format.html { redirect_to(@event) }
         format.xml  { head :ok }
       else
-        logger.error("EVENT UPDATE FAILED - #{@event.errors.full_messages.join('; ')}")
         format.html { render :action => "edit" }
         format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
       end
@@ -89,7 +88,7 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find(params[:id])
     @event.destroy
-
+    
     respond_to do |format|
       format.html { redirect_to(events_url) }
       format.xml  { head :ok }

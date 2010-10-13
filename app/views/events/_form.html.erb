@@ -23,7 +23,7 @@
 <% content_for :javascript do %>
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#event_event_type').attach(SelectPopper, <%= Event.existing_event_types.to_json %>);
+    $('#event_event_type').attach(SelectPopper, <%= "#{Event.existing_event_types.to_json}".html_safe %>);
     
     $('form.formtastic fieldset ol li.text textarea').attach(TextareaExpander, 40, 300);
 
