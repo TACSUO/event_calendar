@@ -43,7 +43,7 @@
     </div>
 
     <div class="base_content span-20">
-      <%= render :partial => 'event-calendar-shared/flash', :object => flash %>
+      <%= render_flash %>
       <div class="inner_content">
         <%= yield %>
       </div>
@@ -51,11 +51,11 @@
 
     <div class="span-4 last">
       <div id="main_menu">
-        <%= render :partial => 'event-calendar-shared/main_menu' %>
+        <%= render_event_main_menu %>
       </div>
 
       <div class="sidebar">
-        <%= render :partial => 'event-calendar-shared/navigation' %>
+        <%= render_event_navigation(@event) %>
       </div>
 
     </div>

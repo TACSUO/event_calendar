@@ -95,7 +95,12 @@ class EventsController < ApplicationController
     end
   end
 
-
+  def attendees
+    @event = Event.find(params[:id])
+    @participants = Participant.types.collect do |type|
+      type.send(:find, :all)
+    end.flatten
+  end
 
   # def drop_contact
   #   @event = Event.find(params[:id])

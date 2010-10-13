@@ -139,3 +139,23 @@ div.select_popper_box ul li:hover { background: #EEE; }
   border: 1px solid #2f4f4f;
   padding: 0 3px 0 3px;
 }
+
+.nav_highlight p, .nav_highlight a:link, .nav_highlight a:visited {
+  background-color: #333366;
+  font: 1.2em bold;
+  color: white;
+  padding: 3px 5px;
+  -webkit-border-top-left-radius: 8px;
+  -webkit-border-bottom-left-radius: 8px;
+  -moz-border-radius-topleft: 8px;
+  -moz-border-radius-bottomleft: 8px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  
+  -webkit-border-top-right-radius: 8px;
+  -webkit-border-bottom-right-radius: 8px;
+  -moz-border-radius-topright: 8px;
+  -moz-border-radius-bottomright: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}

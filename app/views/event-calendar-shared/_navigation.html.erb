@@ -1,40 +1,15 @@
   <h4>Manage Events</h4>
   
-  <p<%= "#{' class="nav_highlight"' if current_page?(event_calendar.new_event_path)}"%>>
-    <%= link_to "Create New Event", event_calendar.new_event_path %>
-  </p>
-  <p<%= "#{' class="nav_highlight"' if current_page?(event_calendar.new_event_path)}"%>>
-    <%= link_to "Restore Deleted Events (#{EventRevision.deleted.count})", event_calendar.event_revisions_path %>
-  </p>
+  <%= link_to_new_event %>
+  <%= link_to_deleted_events %>
   
-  <% if @event && !@event.new_record? %>
+  <% if event && !event.new_record? %>
   <hr />
-  <p<%= "#{' class="nav_highlight"' if current_page?(event_calendar.edit_event_path(@event))}"%>>
-    <%= link_to "Edit <em>#{@event.name}</em>".html_safe, event_calendar.edit_event_path(@event) %>
-  </p>
-  <p>
-    <%= link_to "Delete <em>#{@event.name}</em>".html_safe, event_calendar.event_path(@event),
-                :confirm => 'Are you sure you want to permanently delete this event?',
-                :method => "delete" %>
-  </p>
   
-  <h4>Browse Revisions (<%= @event.revisable_number %>)</h4>
+  <%= link_to_event_attendees(event) %>
+  <%= link_to_edit_event(event) %>
 
-  <% if @event.revisions.empty? %>
-    <p><em>This is the first version of this event.</em></p>
-  <% else %>
-    <%= form_tag event_calendar.event_revisions_path, :method => :get do %>
-      <select name="id">
-        <% @event.revisions.each do |evr| %>
-          <option value="<%= evr.id %>">
-            Version <%= evr.revisable_number %>
-            (<%= evr.revisable_current_at.strftime "%m/%d/%y" %>)
-          </option>
-        <% end %>
-      </select>
-      <%= submit_tag "go"  %>
-    <% end %>
-  <% end %>
-
-  <p>current version modified on <%= @event.updated_at %></p>
+  <%= link_to_delete_event(event) %>
+  
+  <%= form_for_browse_event_revisions(event) %>
   <% end %>

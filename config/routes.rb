@@ -1,6 +1,12 @@
 EventCalendar::Application.routes.draw do
   root :to => "events#index"
-  resources :events
+  resources :events do
+    member do
+      get :attendees
+      post :add_attendees
+      post :drop_attendees
+    end
+  end
   resources :event_revisions do
     member do
       post :restore
