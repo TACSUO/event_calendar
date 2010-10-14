@@ -1,5 +1,6 @@
+<% submission_path = @event.new_record? ? event_calendar.events_path : event_calendar.event_path(@event) %>
 <div style="width: 550px;">
-<%= semantic_form_for @event do |form| %>
+<%= semantic_form_for(@event, :url => submission_path) do |form| %>
   <%= form.inputs do %>
     <%= form.input :name, :hint => "the name of the event" %>
     <%= form.input :event_type, :hint => "conference, meeting, training, etc" %>

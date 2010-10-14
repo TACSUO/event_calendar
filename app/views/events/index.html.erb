@@ -16,17 +16,17 @@ $(document).ready(function()
     $(".nice_table").tablesorter( { widgets: ['zebra'], headers: { 3:{sorter: false}, 4:{sorter: false}, 5:{sorter: false}} });
     
     $('#calendar_now').fullCalendar({ 
-      editable: false, events: "/events", height: 300, aspectRatio: 1.2,
+      editable: false, events: '<%= event_calendar.events_path %>', height: 300, aspectRatio: 1.2,
       buttonText: { today:null, prev:null, next: null }, eventMouseover: updateEventDescription
     });
     
     $('#calendar_one_month').fullCalendar({ 
-      editable: false, events: "/events", height: 300, aspectRatio: 1.2,
+      editable: false, events: '<%= event_calendar.events_path %>', height: 300, aspectRatio: 1.2,
       buttonText: { today:null, prev:null, next: null }, eventMouseover: updateEventDescription
     });
     
     $('#calendar_two_months').fullCalendar({ 
-      editable: false, events: "/events", height: 300, aspectRatio: 1.2,
+      editable: false, events: '<%= event_calendar.events_path %>', height: 300, aspectRatio: 1.2,
       buttonText: { today:null }, eventMouseover: updateEventDescription,
       month: $('#calendar_one_month').fullCalendar('getDate').getMonth() + 1,
       viewDisplay: function(view) {

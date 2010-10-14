@@ -1,4 +1,4 @@
-EventCalendar::Application.routes.draw do
+EventCalendar.app_type.routes.draw do
   root :to => "events#index"
   resources :events do
     member do

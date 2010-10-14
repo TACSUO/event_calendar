@@ -65,11 +65,11 @@ class Event < ActiveRecord::Base
       "#{name} (#{start_on} #{end_on ? ' - ' + end_on.to_s : ''})"
     end
   
-    def to_hash_for_calendar
+    def to_hash_for_calendar(url)
       # { :id => id, :title => name_and_file_count, :start => start_on, :end => end_on, :url => "/events/#{id}", 
       #   :description => description && description.gsub("\n", "<br/>") || '',
       #   :location => location && location.gsub("\n", "<br/>") || '' }
-      { :id => id, :title => name, :start => start_on, :end => end_on, :url => "/events/#{id}", 
+      { :id => id, :title => name, :start => start_on, :end => end_on, :url => url, 
         :description => description && description.gsub("\n", "<br/>") || '',
         :location => location && location.gsub("\n", "<br/>") || '' }
     end
