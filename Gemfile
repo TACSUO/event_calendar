@@ -9,9 +9,8 @@ gem 'prarupa'
 gem 'will_paginate', '~> 3.0.pre2'
 gem 'formtastic'
 gem 'acts_as_revisable', {
-  :path => "/Users/jf/work/rails/gh/acts_as_revisable"
-  #:git => "git://github.com/inertialbit/acts_as_revisable.git",
-  #:branch => 'rails3'
+  :git => "git://github.com/inertialbit/acts_as_revisable.git",
+  :branch => 'rails3'
 }
 
 group :development, :test do
