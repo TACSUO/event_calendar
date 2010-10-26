@@ -3,10 +3,10 @@
   <%= link_to_new_event %>
   <%= link_to_deleted_events %>
   
-  <% if event && !event.new_record? %>
+  <% if defined?(event) && !event.nil? && !event.new_record? %>
   <hr />
   
-  <%= link_to_event_attendees(event) %>
+  <%= link_to_add_event_attendees(event) %>
   <%= link_to_edit_event(event) %>
 
   <%= link_to_delete_event(event) %>

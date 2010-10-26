@@ -1,4 +1,4 @@
-class ApplicationController < ActionController::Base
+class EventCalendar::ApplicationController < defined?(ApplicationController) ? ApplicationController : ActionController::Base
   protect_from_forgery
 
   helper_method :event_calendar

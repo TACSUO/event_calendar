@@ -30,6 +30,13 @@ class Event < ActiveRecord::Base
     
   protected
   public
+  
+    def participants
+      return [] if attendees.count == 0
+      attendees.all.collect do |attendee|
+        attendee.participant
+      end
+    end
 
     def self.existing_event_types
       select('DISTINCT event_type').map(&:event_type).reject { |ev| ev.blank? }.sort

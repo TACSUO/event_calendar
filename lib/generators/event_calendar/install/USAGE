@@ -1,0 +1,5 @@
+Description:
+    Install event_calendar
+
+Example:
+    rails generate event_calendar:install

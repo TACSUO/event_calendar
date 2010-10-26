@@ -14,8 +14,10 @@ gem 'acts_as_revisable', {
 }
 
 group :development, :test do
+  gem 'engineer'
   gem 'rspec-rails', '2.0.1'
   gem 'cucumber-rails'
   gem 'capybara'
   gem 'acts_as_fu'
+  gem 'rcov'
 end

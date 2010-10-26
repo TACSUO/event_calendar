@@ -1,4 +1,4 @@
-class EventRevisionsController < ApplicationController
+class EventRevisionsController < EventCalendar::ApplicationController
   
   layout "event-calendar"
   

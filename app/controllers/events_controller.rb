@@ -1,4 +1,4 @@
-class EventsController < ApplicationController
+class EventsController < EventCalendar::ApplicationController
 
   layout "event-calendar"
   
@@ -101,13 +101,6 @@ class EventsController < ApplicationController
       format.html { redirect_to(event_calendar.events_path) }
       format.xml  { head :ok }
     end
-  end
-
-  def attendees
-    @event = Event.find(params[:id])
-    @participants = Participant.types.collect do |type|
-      type.send(:find, :all)
-    end.flatten
   end
 
   # def drop_contact

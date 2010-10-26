@@ -39,7 +39,4 @@ module EventCalendar
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
   end
-  
-  mattr_reader :app_type
-  @@app_type = EventCalendar::Application
 end

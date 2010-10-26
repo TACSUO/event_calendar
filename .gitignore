@@ -5,3 +5,5 @@ tmp/**/*
 config/database.yml
 .rvmrc
 .DS_Store
+*.gem
+coverage/

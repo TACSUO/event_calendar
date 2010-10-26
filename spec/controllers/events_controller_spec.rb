@@ -3,11 +3,6 @@ require 'spec_helper'
 describe require 'spec_helper'
 
 describe EventsController do
-
-  def mock_event(stubs={})
-    @mock_event ||= mock_model(Event, stubs)
-  end
-
   # def mock_admin_user(stubs={})
   #   @mock_admin_user ||= mock_model(User, stubs.merge({
   #     :role => 'admin',
@@ -167,38 +162,7 @@ describe EventsController do
         delete :destroy, :id => "1"
         response.should redirect_to(events_url)
       end
-    end
-    
-    describe ":attendees, :id => required" do
-      before(:each) do
-        Event.stub(:find).and_return(mock_event)
-        class FakeModel
-          extend ActiveModel::Naming
-          def self.find(*args)
-            new
-          end
-        end
-        @fake_model = mock_model('FakeModel')
-        Participant.stub(:types).and_return([FakeModel])
-      end
-      
-      it "loads an @event" do
-        Event.should_receive(:find).and_return(mock_event)
-        get :attendees, :id => "1"
-        assigns[:event].should eql mock_event
-      end
-      
-      it "loads all Participant model instances as @participants" do
-        FakeModel.should_receive(:find).and_return([@fake_model])
-        get :attendees, :id => "1"
-        assigns[:participants].should eql [@fake_model]
-      end
-      it "renders the attendees template" do
-        get :attendees, :id => "1"
-        response.should render_template("events/attendees")
-      end
-    end
-    
+    end    
   end
 
 end
