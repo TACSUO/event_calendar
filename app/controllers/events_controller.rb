@@ -14,7 +14,7 @@ class EventsController < EventCalendar::ApplicationController
       format.xml  { render :xml => @events }
       format.js do
         json = @events.map do |e|
-          e.to_hash_for_calendar(event_calendar.event_path(e))
+          e.to_hash_for_calendar(event_path(e))
         end
         render :json => json.to_json
       end
@@ -64,7 +64,7 @@ class EventsController < EventCalendar::ApplicationController
     respond_to do |format|
       if @event.save
         flash[:notice] = 'Event was successfully created.'
-        format.html { redirect_to(event_calendar.event_path(@event)) }
+        format.html { redirect_to(event_path(@event)) }
         format.xml  { render :xml => @event, :status => :created, :location => @event }
       else
         format.html { render :action => "new" }
@@ -98,7 +98,7 @@ class EventsController < EventCalendar::ApplicationController
     @event.destroy
     
     respond_to do |format|
-      format.html { redirect_to(event_calendar.events_path) }
+      format.html { redirect_to(events_path) }
       format.xml  { head :ok }
     end
   end

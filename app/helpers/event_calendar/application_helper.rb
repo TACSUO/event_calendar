@@ -16,31 +16,31 @@ module EventCalendar::ApplicationHelper
   end
 
   def link_to_new_event
-    link_wrapper(event_calendar.new_event_path, {}, {
+    link_wrapper(new_event_path, {}, {
       :link_text => "Create New Event"
     })
   end
 
   def link_to_deleted_events
-    link_wrapper(event_calendar.event_revisions_path, {}, {
+    link_wrapper(event_revisions_path, {}, {
       :link_text => "Restore Deleted Events (#{EventRevision.deleted.count})"
     })
   end
 
   def link_to_add_event_attendees(event)
-    link_wrapper(event_calendar.new_event_attendee_path(event), {}, {
+    link_wrapper(new_event_attendee_path(event), {}, {
       :link_text => "Add <em>#{event.name}</em> Attendees".html_safe
     })
   end
 
   def link_to_edit_event(event)
-    link_wrapper(event_calendar.edit_event_path(event), {}, {
+    link_wrapper(edit_event_path(event), {}, {
       :link_text => "Edit <em>#{event.name}</em>".html_safe
     })
   end
 
   def link_to_delete_event(event)
-    link_wrapper(event_calendar.event_path(event), {
+    link_wrapper(event_path(event), {
       :highlight => false
     }, {
       :link_text => "Delete <em>#{event.name}</em>".html_safe,

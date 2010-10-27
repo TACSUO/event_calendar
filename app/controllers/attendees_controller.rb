@@ -31,7 +31,7 @@ class AttendeesController < EventCalendar::ApplicationController
       if params[:event_id]
         @event = Event.includes(:attendees).find(params[:event_id])
       else
-        redirect_to(event_calendar.events_path, {
+        redirect_to(events_path, {
           :notice => "Which event does the new attendee apply to?"
         })
       end
@@ -48,7 +48,7 @@ class AttendeesController < EventCalendar::ApplicationController
     end
     def create
       attendees = Participator.create!(params[:attendee])
-      redirect_to(event_calendar.events_path, {
+      redirect_to(events_path, {
         :notice => "Created #{pluralize(attendees.count, 'Attendee')}!"
       })
     end
