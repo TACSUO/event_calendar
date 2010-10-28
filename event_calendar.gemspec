@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jason LaPier", "Jeremiah Heller"]
-  s.date = %q{2010-10-27}
+  s.date = %q{2010-10-28}
   s.description = %q{Provides basic event management features with versioned history of changes.}
   s.email = ["jason.lapier@gmail.com", "jeremiah@inertialbit.net"]
   s.extra_rdoc_files = [
@@ -75,6 +75,8 @@ Gem::Specification.new do |s|
      "db/schema.rb",
      "db/seeds.rb",
      "lib/event_calendar.rb",
+     "lib/event_calendar/action_view.rb",
+     "lib/event_calendar/asset_path.rb",
      "lib/event_calendar/engine.rb",
      "lib/generators/event_calendar/install/USAGE",
      "lib/generators/event_calendar/install/install_generator.rb",

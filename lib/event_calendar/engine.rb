@@ -19,35 +19,12 @@ module EventCalendar
     end
 
     initializer "event_calendar.action_view.identifier_collection" do
-      require 'action_view/template'
-      class ActionView::Template
-        def render_with_identifier_collection(view, locals, &block)
-          (Thread.current[:view_identifiers] ||= []).push identifier
-          render_without_identifier_collection(view, locals, &block)
-        ensure
-          Thread.current[:view_identifiers].pop
-        end
-
-        unless instance_methods.include? "render_without_identifier_collection"
-          alias_method_chain :render, :identifier_collection
-        end
-      end
-    end
-
-    def engine_view?(identifier)
-      @engine_views ||= Hash.new do |h, identifier|
-        h[identifier] = !Rails.application.paths.app.views.any? do |path|
-          identifier =~ /^#{Regexp.escape(path)}/
-        end
-      end
-      @engine_views[identifier]
+      require 'event_calendar/action_view'
     end
 
     initializer "event_calendar.asset_path" do
-      EventCalendar::ApplicationController.config.asset_path = lambda do |source|
-        view_identifier = (Thread.current[:view_identifiers] ||= []).last
-        engine_view?(view_identifier) ? "/#{ASSET_PREFIX}#{source}" : source
-      end
+      require 'event_calendar/asset_path'
+      setup_asset_path
     end
   end
 end
