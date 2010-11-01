@@ -14,6 +14,12 @@ module EventCalendar::ApplicationHelper
       link_to(link_text, path, link_options)
     end
   end
+  
+  def link_to_events
+    link_wrapper(events_path, {}, {
+      :link_text => 'Event Calendar'
+    })
+  end
 
   def link_to_new_event
     link_wrapper(new_event_path, {}, {
