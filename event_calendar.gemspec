@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jason LaPier", "Jeremiah Heller"]
-  s.date = %q{2010-10-28}
+  s.date = %q{2010-11-02}
   s.description = %q{Provides basic event management features with versioned history of changes.}
   s.email = ["jason.lapier@gmail.com", "jeremiah@inertialbit.net"]
   s.extra_rdoc_files = [
@@ -21,9 +21,9 @@ Gem::Specification.new do |s|
      "README",
      "Rakefile",
      "VERSION",
+     "app/controllers/application_controller.rb",
      "app/controllers/attendees_controller.rb",
      "app/controllers/event_calendar/application_controller.rb",
-     "app/controllers/event_calendar_controller.rb",
      "app/controllers/event_revisions_controller.rb",
      "app/controllers/events_controller.rb",
      "app/helpers/event_calendar/application_helper.rb",
@@ -51,8 +51,9 @@ Gem::Specification.new do |s|
      "app/views/events/new.html.erb",
      "app/views/events/search.html.erb",
      "app/views/events/show.html.erb",
-     "app/views/layouts/event-calendar.html.erb",
+     "app/views/layouts/application.html.erb",
      "config/application.rb",
+     "config/blueprint_settings.yml",
      "config/boot.rb",
      "config/cucumber.yml",
      "config/database.example.yml",
@@ -81,6 +82,7 @@ Gem::Specification.new do |s|
      "lib/generators/event_calendar/install/USAGE",
      "lib/generators/event_calendar/install/install_generator.rb",
      "lib/generators/event_calendar/install/templates/event_calendar.rake",
+     "lib/tasks/blueprint.rake",
      "lib/tasks/cucumber.rake",
      "public/404.html",
      "public/422.html",
@@ -101,6 +103,17 @@ Gem::Specification.new do |s|
      "public/robots.txt",
      "public/stylesheets/application.css",
      "public/stylesheets/blueprint/grid.css",
+     "public/stylesheets/blueprint/icons/cross.png",
+     "public/stylesheets/blueprint/icons/doc.png",
+     "public/stylesheets/blueprint/icons/email.png",
+     "public/stylesheets/blueprint/icons/external.png",
+     "public/stylesheets/blueprint/icons/feed.png",
+     "public/stylesheets/blueprint/icons/im.png",
+     "public/stylesheets/blueprint/icons/key.png",
+     "public/stylesheets/blueprint/icons/pdf.png",
+     "public/stylesheets/blueprint/icons/tick.png",
+     "public/stylesheets/blueprint/icons/visited.png",
+     "public/stylesheets/blueprint/icons/xls.png",
      "public/stylesheets/blueprint/ie.css",
      "public/stylesheets/blueprint/plugins/buttons/icons/cross.png",
      "public/stylesheets/blueprint/plugins/buttons/icons/key.png",
@@ -124,11 +137,13 @@ Gem::Specification.new do |s|
      "public/stylesheets/blueprint/plugins/silksprite/sprite.css",
      "public/stylesheets/blueprint/plugins/silksprite/sprites.png",
      "public/stylesheets/blueprint/print.css",
+     "public/stylesheets/blueprint/readme.txt",
      "public/stylesheets/blueprint/screen.css",
      "public/stylesheets/error_messages.css",
      "public/stylesheets/formtastic.css",
      "public/stylesheets/formtastic_changes.css",
      "public/stylesheets/fullcalendar.css",
+     "public/stylesheets/fullcalendar_changes.css",
      "public/stylesheets/smoothness/images/ui-bg_flat_0_aaaaaa_40x100.png",
      "public/stylesheets/smoothness/images/ui-bg_flat_75_ffffff_40x100.png",
      "public/stylesheets/smoothness/images/ui-bg_glass_55_fbf9ee_1x400.png",
