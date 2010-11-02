@@ -1,7 +1,5 @@
 class AttendeesController < EventCalendar::ApplicationController
   
-  layout 'event-calendar'
-  
   before_filter :load_event
   
   rescue_from ActiveRecord::RecordInvalid, :with => :invalid_record

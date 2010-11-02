@@ -1,6 +1,4 @@
 class EventsController < EventCalendar::ApplicationController
-
-  layout "event-calendar"
   
   # before_filter :load_and_authorize_current_user, :except => [:index, :show]
   

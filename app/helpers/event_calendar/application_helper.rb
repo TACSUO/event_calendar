@@ -74,4 +74,39 @@ module EventCalendar::ApplicationHelper
   def render_flash
     render :partial => 'event-calendar-shared/flash', :object => flash
   end
+  
+  def event_calendar_stylesheet_includes
+    list = [
+      "fullcalendar",
+      "fullcalendar_changes",
+      "error_messages",
+      "text_and_colors",
+      "application",
+      "tablesorter/blue/style",
+      "smoothness/jquery-ui-1.7.2.custom.css",
+      "formtastic",
+      "formtastic_changes"
+    ]
+    list
+  end
+  
+  def event_calendar_javascript_includes
+    list = [
+      'jquery.tablesorter.min.js',
+      'jquery-ui-1.7.2.custom.min.js',
+      'jquery.string.1.0-min.js',
+      'jquery.clonePosition.js',
+      'lowpro.jquery.js',
+      'fullcalendar.js',
+      'jquery.qtip-1.0.0-rc3.js',
+      'rails.js',
+      'behaviors.js',
+      'application.js'
+    ]
+    unless Rails.env == 'production'
+      list.unshift("jquery-1.4.2.min.js")
+    else
+      list.unshift("http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js")
+    end
+  end
 end
