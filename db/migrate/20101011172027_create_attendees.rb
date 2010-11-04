@@ -1,6 +1,6 @@
 class CreateAttendees < ActiveRecord::Migration
   def self.up
-    create_table :attendees do |t|
+    create_table :event_calendar_attendees do |t|
       t.integer :event_id
       t.integer :participant_id
       t.string :participant_type
@@ -11,6 +11,6 @@ class CreateAttendees < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :attendees
+    drop_table :event_calendar_attendees
   end
 end

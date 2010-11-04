@@ -1,4 +1,6 @@
 class EventRevision < ActiveRecord::Base
+  set_table_name "event_calendar_events"
+  
   acts_as_revision :revisable_class_name => 'Event'
   
   include DeletableInstanceMethods

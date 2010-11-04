@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(:version => 20101011200048) do
 
-  create_table "attendees", :force => true do |t|
+  create_table "event_calendar_attendees", :force => true do |t|
     t.integer  "event_id"
     t.integer  "participant_id"
     t.string   "participant_type"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20101011200048) do
     t.datetime "updated_at"
   end
 
-  create_table "events", :force => true do |t|
+  create_table "event_calendar_events", :force => true do |t|
     t.string   "name"
     t.string   "event_type"
     t.date     "start_on"

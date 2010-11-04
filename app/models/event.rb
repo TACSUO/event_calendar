@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+  set_table_name "event_calendar_events"
   
   include ActionView::Helpers::TextHelper
   
