@@ -10,45 +10,49 @@ module EventCalendar::ApplicationHelper
       end
     end
   
-    content_tag(tag, wrapper_options) do
-      link_to(link_text, path, link_options)
+    unless wrapper_options.delete(:no_wrapper)
+      return content_tag(tag, wrapper_options) do
+        link_to(link_text, path, link_options)
+      end
+    else
+      return link_to(link_text, path, link_options)
     end
   end
   
-  def link_to_events
-    link_wrapper(events_path, {}, {
+  def link_to_events(wrapper_options={})
+    link_wrapper(events_path, wrapper_options, {
       :link_text => 'Event Calendar'
     })
   end
 
-  def link_to_new_event
-    link_wrapper(new_event_path, {}, {
+  def link_to_new_event(wrapper_options={})
+    link_wrapper(new_event_path, wrapper_options, {
       :link_text => "Create New Event"
     })
   end
 
-  def link_to_deleted_events
-    link_wrapper(event_revisions_path, {}, {
+  def link_to_deleted_events(wrapper_options={})
+    link_wrapper(event_revisions_path, wrapper_options, {
       :link_text => "Restore Deleted Events (#{EventRevision.deleted.count})"
     })
   end
 
-  def link_to_add_event_attendees(event)
-    link_wrapper(new_event_attendee_path(event), {}, {
+  def link_to_add_event_attendees(event, wrapper_options={})
+    link_wrapper(new_event_attendee_path(event), wrapper_options, {
       :link_text => "Add <em>#{event.name}</em> Attendees".html_safe
     })
   end
 
-  def link_to_edit_event(event)
-    link_wrapper(edit_event_path(event), {}, {
+  def link_to_edit_event(event, wrapper_options={})
+    link_wrapper(edit_event_path(event), wrapper_options, {
       :link_text => "Edit <em>#{event.name}</em>".html_safe
     })
   end
 
-  def link_to_delete_event(event)
+  def link_to_delete_event(event, wrapper_options={})
     link_wrapper(event_path(event), {
       :highlight => false
-    }, {
+    }.merge!(wrapper_options), {
       :link_text => "Delete <em>#{event.name}</em>".html_safe,
       :confirm => 'Are you sure you want to permanently delete this event?',
       :method => "delete"
