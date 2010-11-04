@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jason LaPier", "Jeremiah Heller"]
-  s.date = %q{2010-11-02}
+  s.date = %q{2010-11-04}
   s.description = %q{Provides basic event management features with versioned history of changes.}
   s.email = ["jason.lapier@gmail.com", "jeremiah@inertialbit.net"]
   s.extra_rdoc_files = [
@@ -57,7 +57,6 @@ Gem::Specification.new do |s|
      "config/boot.rb",
      "config/cucumber.yml",
      "config/database.example.yml",
-     "config/database.yml",
      "config/environment.rb",
      "config/environments/development.rb",
      "config/environments/production.rb",
@@ -166,7 +165,7 @@ Gem::Specification.new do |s|
      "spec/controllers/attendees_controller_spec.rb",
      "spec/controllers/event_revisions_controller_spec.rb",
      "spec/controllers/events_controller_spec.rb",
-     "spec/fixtures/events.yml",
+     "spec/fixtures/event_calendar_events.yml",
      "spec/models/deletable_instance_methods_spec.rb",
      "spec/models/event_revision_spec.rb",
      "spec/models/event_spec.rb",

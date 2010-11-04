@@ -6,6 +6,8 @@ require 'rake'
 
 EventCalendar::Application.load_tasks
 
+excluded_files = %w(config/database.yml)
+
 Engineer::Tasks.new do |gem|
   gem.name = "event_calendar"
   gem.summary = %Q{Simple versioned event management for Rails 3.}
@@ -19,6 +21,7 @@ Engineer::Tasks.new do |gem|
     "{app,config,lib,public,spec,test,vendor}/**/*",
     "db/**/*.rb"
   ]
+  excluded_files.each{|f| gem.files.exclude(f)}
 
   # Include Bundler dependencies
   Bundler.definition.dependencies.each do |dependency|
