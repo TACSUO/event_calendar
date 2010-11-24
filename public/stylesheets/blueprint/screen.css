@@ -364,7 +364,7 @@ input[type="checkbox"], input[type="radio"], input.checkbox, input.radio {top:0
 #main_menu a:hover {color:#66C;}
 .sidebar {padding:3px 6px;font-size:11px;margin-top:40px;}
 .sidebar h4 {color:#666;}
-.fake_button {font-size:11px;font-weight:bold;border:1px solid #2f4f4f;padding:0 3px 0 3px;}
+.fake_button {font-size:11px;font-weight:bold;border:1px solid #2f4f4f;padding:0 3px 0 3px;white-space:nowrap;}
 .flash_message {margin:10px;background:#FFC;border:4px double #999;color:#333;padding:8px 12px;font-size:14px;font-family:Verdana, sans-serif;-moz-border-radius:10px;-webkit-border-radius:10px;}
 .notice_message {border-color:#3C3;color:#020;clear:both;}
 .warning_message {border-color:#FC3;color:#630;}
