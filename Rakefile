@@ -21,6 +21,7 @@ Engineer::Tasks.new do |gem|
     "{app,config,lib,public,vendor}/**/*",
     "db/**/*.rb"
   ]
+  gem.test_files = FileList["spec/**/*"]
   excluded_files.each{|f| gem.files.exclude(f)}
 
   # Include Bundler dependencies
