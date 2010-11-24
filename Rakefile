@@ -18,7 +18,7 @@ Engineer::Tasks.new do |gem|
   gem.require_path = 'lib'
   gem.files =  FileList[
     "[A-Z]*",
-    "{app,config,lib,public,spec,test,vendor}/**/*",
+    "{app,config,lib,public,vendor}/**/*",
     "db/**/*.rb"
   ]
   excluded_files.each{|f| gem.files.exclude(f)}
