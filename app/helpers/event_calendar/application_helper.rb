@@ -6,7 +6,9 @@ module EventCalendar::ApplicationHelper
   
     unless path.blank?
       if current_page?(path) && (highlight.nil? || highlight)
-        wrapper_options = {:class => (wrapper_options[:class] || '') + " nav_highlight"}
+        wrapper_options.merge!({
+          :class => (wrapper_options[:class] || '') + " nav_highlight"
+        })
       end
     end
   
@@ -19,10 +21,10 @@ module EventCalendar::ApplicationHelper
     end
   end
   
-  def link_to_events(wrapper_options={})
-    link_wrapper(events_path, wrapper_options, {
+  def link_to_events(wrapper_options={}, link_options={})
+    link_wrapper(events_path, wrapper_options, link_options.reverse_merge!({
       :link_text => 'Event Calendar'
-    })
+    }))
   end
 
   def link_to_new_event(wrapper_options={})
