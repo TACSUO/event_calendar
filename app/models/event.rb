@@ -19,6 +19,13 @@ class Event < ActiveRecord::Base
   
   acts_as_revisable :revision_class_name => 'EventRevision', :on_delete => :revise
   
+  scope :past, lambda{
+    where(sanitize_sql_array(["end_on < '%s'", Date.current]))
+  }
+  scope :future, lambda{
+    where(sanitize_sql_array(["start_on > '%s'", Date.current]))
+  }
+  
   validate :sane_dates
 
   private
@@ -31,6 +38,22 @@ class Event < ActiveRecord::Base
     
   protected
   public
+  
+    def start_year
+      start_on.year
+    end
+  
+    def start_month
+      start_on.strftime("%B")
+    end
+    
+    def end_year
+      end_on.year
+    end
+    
+    def end_month
+      end_on.strftime("%B")
+    end
   
     def participants
       return [] if attendees.count == 0

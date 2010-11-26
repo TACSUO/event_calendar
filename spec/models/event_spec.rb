@@ -11,6 +11,24 @@ describe Event do
       :description => "value for description"
     }
   end
+  
+  it "Event.past finds past events" do
+    past = Event.create!(@valid_attributes)
+    Event.create!(@valid_attributes.merge!({
+      :start_on => Date.new(2100,3,12),
+      :end_on => Date.new(2100,3,13)
+    }))
+    Event.past.first.should eql past
+  end
+  
+  it "Event.future finds future events" do
+    Event.create!(@valid_attributes)
+    future = Event.create!(@valid_attributes.merge!({
+      :start_on => Date.new(2100,3,12),
+      :end_on => Date.new(2100,3,13)
+    }))
+    Event.future.first.should eql future
+  end
 
   it "should create a new instance given valid attributes" do
     Event.create!(@valid_attributes)
