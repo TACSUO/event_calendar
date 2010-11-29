@@ -47,12 +47,20 @@ class Event < ActiveRecord::Base
       start_on.strftime("%B")
     end
     
+    def start_day
+      start_on.day
+    end
+    
     def end_year
       end_on.year
     end
     
     def end_month
       end_on.strftime("%B")
+    end
+    
+    def end_day
+      end_on.day
     end
   
     def participants
