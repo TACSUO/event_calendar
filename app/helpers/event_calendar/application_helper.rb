@@ -105,12 +105,12 @@ module EventCalendar::ApplicationHelper
       'lowpro.jquery.js',
       'fullcalendar.js',
       'jquery.qtip-1.0.0-rc3.js',
-      'rails.js',
-      'behaviors.js',
-      'application.js'
+      'rails',
+      'event_calendar_behaviors.js',
+      'event_calendar.js'
     ]
     unless Rails.env == 'production'
-      list.unshift("jquery-1.4.2.min.js")
+      list.unshift("jquery")
     else
       list.unshift("http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js")
     end

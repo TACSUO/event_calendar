@@ -18,13 +18,8 @@ module EventCalendar
       end
     end
 
-    initializer "event_calendar.action_view.identifier_collection" do
-      require 'event_calendar/action_view'
-    end
-
-    initializer "event_calendar.asset_path" do
-      require 'event_calendar/asset_path'
-      setup_asset_path
+    initializer "event_calendar.asset_path" do |app|
+      app.config.middleware.use ::ActionDispatch::Static, "#{root}/public"
     end
   end
 end
