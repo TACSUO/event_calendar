@@ -1,1 +1,4 @@
-Basic versioned event management
+Rails engine providing basic versioned event management.
+
+In Gemfile do
+  gem "event_calendar_engine", :require => 'event_calendar'
