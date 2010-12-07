@@ -9,7 +9,7 @@ EventCalendar::Application.load_tasks
 excluded_files = %w(config/database.yml)
 
 Engineer::Tasks.new do |gem|
-  gem.name = "event_calendar"
+  gem.name = "event_calendar_engine"
   gem.summary = %Q{Simple versioned event management for Rails 3.}
   gem.description = %Q{Provides basic event management features with versioned history of changes.}
   gem.email = ["jason.lapier@gmail.com", "jeremiah@inertialbit.net"]
