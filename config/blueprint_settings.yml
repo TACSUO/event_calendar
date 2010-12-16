@@ -1,5 +1,5 @@
 default:
-  path: public/stylesheets/blueprint
+  path: public/stylesheets/event_calendar/blueprint
   plugins:
   - buttons
   - events

@@ -5,15 +5,19 @@
   <!-- <link rel="icon" type="image/png" href="/images/favorite.png"/> -->
   <title>Event Calendar</title>
   
-  <%= stylesheet_link_tag "blueprint/screen", :media => "screen, projection" %>
-  <%= stylesheet_link_tag "blueprint/print", :media => "print" %>
+  <%= stylesheet_link_tag "#{event_calendar_asset_prefix}blueprint/screen", :media => "screen, projection" %>
+  <%= stylesheet_link_tag "#{event_calendar_asset_prefix}blueprint/print", :media => "print" %>
   
   <!--[if lt IE 8]>
-    <%= stylesheet_link_tag "blueprint/ie", :media => "screen, projection" %>
+    <%= stylesheet_link_tag "#{event_calendar_asset_prefix}blueprint/ie", :media => "screen, projection" %>
   <![endif]-->
   
-  <%= stylesheet_link_tag 'error_messages', 'formtastic', 'formtastic_changes',
-                          'fullcalendar', 'fullcalendar_changes', 'text_and_colors' %>
+  <%= stylesheet_link_tag "#{event_calendar_asset_prefix}error_messages", 
+            "#{event_calendar_asset_prefix}formtastic", 
+            "#{event_calendar_asset_prefix}formtastic_changes",
+            "#{event_calendar_asset_prefix}fullcalendar", 
+            "#{event_calendar_asset_prefix}fullcalendar_changes",
+            "#{event_calendar_asset_prefix}text_and_colors" %>
 
   <%= javascript_include_tag event_calendar_javascript_includes %>
   <%= yield :javascript %>

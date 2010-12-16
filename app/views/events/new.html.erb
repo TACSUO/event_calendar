@@ -1,3 +1,3 @@
 <h1>New Event</h1>
 
-<%= render :partial => "form" %>
+<%= render :partial => "form" if has_authorization?(:create, Event.new) %>

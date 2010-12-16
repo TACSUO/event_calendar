@@ -26,4 +26,4 @@
       </td>
     </tr>
   </table>
-<% end %>
+<% end if has_authorization?(:add_attendees, @event) %>

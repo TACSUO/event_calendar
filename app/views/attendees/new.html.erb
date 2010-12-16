@@ -10,4 +10,4 @@
     <% end %>
   <% end %>
   <%= form.submit %>
-<% end %>
+<% end if has_authorization?(:add_attendees, @event) %>

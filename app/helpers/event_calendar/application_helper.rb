@@ -28,6 +28,7 @@ module EventCalendar::ApplicationHelper
   end
 
   def link_to_new_event(wrapper_options={})
+    return unless has_authorization?(:create, Event.new)
     link_wrapper(new_event_path, wrapper_options, {
       :link_text => "Create New Event"
     })
@@ -40,18 +41,21 @@ module EventCalendar::ApplicationHelper
   end
 
   def link_to_add_event_attendees(event, wrapper_options={})
+    return unless has_authorization?(:add_attendees, event)
     link_wrapper(new_event_attendee_path(event), wrapper_options, {
-      :link_text => "Add <em>#{event.name}</em> Attendees".html_safe
+      :link_text => "Add <em>#{h(event.name)}</em> Attendees".html_safe
     })
   end
 
   def link_to_edit_event(event, wrapper_options={})
+    return unless has_authorization?(:update, event)
     link_wrapper(edit_event_path(event), wrapper_options, {
-      :link_text => "Edit <em>#{event.name}</em>".html_safe
+      :link_text => "Edit <em>#{h(event.name)}</em>".html_safe
     })
   end
 
   def link_to_delete_event(event, wrapper_options={})
+    return unless has_authorization?(:delete, event)
     link_wrapper(event_path(event), {
       :highlight => false
     }.merge!(wrapper_options), {
@@ -81,36 +85,25 @@ module EventCalendar::ApplicationHelper
     render :partial => 'event-calendar-shared/flash', :object => flash
   end
   
-  def event_calendar_stylesheet_includes
-    list = [
-      "fullcalendar",
-      "fullcalendar_changes",
-      "error_messages",
-      "text_and_colors",
-      "application",
-      "tablesorter/blue/style",
-      "smoothness/jquery-ui-1.7.2.custom.css",
-      "formtastic",
-      "formtastic_changes"
-    ]
-    list
+  def event_calendar_asset_prefix
+    'event_calendar/'
   end
   
   def event_calendar_javascript_includes
     list = [
-      'jquery.tablesorter.min.js',
-      'jquery-ui-1.7.2.custom.min.js',
-      'jquery.string.1.0-min.js',
-      'jquery.clonePosition.js',
-      'lowpro.jquery.js',
-      'fullcalendar.js',
-      'jquery.qtip-1.0.0-rc3.js',
-      'rails',
-      'event_calendar_behaviors.js',
-      'event_calendar.js'
+      "#{event_calendar_asset_prefix}jquery.tablesorter.min.js",
+      "#{event_calendar_asset_prefix}jquery-ui-1.7.2.custom.min.js",
+      "#{event_calendar_asset_prefix}jquery.string.1.0-min.js",
+      "#{event_calendar_asset_prefix}jquery.clonePosition.js",
+      "#{event_calendar_asset_prefix}lowpro.jquery.js",
+      "#{event_calendar_asset_prefix}fullcalendar.js",
+      "#{event_calendar_asset_prefix}jquery.qtip-1.0.0-rc3.js",
+      "#{event_calendar_asset_prefix}rails",
+      "#{event_calendar_asset_prefix}event_calendar_behaviors.js",
+      "#{event_calendar_asset_prefix}event_calendar.js"
     ]
     unless Rails.env == 'production'
-      list.unshift("jquery")
+      list.unshift("#{event_calendar_asset_prefix}jquery")
     else
       list.unshift("http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js")
     end
