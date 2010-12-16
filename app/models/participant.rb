@@ -2,6 +2,8 @@ module Participant
   @@types ||= []
   
   def self.included(base)
+    return if @@types.include?(base)
+    
     @@types << base
     
     base.instance_eval do
