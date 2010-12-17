@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{event_calendar_engine}
-  s.version = "0.1.2"
+  s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jason LaPier", "Jeremiah Heller"]
-  s.date = %q{2010-12-16}
+  s.date = %q{2010-12-17}
   s.description = %q{Provides basic event management features with versioned history of changes.}
   s.email = ["jason.lapier@gmail.com", "jeremiah@inertialbit.net"]
   s.extra_rdoc_files = [
@@ -110,27 +110,6 @@ Gem::Specification.new do |s|
     "public/stylesheets/event_calendar/blueprint/icons/visited.png",
     "public/stylesheets/event_calendar/blueprint/icons/xls.png",
     "public/stylesheets/event_calendar/blueprint/ie.css",
-    "public/stylesheets/event_calendar/blueprint/plugins/buttons/icons/cross.png",
-    "public/stylesheets/event_calendar/blueprint/plugins/buttons/icons/key.png",
-    "public/stylesheets/event_calendar/blueprint/plugins/buttons/icons/tick.png",
-    "public/stylesheets/event_calendar/blueprint/plugins/buttons/readme.txt",
-    "public/stylesheets/event_calendar/blueprint/plugins/buttons/screen.css",
-    "public/stylesheets/event_calendar/blueprint/plugins/fancy-type/readme.txt",
-    "public/stylesheets/event_calendar/blueprint/plugins/fancy-type/screen.css",
-    "public/stylesheets/event_calendar/blueprint/plugins/link-icons/icons/doc.png",
-    "public/stylesheets/event_calendar/blueprint/plugins/link-icons/icons/email.png",
-    "public/stylesheets/event_calendar/blueprint/plugins/link-icons/icons/external.png",
-    "public/stylesheets/event_calendar/blueprint/plugins/link-icons/icons/feed.png",
-    "public/stylesheets/event_calendar/blueprint/plugins/link-icons/icons/im.png",
-    "public/stylesheets/event_calendar/blueprint/plugins/link-icons/icons/pdf.png",
-    "public/stylesheets/event_calendar/blueprint/plugins/link-icons/icons/visited.png",
-    "public/stylesheets/event_calendar/blueprint/plugins/link-icons/icons/xls.png",
-    "public/stylesheets/event_calendar/blueprint/plugins/link-icons/readme.txt",
-    "public/stylesheets/event_calendar/blueprint/plugins/link-icons/screen.css",
-    "public/stylesheets/event_calendar/blueprint/plugins/rtl/readme.txt",
-    "public/stylesheets/event_calendar/blueprint/plugins/rtl/screen.css",
-    "public/stylesheets/event_calendar/blueprint/plugins/silksprite/sprite.css",
-    "public/stylesheets/event_calendar/blueprint/plugins/silksprite/sprites.png",
     "public/stylesheets/event_calendar/blueprint/print.css",
     "public/stylesheets/event_calendar/blueprint/readme.txt",
     "public/stylesheets/event_calendar/blueprint/screen.css",
