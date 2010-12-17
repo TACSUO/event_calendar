@@ -10,24 +10,27 @@ describe Event do
       :location => "value for location",
       :description => "value for description"
     }
+    @may_2010 = Event.create!(@valid_attributes)
+    @mar_2100 = Event.create!(@valid_attributes.merge!({
+      :start_on => Date.new(2100,3,12),
+      :end_on => Date.new(2100,3,13)
+    }))
+    @current = Event.create!(@valid_attributes.merge!({
+      :start_on => Date.yesterday,
+      :end_on => Date.tomorrow
+    }))
   end
   
   it "Event.past finds past events" do
-    past = Event.create!(@valid_attributes)
-    Event.create!(@valid_attributes.merge!({
-      :start_on => Date.new(2100,3,12),
-      :end_on => Date.new(2100,3,13)
-    }))
-    Event.past.first.should eql past
+    Event.past.first.should eql @may_2010
   end
   
   it "Event.future finds future events" do
-    Event.create!(@valid_attributes)
-    future = Event.create!(@valid_attributes.merge!({
-      :start_on => Date.new(2100,3,12),
-      :end_on => Date.new(2100,3,13)
-    }))
-    Event.future.first.should eql future
+    Event.future.first.should eql @mar_2100
+  end
+  
+  it "Event.current finds current events" do
+    Event.current.first.should eql @current
   end
 
   it "should create a new instance given valid attributes" do

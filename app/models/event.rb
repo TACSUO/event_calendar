@@ -19,12 +19,9 @@ class Event < ActiveRecord::Base
   
   acts_as_revisable :revision_class_name => 'EventRevision', :on_delete => :revise
   
-  scope :past, lambda{
-    where(sanitize_sql_array(["end_on < '%s'", Date.current]))
-  }
-  scope :future, lambda{
-    where(sanitize_sql_array(["start_on > '%s'", Date.current]))
-  }
+  scope :past, where(sanitize_sql_array(["end_on < '%s'", Date.current]))
+  scope :future, where(sanitize_sql_array(["start_on > '%s'", Date.current]))
+  scope :current, where(sanitize_sql_array(["end_on >= '%s' AND start_on <= '%s'", Date.current, Date.current]))
   
   validate :sane_dates
 
