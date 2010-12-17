@@ -22,16 +22,28 @@ module EventCalendar::ApplicationHelper
   end
   
   def link_to_events(wrapper_options={}, link_options={})
+    return unless has_authorization?(:read, Event.new)
     link_wrapper(events_path, wrapper_options, link_options.reverse_merge!({
       :link_text => 'Event Calendar'
     }))
   end
+  
+  def link_to_event_revisions(wrapper_options={}, link_options={})
+    return unless has_authorization?(:read, EventRevision.new)
+    link_wrapper(event_revisions_path, {
+      :no_wrapper => true
+    }.merge!(wrapper_options), {
+      :link_text => 'Browse Event Revisions'
+    }.merge!(link_options))
+  end
 
-  def link_to_new_event(wrapper_options={})
+  def link_to_new_event(wrapper_options={}, link_options={})
     return unless has_authorization?(:create, Event.new)
-    link_wrapper(new_event_path, wrapper_options, {
+    link_wrapper(new_event_path, {
+      :no_wrapper => true
+    }.merge!(wrapper_options), {
       :link_text => "Create New Event"
-    })
+    }.merge!(link_options))
   end
 
   def link_to_deleted_events(wrapper_options={})

@@ -1,5 +1,7 @@
+<% if @event_revision.revisable_is_current %>
 <p>
   <%= link_to "< Current Version", event_path(@event_revision.current_revision), :class => 'fake_button' %>
 </p>
+<% end %>
 <h1>Event - Version: <%= @event_revision.revision_number %><hr /></h1>
 <%= render :partial => 'events/event_details', :object => @event_revision %>
