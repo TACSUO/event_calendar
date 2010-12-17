@@ -1,0 +1,11 @@
+/* resizable */
+/* taken directly from fullcalendar.css - here cuz blueprint's compress.rb
+  does not properly compress this style and it results in a syntax error
+  preventing the subsequent styles to not get defined */
+.fc .ui-resizable-handle {
+	display: block;
+	position: absolute;
+	z-index: 99999;
+	border: 0 !important; /* important overrides pre jquery ui 1.7 styles */
+	background: url(data:image/gif;base64,AAAA) !important; /* hover fix for IE */
+	}

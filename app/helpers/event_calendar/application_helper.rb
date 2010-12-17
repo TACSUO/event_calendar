@@ -47,22 +47,36 @@ module EventCalendar::ApplicationHelper
     })
   end
 
-  def link_to_edit_event(event, wrapper_options={})
+  def link_to_edit_event(event, wrapper_options={}, link_options={})
     return unless has_authorization?(:update, event)
     link_wrapper(edit_event_path(event), wrapper_options, {
       :link_text => "Edit <em>#{h(event.name)}</em>".html_safe
-    })
+    }.merge!(link_options))
   end
 
-  def link_to_delete_event(event, wrapper_options={})
+  def link_to_delete_event(event, wrapper_options={}, link_options={})
     return unless has_authorization?(:delete, event)
     link_wrapper(event_path(event), {
       :highlight => false
     }.merge!(wrapper_options), {
       :link_text => "Delete <em>#{event.name}</em>".html_safe,
-      :confirm => 'Are you sure you want to permanently delete this event?',
+      :confirm => "Are you sure you want to permanently delete the #{event.name} #{event.type}?",
       :method => "delete"
-    })
+    }.merge!(link_options))
+  end
+  
+  def links_to_edit_and_delete_event(event, wrapper_options={}, link_options={})
+    return unless has_authorization?(:delete, event) || has_authorization?(:update, event)
+    link_to_edit_event(event, {
+      :no_wrapper => true
+    }.merge!(wrapper_options), {
+      :link_text => 'edit'
+    }.merge!(link_options)) + " " +
+    link_to_delete_event(event, {
+      :no_wrapper => true
+    }.merge!(wrapper_options), {
+      :link_text => 'delete'
+    }.merge!(link_options))
   end
 
   def form_for_browse_event_revisions(event)
