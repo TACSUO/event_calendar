@@ -47,6 +47,7 @@ module EventCalendar::ApplicationHelper
   end
 
   def link_to_deleted_events(wrapper_options={})
+    return unless has_authorization?(:update, Event.new)
     link_wrapper(event_revisions_path, wrapper_options, {
       :link_text => "Restore Deleted Events (#{EventRevision.deleted.count})"
     })
@@ -92,6 +93,7 @@ module EventCalendar::ApplicationHelper
   end
 
   def form_for_browse_event_revisions(event)
+    return unless has_authorization?(:update, event)
     render :partial => 'events/browse_event_revisions', :locals => {
       :event => event
     }
