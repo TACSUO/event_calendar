@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{event_calendar_engine}
-  s.version = "0.1.6"
+  s.version = "0.1.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jason LaPier", "Jeremiah Heller"]
-  s.date = %q{2010-12-21}
+  s.date = %q{2010-12-23}
   s.description = %q{Provides basic event management features with versioned history of changes.}
   s.email = ["jason.lapier@gmail.com", "jeremiah@inertialbit.net"]
   s.extra_rdoc_files = [
@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
     "app/views/event_revisions/index.html.erb",
     "app/views/event_revisions/show.html.erb",
     "app/views/events/_browse_event_revisions.html.erb",
+    "app/views/events/_details.html.erb",
     "app/views/events/_event.html.erb",
     "app/views/events/_event_details.html.erb",
     "app/views/events/_form.html.erb",
