@@ -22,6 +22,10 @@ class Event < ActiveRecord::Base
   scope :past, where(sanitize_sql_array(["end_on < '%s'", Date.current]))
   scope :future, where(sanitize_sql_array(["start_on > '%s'", Date.current]))
   scope :current, where(sanitize_sql_array(["end_on >= '%s' AND start_on <= '%s'", Date.current, Date.current]))
+  scope :between, lambda{ |start_date, end_date|
+    where(["start_on BETWEEN ? AND ? OR end_on BETWEEN ? AND ?",
+      start_date, end_date, start_date, end_date])
+  }
   
   validate :sane_dates
 
@@ -99,15 +103,6 @@ class Event < ActiveRecord::Base
 
     def to_s
       "#{name} (#{start_on} #{end_on ? ' - ' + end_on.to_s : ''})"
-    end
-  
-    def to_hash_for_calendar(url)
-      # { :id => id, :title => name_and_file_count, :start => start_on, :end => end_on, :url => "/events/#{id}", 
-      #   :description => description && description.gsub("\n", "<br/>") || '',
-      #   :location => location && location.gsub("\n", "<br/>") || '' }
-      { :id => id, :title => name, :start => start_on, :end => end_on, :url => url, 
-        :description => description && description.gsub("\n", "<br/>") || '',
-        :location => location && location.gsub("\n", "<br/>") || '' }
     end
 
     # list all groups that had least one member in attendance at this event

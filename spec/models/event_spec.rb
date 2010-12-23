@@ -32,6 +32,10 @@ describe Event do
   it "Event.current finds current events" do
     Event.current.first.should eql @current
   end
+  
+  it "Event.between finds events between limits" do
+    Event.between(Date.new(2100,3,1), Date.new(2100,3,30)).first.should eql @mar_2100
+  end
 
   it "should create a new instance given valid attributes" do
     Event.create!(@valid_attributes)
@@ -47,14 +51,6 @@ describe Event do
     Event.create!(@valid_attributes)
     Event.create!(@valid_attributes.merge :event_type => 'Conference')
     Event.existing_event_types.should == ['Conference', 'Meeting']
-  end
-  
-  it "should call to_hash_for_calendar" do
-    event = Event.create! :name => "test", :start_on => "2010-01-01", :end_on => "2010-01-07", 
-      :event_type => "meeting", :description => "some kind of meeting", :location => 'skype.address'
-    event.to_hash_for_calendar("/events/#{event.id}").should == { :id => event.id, :title => "test", 
-      :start => Date.new(2010,1,1), :end => Date.new(2010,1,7), :url => "/events/#{event.id}",
-      :description => "some kind of meeting", :location => 'skype.address' }
   end
   
   it "should create a new version when an attribute is updated" do

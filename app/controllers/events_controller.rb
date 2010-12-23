@@ -2,20 +2,37 @@ class EventsController < EventCalendar::ApplicationController
   
   # before_filter :load_and_authorize_current_user, :except => [:index, :show]
   
+  private
+    def events_to_json
+      return {} unless @events
+      json = @events.map do |event|
+        {
+          :id => event.id,
+          :title => event.name,
+          :start => event.start_on,
+          :end => event.end_on,
+          :url => event_path(event),
+          :details => render_to_string(:partial => 'events/details', :object => event)
+        }
+      end
+      json.to_json
+    end
+  protected
+  public
+  
   # GET /events
   # GET /events.xml
   def index
-    @events = Event.find :all
+    if params[:start] && params[:end]
+      @events = Event.between(Time.at(params[:start].to_i), Time.at(params[:end].to_i))
+    else
+      @events = Event.find :all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @events }
-      format.js do
-        json = @events.map do |e|
-          e.to_hash_for_calendar(event_path(e))
-        end
-        render :json => json.to_json
-      end
+      format.js { render :json => events_to_json }
     end
   end
 

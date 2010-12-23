@@ -3,30 +3,6 @@ require 'spec_helper'
 describe require 'spec_helper'
 
 describe EventsController do
-  # def mock_admin_user(stubs={})
-  #   @mock_admin_user ||= mock_model(User, stubs.merge({
-  #     :role => 'admin',
-  #     :contact => mock_model(Contact, {
-  #       :first_name => 'First',
-  #       :last_name => 'Last',
-  #       :email => 'test@test.com'
-  #     })
-  #   }))
-  # end
-
-  # def mock_user(stubs={})
-  #   @mock_user ||= mock_model(User, stubs.merge({:role => 'general'}))
-  # end
-
-  describe "when logged in as admin" do
-    before do
-      # pending
-      # controller.stub(:current_user_session).and_return(
-      #   mock_model(UserSession, {
-      #     :user => mock_admin_user
-      #   })
-      # )
-    end
 
     describe "GET index" do
       it "assigns all events as @events" do
@@ -38,8 +14,14 @@ describe EventsController do
     
     describe "GET index as json" do
       it "renders @events as json" do
-        mock_event.stub(:to_hash_for_calendar).and_return( { :id => 1, :name => "whatever" } )
-        Event.stub(:find).with(:all).and_return([mock_event])
+        mock_event({
+          :name => 'Some Event',
+          :start_on => Date.yesterday,
+          :end_on => Date.tomorrow,
+          :description => 'Some Description',
+          :location => 'Some City'
+        })
+        Event.stub(:between).and_return([mock_event])
         get :index, :format => 'js'
         response.should be_success
       end
@@ -162,7 +144,6 @@ describe EventsController do
         delete :destroy, :id => "1"
         response.should redirect_to(events_url)
       end
-    end    
-  end
+    end
 
 end
