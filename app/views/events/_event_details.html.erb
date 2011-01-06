@@ -4,23 +4,26 @@
 </p>
 
 <p>
-  <strong>When:</strong>
-  <%= event_details.start_on %>
-  <% if event_details.end_on %>
-    - <%=  event_details.end_on %>
-  <% end %>
+  <strong>Starts</strong><br />
+  <%= event_details.start_on.in_time_zone(event_details.timezone).strftime('%A, %B %d %Y at %I:%M %p (%Z)') %>
 </p>
+<% if event_details.end_on %>
+<p>
+  <strong>Ends</strong><br />
+  <%=  event_details.end_on.in_time_zone(event_details.timezone).strftime('%A, %B %d %Y at %I:%M %p (%Z)') %>
+</p>
+<% end %>
 
 <% unless event_details.location.blank? %>
 <p>
-  <strong>Where:</strong><br/>
+  <strong>Location</strong><br/>
   <%= textilize_without_paragraph event_details.location %>
 </p>
 <% end %>
 
 <% unless event_details.description.blank? %>
 <p>
-  <strong>Description/Other Details:</strong>
+  <strong>Description/Other Details</strong><br />
   <%= textilize_without_paragraph event_details.description %>
 </p>
 <% end %>

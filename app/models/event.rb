@@ -3,17 +3,11 @@ class Event < ActiveRecord::Base
   
   include ActionView::Helpers::TextHelper
   
-  has_many :attendees
-  #has_many :contacts, :through => :attendees, :order => ["last_name, first_name"],
-  # :conditions => {:revisable_is_current => true}
-  
-  #has_many :file_attachments
+  attr_accessor :start_time, :end_time, :start_date, :end_date
 
-  #belongs_to :modified_by_user, :class_name => 'User'
+  has_many :attendees
 
   validates_presence_of :name, :event_type, :start_on
-
-  # acts_as_stripped :name
   
   searchable_by :name, :event_type, :location, :description
   
@@ -22,12 +16,14 @@ class Event < ActiveRecord::Base
   scope :past, where(sanitize_sql_array(["end_on < '%s'", Date.current]))
   scope :future, where(sanitize_sql_array(["start_on > '%s'", Date.current]))
   scope :current, where(sanitize_sql_array(["end_on >= '%s' AND start_on <= '%s'", Date.current, Date.current]))
-  scope :between, lambda{ |start_date, end_date|
+  scope :between, lambda{ |start_datetime, end_datetime|
     where(["start_on BETWEEN ? AND ? OR end_on BETWEEN ? AND ?",
-      start_date, end_date, start_date, end_date])
+      start_datetime, end_datetime, start_datetime, end_datetime])
   }
   
   validate :sane_dates
+  
+  before_save :set_timezone
 
   private
 
@@ -37,8 +33,28 @@ class Event < ActiveRecord::Base
       end
     end
     
+    def set_timezone
+      Time.zone = timezone
+    end
+    
   protected
   public
+  
+    def start_time
+      @start_time ||= start_on
+    end
+    
+    def end_time
+      @end_time ||= end_on
+    end
+    
+    def start_date
+      @start_date ||= start_on.present? ? start_on.to_date : start_on
+    end
+    
+    def end_date
+      @end_date ||= end_on.present? ? end_on.to_date : end_on
+    end
   
     def start_year
       start_on.year

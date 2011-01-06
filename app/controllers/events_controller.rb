@@ -1,6 +1,7 @@
 class EventsController < EventCalendar::ApplicationController
   
   # before_filter :load_and_authorize_current_user, :except => [:index, :show]
+  before_filter :parse_dates_from_params, :only => [:create, :update]
   
   private
     def events_to_json
@@ -17,6 +18,25 @@ class EventsController < EventCalendar::ApplicationController
       end
       json.to_json
     end
+    
+    def parse_dates_from_params
+      params[:event].delete :"start_time(1i)"
+      params[:event].delete :"start_time(2i)"
+      params[:event].delete :"start_time(3i)"
+      params[:event].delete :"end_time(1i)"
+      params[:event].delete :"end_time(2i)"
+      params[:event].delete :"end_time(3i)"
+      start_hour = params[:event].delete :"start_time(4i)"
+      start_min = params[:event].delete :"start_time(5i)"
+      end_hour = params[:event].delete :"end_time(4i)"
+      end_min = params[:event].delete :"end_time(5i)"
+      start_date = Date.parse(params[:event][:start_date])
+      end_date = Date.parse(params[:event][:end_date])
+      params[:event][:start_on] = Time.local(start_date.year, start_date.month, start_date.day, start_hour, start_min)
+      params[:event][:end_on] = Time.local(end_date.year, end_date.month, end_date.day, end_hour, end_min)
+      params[:event][:start_time] = params[:event][:start_on]
+      params[:event][:end_time] = params[:event][:end_on]
+    end
   protected
   public
   
@@ -26,7 +46,7 @@ class EventsController < EventCalendar::ApplicationController
     if params[:start] && params[:end]
       @events = Event.between(Time.at(params[:start].to_i), Time.at(params[:end].to_i))
     else
-      @events = Event.find :all
+      @events = Event.all
     end
 
     respond_to do |format|
@@ -68,14 +88,14 @@ class EventsController < EventCalendar::ApplicationController
   # GET /events/1/edit
   def edit
     @event = Event.find(params[:id])
+    Time.zone = @event.timezone
   end
 
   # POST /events
   # POST /events.xml
   def create
     @event = Event.new(params[:event])
-    # @event.modified_by_user = current_user
-
+    
     respond_to do |format|
       if @event.save
         flash[:notice] = 'Event was successfully created.'
