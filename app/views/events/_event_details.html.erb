@@ -1,14 +1,17 @@
 <p>
   <strong>Starts</strong><br />
-  <%= event_details.start_on.in_time_zone(event_details.timezone).strftime('%A, %B %d %Y at %I:%M %p (%Z)') %>
+  <%= event_details.start_on.in_time_zone(event_details.timezone).strftime('%A, %B %d %Y') %>
 </p>
-<% if event_details.end_on %>
-<p>
-  <strong>Ends</strong><br />
-  <%=  event_details.end_on.in_time_zone(event_details.timezone).strftime('%A, %B %d %Y at %I:%M %p (%Z)') %>
-</p>
-<% end %>
-
+<%- unless event_details.one_day? %>
+  <% if event_details.end_on %>
+  <p>
+    <strong>Ends</strong><br />
+    <%=  event_details.end_on.in_time_zone(event_details.timezone).strftime('%A, %B %d %Y') %>
+  </p>
+  <% end %>
+<%- else -%>
+  <%= render :partial => 'events/times', :object => times_with_zones(event_details) %>
+<%- end -%>
 <% unless event_details.location.blank? %>
 <p>
   <strong>Location</strong><br/>

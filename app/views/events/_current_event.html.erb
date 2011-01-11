@@ -1,0 +1,6 @@
+<%- if current_event_counter == 0; then current_event_counter += 1; end -%>
+<div class="span-2<%= current_event_counter % 8 == 0 ? ' last' : '' %>">
+  <p><strong><%= link_to current_event.name, event_path(current_event) %></strong></p>
+  <p><em><%= current_event.start_on.strftime("%a, %b %d") %></em></p>
+  <p><em><%= current_event.end_on.strftime("%a, %b %d") %></em></p>
+</div>

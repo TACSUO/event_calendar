@@ -19,13 +19,23 @@ describe EventsController do
   end
   before(:each) do
     subject.stub(:find).with("37"){ event }
+    subject.stub_chain(:past, :order){ ['past'] }
+    subject.stub_chain(:current, :order){ ['current'] }
+    subject.stub_chain(:future, :order){ ['future'] }
   end
   
     describe "GET index" do
-      it "assigns all events as @events" do
-        subject.stub(:all){ [event] }
+      it "assigns past events as @past_events" do
         get :index
-        assigns(:events).should eq [event]
+        assigns(:past_events).should eq ['past']
+      end
+      it "assigns current events as @current_events" do
+        get :index
+        assigns(:current_events).should eq ['current']
+      end
+      it "assigns future events as @future_events" do
+        get :index
+        assigns(:future_events).should eq ['future']
       end
     end
     

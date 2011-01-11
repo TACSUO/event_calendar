@@ -1,21 +1,2 @@
-<table class="nice_table tablesorter">
-  <thead>
-    <tr>
-      <th>Event</th>
-      <th>Location</th>
-      <th>Description</th>
-      <th style="border: 1px #CCF dashed; text-align:center">Manage</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render @deleted_events %>
-  </tbody>
-</table>
-
-<script type="text/javascript">
-$(document).ready(function()
-  {
-    $(".nice_table").tablesorter( { widgets: ['zebra'], headers: { 3:{sorter: false}, 4:{sorter: false}, 5:{sorter: false}} });
-  }
-);
-</script>
+<h2>Deleted Events (<em><%= @deleted_events.count %></em>)</h2>
+<%= render :partial => 'event_revisions/list_group', :locals => {:events => @deleted_events} %>

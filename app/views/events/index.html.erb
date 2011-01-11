@@ -1,23 +1,10 @@
-<h1>Events</h1>
-
-<p><em>mouse over an event to preview; click on an event for full details</em></p>
-
-<div id="calendar" class="calendars"></div>
-
-<div style="clear:both"></div>
-
-<div id="event_quick_description" style="display:none"></div>
-
-<% content_for :javascript do %>
-<script type="text/javascript">
-$(document).ready(function()
-  {
-    $('#calendar').fullCalendar({ 
-      editable: false, events: '<%= events_path %>', height: 500, aspectRatio: 1,
-      eventMouseover: updateEventDescription
-    });
-  }
-);
-
-</script>
-<% end %>
+<p style="float: right;">
+  <a href="#" class="fake_button view_events calendar">Calendar</a>
+  <a href="#" class="fake_button view_events list">List</a>
+</p>
+<div id="event_calendar">
+  <%= render :partial => 'calendar' %>
+</div>
+<div id="event_list" style="display: none;">
+  <%= render :partial => 'list' %>
+</div>

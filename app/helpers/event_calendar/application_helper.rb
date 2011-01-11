@@ -29,6 +29,28 @@ module EventCalendar::ApplicationHelper
     end
   end
   
+  def time_with_zones(time=Time.now)
+    out = {}
+    format = "%H:%M"
+    ActiveSupport::TimeZone.us_zones.map(&:name).each do |us_zone|
+      next unless us_zone =~ /Pacific|Mountain|Central|Eastern/
+      key = time.in_time_zone(us_zone).strftime("%Z")
+      out[key] = time.in_time_zone(us_zone).strftime(format)
+    end
+    out
+  end
+  
+  def times_with_zones(event)
+    begin
+    [
+      time_with_zones(event.start_time),
+      time_with_zones(event.end_time)
+    ]
+    rescue NoMethodError => e
+      raise "#{e.message} - #{event.inspect}"
+    end
+  end
+  
   def link_to_events(wrapper_options={}, link_options={})
     return unless has_authorization?(:read, Event.new)
     link_wrapper(events_path, wrapper_options, link_options.reverse_merge!({
@@ -57,7 +79,7 @@ module EventCalendar::ApplicationHelper
   def link_to_deleted_events(wrapper_options={})
     return unless has_authorization?(:update, Event.new)
     link_wrapper(event_revisions_path, wrapper_options, {
-      :link_text => "Restore Deleted Events (#{EventRevision.deleted.count})"
+      :link_text => "Browse Deleted Events (#{EventRevision.deleted.count})"
     })
   end
 

@@ -1,0 +1,20 @@
+<p><em>mouse over an event to preview; click on an event for full details</em></p>
+
+<div id="event_quick_description" class="span-12" style="display:none"></div>
+
+<div style="clear:both"></div>
+
+<div id="calendar" class="calendars"></div>
+
+<% content_for :javascript do %>
+<script type="text/javascript">
+$(document).ready(function()
+  {
+    $('#calendar').fullCalendar({ 
+      editable: false, events: '<%= events_path %>', height: 500, aspectRatio: 1,
+      eventMouseover: updateEventDescription
+    });
+  }
+);
+</script>
+<% end %>

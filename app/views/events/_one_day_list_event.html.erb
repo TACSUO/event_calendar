@@ -1,0 +1,2 @@
+<p><%= one_day_list_event.start_on.strftime("%A") %> <%= one_day_list_event.start_day.ordinalize %></p>
+<%= render :partial => 'events/times', :object => times_with_zones(one_day_list_event) %>
