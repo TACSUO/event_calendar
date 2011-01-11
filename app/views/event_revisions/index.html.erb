@@ -8,17 +8,7 @@
     </tr>
   </thead>
   <tbody>
-  <% for event in @deleted_events %>
-    <tr style="background-color: #f5c6d7;">
-      <td><%= link_to event.name, event_revision_path(event) %></td>
-      <td><%= truncate(event.location, :length => 100) %></td>
-      <td><%= truncate(event.description, :length => 100) %></td>
-      <td><%= link_to 'restore', restore_event_revision_path(event),
-                  :confirm => 'Are you sure you want to restore this deleted event?',
-                  :method => "post",
-                  :class => 'fake_button' %></td>
-    </tr>
-  <% end %>
+    <%= render @deleted_events %>
   </tbody>
 </table>
 

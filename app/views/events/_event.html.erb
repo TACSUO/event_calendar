@@ -1,10 +1,5 @@
-<div class="span-8">
-  <h4><%= link_to event.name_and_file_count, event_path(event.id) %></h4>
-  <p><%=h event.event_type %></p>
-  <% if event.attendees.count > 0 %>
-    <p><%= "#{event.attendees.count} attendees" %></p>
-  <% end %>
-  <p>from <%=h event.start_on.strftime "%a, %b %d %Y (%I:%M%p)" %></p>
-  <p>until <%=h event.end_on.strftime "%a, %b %d %Y (%I:%M%p)" %></p>
-  <p><%=h event.description[0..60] %></p>
-</div>
+<%= div_for_record(event) do -%>
+  <h1><%= link_to event.name, event_path(event) %> (<em><%= event.event_type %></em>)</h1>
+  
+  <%= render :partial => 'events/event_details', :object => event %>
+<% end %>

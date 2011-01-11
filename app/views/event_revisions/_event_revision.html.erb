@@ -1,0 +1,9 @@
+<%= tag_for_record :tr, event_revision, :style => 'background-color: #f5c6d7' do %>
+  <td><%= link_to event_revision.name, event_revision_path(event_revision) %></td>
+  <td><%= truncate(event_revision.location, :length => 100) %></td>
+  <td><%= truncate(event_revision.description, :length => 100) %></td>
+  <td><%= link_to 'restore', restore_event_revision_path(event_revision),
+              :confirm => 'Are you sure you want to restore this deleted event?',
+              :method => "post",
+              :class => 'fake_button' %></td>
+<% end %>

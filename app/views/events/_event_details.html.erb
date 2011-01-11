@@ -1,9 +1,4 @@
 <p>
-  <strong><%= event_details.name %></strong><br/>
-  <em><%= event_details.event_type %></em>
-</p>
-
-<p>
   <strong>Starts</strong><br />
   <%= event_details.start_on.in_time_zone(event_details.timezone).strftime('%A, %B %d %Y at %I:%M %p (%Z)') %>
 </p>

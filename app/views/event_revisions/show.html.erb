@@ -1,11 +1,11 @@
-
 <p>
   <% if Event.where(:id => @event_revision.current_revision).count > 0 %>
   <%= link_to "< Current Version", event_path(@event_revision.current_revision), :class => 'fake_button' %>
   <% else %>
-  <%= link_to "< Browse Revisions", event_revisions_path, :class => 'fake_button' %>
+  <%= link_to "< Browse Deleted", event_revisions_path, :class => 'fake_button' %>
   <% end %>
 </p>
 
-<h1>Event - Version: <%= @event_revision.revision_number %><hr /></h1>
-<%= render :partial => 'events/event_details', :object => @event_revision %>
+<p style="float: right;" class="fake_button">Revision <%= @event_revision.revision_number %></p>
+
+<%= render :partial => 'events/event', :object => @event_revision %>

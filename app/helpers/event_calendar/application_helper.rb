@@ -1,4 +1,12 @@
 module EventCalendar::ApplicationHelper
+  def div_for_record(record, options={}, &block)
+    options.merge!({:class => "span-10 #{options[:class]}"})
+    div_for(record, options){ yield }
+  end
+  def tag_for_record(tag, record, *args, &block)
+    content_tag_for(tag, record, *args){ yield }
+  end
+  
   def link_wrapper(path, wrapper_options={}, link_options={})
     tag       = wrapper_options.delete(:tag) || :p
     link_text = link_options.delete(:link_text) || path
@@ -73,7 +81,7 @@ module EventCalendar::ApplicationHelper
       :highlight => false
     }.merge!(wrapper_options), {
       :link_text => "Delete <em>#{event.name}</em>".html_safe,
-      :confirm => "Are you sure you want to permanently delete the #{event.name} #{event.type}?",
+      :confirm => "Are you sure you want to permanently delete the #{event.name} #{event.event_type}?",
       :method => "delete"
     }.merge!(link_options))
   end
