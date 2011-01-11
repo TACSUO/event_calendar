@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{event_calendar_engine}
-  s.version = "0.1.8"
+  s.version = "0.1.9"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jason LaPier", "Jeremiah Heller"]
-  s.date = %q{2011-01-06}
+  s.date = %q{2011-01-11}
   s.description = %q{Provides basic event management features with versioned history of changes.}
   s.email = ["jason.lapier@gmail.com", "jeremiah@inertialbit.net"]
   s.extra_rdoc_files = [
@@ -31,21 +31,32 @@ Gem::Specification.new do |s|
     "app/models/attendee.rb",
     "app/models/deletable_instance_methods.rb",
     "app/models/event.rb",
+    "app/models/event_instance_methods.rb",
     "app/models/event_revision.rb",
     "app/models/participant.rb",
     "app/models/participator.rb",
+    "app/views/attendees/_add_attendees.html.erb",
     "app/views/attendees/index.html.erb",
     "app/views/attendees/new.html.erb",
     "app/views/event-calendar-shared/_flash.html.erb",
     "app/views/event-calendar-shared/_main_menu.html.erb",
     "app/views/event-calendar-shared/_navigation.html.erb",
+    "app/views/event_revisions/_event_revision.html.erb",
+    "app/views/event_revisions/_list_group.html.erb",
     "app/views/event_revisions/index.html.erb",
     "app/views/event_revisions/show.html.erb",
     "app/views/events/_browse_event_revisions.html.erb",
+    "app/views/events/_calendar.html.erb",
+    "app/views/events/_current_event.html.erb",
     "app/views/events/_details.html.erb",
     "app/views/events/_event.html.erb",
     "app/views/events/_event_details.html.erb",
     "app/views/events/_form.html.erb",
+    "app/views/events/_list.html.erb",
+    "app/views/events/_list_group.html.erb",
+    "app/views/events/_multi_day_list_event.html.erb",
+    "app/views/events/_one_day_list_event.html.erb",
+    "app/views/events/_times.html.erb",
     "app/views/events/attendees.html.erb",
     "app/views/events/edit.html.erb",
     "app/views/events/index.html.erb",
