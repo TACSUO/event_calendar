@@ -1,6 +1,5 @@
 module EventCalendar::ApplicationHelper
   def div_for_record(record, options={}, &block)
-    options.merge!({:class => "span-10 #{options[:class]}"})
     div_for(record, options){ yield }
   end
   def tag_for_record(tag, record, *args, &block)

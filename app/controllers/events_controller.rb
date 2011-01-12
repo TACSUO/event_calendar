@@ -10,8 +10,8 @@ class EventsController < EventCalendar::ApplicationController
         {
           :id => event.id,
           :title => event.name,
-          :start => event.start_on,
-          :end => event.end_on,
+          :start => event.start_on.in_time_zone(event.timezone),
+          :end => event.end_on.in_time_zone(event.timezone),
           :url => event_path(event),
           :details => render_to_string(:partial => 'events/details', :object => event)
         }
@@ -32,8 +32,8 @@ class EventsController < EventCalendar::ApplicationController
       end_min = params[:event].delete :"end_time(5i)"
       start_date = Date.parse(params[:event][:start_date])
       end_date = Date.parse(params[:event][:end_date])
-      params[:event][:start_on] = Time.local(start_date.year, start_date.month, start_date.day, start_hour, start_min)
-      params[:event][:end_on] = Time.local(end_date.year, end_date.month, end_date.day, end_hour, end_min)
+      params[:event][:start_on] = Time.local(nil, start_min, start_hour, start_date.day, start_date.month, start_date.year, nil, nil, nil, params[:event][:timezone])
+      params[:event][:end_on] = Time.local(nil, end_min, end_hour, end_date.day, end_date.month, end_date.year, nil, nil, nil, params[:event][:timezone])
       params[:event][:start_time] = params[:event][:start_on]
       params[:event][:end_time] = params[:event][:end_on]
     end
