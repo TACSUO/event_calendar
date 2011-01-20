@@ -29,14 +29,15 @@ module EventCalendar::ApplicationHelper
   end
   
   def time_with_zones(time=Time.now)
-    out = {}
+    out = []
     format = "%H:%M"
     ActiveSupport::TimeZone.us_zones.map(&:name).each do |us_zone|
       next unless us_zone =~ /Pacific|Mountain|Central|Eastern/
       key = time.in_time_zone(us_zone).strftime("%Z")
-      out[key] = time.in_time_zone(us_zone).strftime(format)
+      # out[key] = time.in_time_zone(us_zone).strftime(format)
+      out << [key, time.in_time_zone(us_zone).strftime(format)]
     end
-    out
+    out.reverse
   end
   
   def times_with_zones(event)
