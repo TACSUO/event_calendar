@@ -1,3 +1,5 @@
+<%- t = [] -%>
 <% times.first.each_with_index do |z_t, i| %>
-  <p><%= z_t.last %> - <%= times.last[i].last %> <em><%= z_t.first %></em></p>
+  <% t << "#{z_t.last} - #{times.last[i].last} " + content_tag(:em, z_t.first) %>
 <% end %>
+<%= t.join(" / ").html_safe %>
