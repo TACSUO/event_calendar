@@ -11,6 +11,7 @@ var updateEventDescription = function(event, jsEvent) {
 
 
 jQuery(function($) {
+  $('ul.events').attach(Collapsible);
   $('a.show_hide_link').attach(ShowHideLink);
   $('a.view_events').attach(EventView);
 });
