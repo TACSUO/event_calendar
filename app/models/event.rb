@@ -36,9 +36,27 @@ class Event < ActiveRecord::Base
     def set_timezone
       Time.zone = timezone
     end
-    
   protected
   public  
+    
+    def self.existing_event_types
+      select('DISTINCT event_type').map(&:event_type).reject { |ev| ev.blank? }.sort
+    end
+    
+    def date
+      one_day? ? one_day_date : multi_day_date
+    end
+    
+    def one_day_date
+      start_on.in_time_zone(timezone).strftime('%A, %B %d %Y')
+    end
+    
+    def multi_day_date
+      return one_day_date if end_on.blank?
+      "#{start_on.in_time_zone(timezone).strftime('%A, %B %d')} - "+
+      "#{end_on.in_time_zone(timezone).strftime('%A, %B %d %Y')}"
+    end
+    
     def participants
       return [] if attendees.count == 0
       attendees.all.collect do |attendee|
@@ -46,46 +64,7 @@ class Event < ActiveRecord::Base
       end
     end
 
-    def self.existing_event_types
-      select('DISTINCT event_type').map(&:event_type).reject { |ev| ev.blank? }.sort
-    end
-    
-    # def update_roster
-    #   self.attendee_roster = attendees.collect{|a| a.contact_id}.join(',')
-    # end
-
-    # def drop_attendees(drop_contact_ids)
-    #   drop_contact_ids = [*drop_contact_ids].compact.map(&:to_i)
-    #   changeset! do |event|
-    #     event.attendees.find(:all, {
-    #       :select => 'id',
-    #       :conditions => ["contact_id IN (?)", drop_contact_ids]
-    #     }).each{|a| a.destroy && !a.destroyed?}
-    #     event.update_roster
-    #     event.save
-    #   end
-    # end
-    
-    # def add_attendees(from_contact_ids)
-    #   changeset! do |event|
-    #     from_contact_ids.each do |c_id|
-    #       event.attendees.build(:contact_id => c_id)
-    #     end
-    #     event.update_roster
-    #     event.save
-    #   end
-    # end
-
     def to_s
       "#{name} (#{start_on} #{end_on ? ' - ' + end_on.to_s : ''})"
     end
-
-    # list all groups that had least one member in attendance at this event
-    # def contact_groups_represented
-    #   @contact_groups_represented ||= contacts.map(&:contact_groups).flatten.uniq
-    # end
-    
-    # def name_and_file_count
-    #   "#{name} (#{pluralize(file_attachments.count, 'file')})"
-    # end
 end

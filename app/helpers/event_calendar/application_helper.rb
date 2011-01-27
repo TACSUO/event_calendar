@@ -33,21 +33,37 @@ module EventCalendar::ApplicationHelper
     ActiveSupport::TimeZone.us_zones.map(&:name).each do |us_zone|
       next unless us_zone =~ /Pacific|Mountain|Central|Eastern/
       key = time.in_time_zone(us_zone).strftime("%Z")
+      key = timezone_in_words(key.strip)
       # out[key] = time.in_time_zone(us_zone).strftime(format)
       out << [key, time.in_time_zone(us_zone).strftime(TIME_BASE)]
     end
     out.reverse
   end
+      
+  def timezone_in_words(zone)
+    pac_regex = /^P(S|D)T$/
+    mnt_regex = /^M(S|D)T$/
+    ctr_regex = /^C(S|D)T$/
+    est_regex = /^E(S|D)T$/
+    case zone
+    when pac_regex
+      zone.gsub(pac_regex, 'Pacific')
+    when mnt_regex
+      zone.gsub(mnt_regex, 'Mountain')
+    when ctr_regex
+      zone.gsub(ctr_regex, 'Central')
+    when est_regex
+      zone.gsub(est_regex, 'Eastern')
+    else
+      zone
+    end
+  end
   
   def times_with_zones(event)
-    begin
     [
       time_with_zones(event.start_time),
       time_with_zones(event.end_time)
     ]
-    rescue NoMethodError => e
-      raise "#{e.message} - #{event.inspect}"
-    end
   end
   
   def link_to_events(wrapper_options={}, link_options={})
