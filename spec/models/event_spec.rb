@@ -29,8 +29,9 @@ describe Event do
     Event.future.first.should eql @mar_2100
   end
   
-  it "Event.current finds current events" do
-    Event.current.first.should eql @current
+  it "Event.current finds current events (in progress and future)" do
+    Event.current.should include @current
+    Event.current.should include @mar_2100
   end
   
   it "Event.between finds events between limits" do

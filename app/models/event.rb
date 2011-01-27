@@ -15,7 +15,7 @@ class Event < ActiveRecord::Base
   
   scope :past, where(sanitize_sql_array(["end_on < '%s'", Date.current]))
   scope :future, where(sanitize_sql_array(["start_on > '%s'", Date.current]))
-  scope :current, where(sanitize_sql_array(["end_on >= '%s' AND start_on <= '%s'", Date.current, Date.current]))
+  scope :current, where(sanitize_sql_array(["end_on >= '%s'", Date.current]))
   scope :between, lambda{ |start_datetime, end_datetime|
     where(["start_on BETWEEN ? AND ? OR end_on BETWEEN ? AND ?",
       start_datetime, end_datetime, start_datetime, end_datetime])

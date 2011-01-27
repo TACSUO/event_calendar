@@ -47,8 +47,7 @@ class EventsController < EventCalendar::ApplicationController
       @events = Event.between(Time.at(params[:start].to_i), Time.at(params[:end].to_i))
     else
       @past_events = Event.past.order("start_on DESC")
-      @future_events = Event.future.order("start_on ASC")
-      @current_events = Event.current.order("start_on ASC")
+      @current_events = Event.current.order("start_on DESC")
     end
 
     respond_to do |format|
