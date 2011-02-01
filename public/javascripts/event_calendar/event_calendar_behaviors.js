@@ -180,6 +180,10 @@ var Collapsible = $.klass({
   },
   onclick: $.delegate({
     '.collapsible': function(clickedElement, event) {
+      expanded = clickedElement.siblings().find(':visible').size();
+      if( expanded < 1 ) {
+        event.preventDefault();
+      }
       clickedElement.siblings().toggle();
     }
   })

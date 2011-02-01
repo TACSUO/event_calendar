@@ -23,13 +23,18 @@ class Event < ActiveRecord::Base
   
   validate :sane_dates
   
-  before_save :set_timezone
+  before_validation do
+    if end_on.in_time_zone(timezone).hour == 0
+      self.end_on = Time.local(nil, start_on.min, start_on.in_time_zone(timezone).hour + 1, start_on.in_time_zone(timezone).day, start_on.in_time_zone(timezone).month, start_on.in_time_zone(timezone).year, nil, nil, nil, timezone)
+    end
+  end
+  #before_save :set_timezone
 
   private
 
     def sane_dates
       if start_on and end_on and start_on > end_on
-        errors.add :end_on, "cannot be before the start date"
+        errors.add :end_on, "calculated as #{end_on.in_time_zone(timezone).strftime('%A, %B %d %Y @ %I:%m%p')} but cannot be before the start date #{start_on.in_time_zone(timezone).strftime('%A, %B %d %Y @ %I:%m%p')}"# "cannot be before the start date"
       end
     end
     

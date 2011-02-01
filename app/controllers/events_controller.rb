@@ -30,12 +30,21 @@ class EventsController < EventCalendar::ApplicationController
       start_min = params[:event].delete :"start_time(5i)"
       end_hour = params[:event].delete :"end_time(4i)"
       end_min = params[:event].delete :"end_time(5i)"
-      start_date = Date.parse(params[:event][:start_date])
-      end_date = Date.parse(params[:event][:end_date])
-      params[:event][:start_on] = Time.local(nil, start_min, start_hour, start_date.day, start_date.month, start_date.year, nil, nil, nil, params[:event][:timezone])
-      params[:event][:end_on] = Time.local(nil, end_min, end_hour, end_date.day, end_date.month, end_date.year, nil, nil, nil, params[:event][:timezone])
-      params[:event][:start_time] = params[:event][:start_on]
-      params[:event][:end_time] = params[:event][:end_on]
+      if params[:event][:start_date].present?
+        start_date = Date.parse(params[:event][:start_date])
+        params[:event][:start_on] = Time.local(nil, start_min, start_hour, start_date.day, start_date.month, start_date.year, nil, nil, nil, params[:event][:timezone])
+        if params[:event][:end_date].present?
+          end_date = Date.parse(params[:event][:end_date])
+        else
+          end_date = start_date
+        end
+        params[:event][:end_on] = Time.local(nil, end_min, end_hour, end_date.day, end_date.month, end_date.year, nil, nil, nil, params[:event][:timezone])
+        params[:event][:start_time] = params[:event][:start_on]
+        params[:event][:end_time] = params[:event][:end_on]
+      else
+        params[:event][:start_time] = ''
+        params[:event][:end_time] = ''
+      end
     end
   protected
   public
@@ -79,7 +88,7 @@ class EventsController < EventCalendar::ApplicationController
   # GET /events/new.xml
   def new
     @event = Event.new
-
+    @event.start_time = Time.local(Date.current.year, Date.current.month, Date.current.day, 06, 00)
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @event }
@@ -138,30 +147,4 @@ class EventsController < EventCalendar::ApplicationController
       format.xml  { head :ok }
     end
   end
-
-  # def drop_contact
-  #   @event = Event.find(params[:id])
-  #   if @event.drop_attendees(params[:contact_ids] || params[:contact_id])
-  #     flash[:notice] = "Contact(s) removed from #{@event.name} roster."
-  #   else
-  #     flash[:warning] = "Failed to remove contact(s) from #{@event.name} roster. (#{@event.errors.full_messages.join('; ')}"
-  #   end
-  #   redirect_to @event
-  # end
-
-  # def add_attendees
-  #   @event = Event.find(params[:id])
-  #   @contacts_not_in_group = Contact.find(:all, :order => 'last_name, first_name',
-  #     :conditions => 'last_name IS NOT NULL AND last_name != ""') - @event.contacts
-  # end
-
-  # def add_contacts
-  #   @event = Event.find(params[:id])
-  #   if @event.add_attendees(params[:contact_ids])
-  #     flash[:notice] = "Contacts(s) added to #{@event.name}."
-  #   else
-  #     flash[:warning] = "Failed to add contact(s) to #{@event.name}. (#{@event.errors.full_messages.join('; ')}"
-  #   end
-  #   redirect_to @event
-  # end
 end

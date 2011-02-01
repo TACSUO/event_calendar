@@ -5,7 +5,8 @@ describe EventsController do
   let(:event) do
     mock_model(Event, {
       :name => 'Some Event',
-      :start_on => Date.yesterday,
+      :start_on => 4.hours.from_now,
+      :start_time= => 4.hours.from_now,
       :end_on => Date.tomorrow,
       :timezone => 'Pacific Time (US & Canada)',
       :description => 'Some Description',

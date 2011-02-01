@@ -12,12 +12,12 @@ describe Event do
     }
     @may_2010 = Event.create!(@valid_attributes)
     @mar_2100 = Event.create!(@valid_attributes.merge!({
-      :start_on => Date.new(2100,3,12),
-      :end_on => Date.new(2100,3,13)
+      :start_on => (365 * 24 * 5).hours.from_now,
+      :end_on => ((365 * 24 * 5) + 72).hours.from_now
     }))
     @current = Event.create!(@valid_attributes.merge!({
-      :start_on => Date.yesterday,
-      :end_on => Date.tomorrow
+      :start_on => 72.hours.ago,
+      :end_on => 48.hours.from_now
     }))
   end
   
@@ -35,7 +35,7 @@ describe Event do
   end
   
   it "Event.between finds events between limits" do
-    Event.between(Date.new(2100,3,1), Date.new(2100,3,30)).first.should eql @mar_2100
+    Event.between((362 * 24 * 5).hours.from_now, ((365 * 24 * 5) + 72).hours.from_now).first.should eql @mar_2100
   end
 
   it "should create a new instance given valid attributes" do
@@ -44,8 +44,19 @@ describe Event do
   
   it "must start before it can end" do
     event = Event.new(@valid_attributes)
-    event.end_on = Date.new(2010,5,3)
+    event.end_on = 6.months.ago
     event.should_not be_valid
+  end
+  
+  it "sets end_on to start_on.hour + 1 before_validation if end_on.hour == 0" do
+    Time.zone = 'Pacific Time (US & Canada)'
+    event = Event.new(@valid_attributes.merge!({
+      :timezone => 'Pacific Time (US & Canada)',
+      :start_on => Time.local(Date.current.year, Date.current.month, Date.current.day, 8, 0),
+      :end_on => Time.local(Date.current.year, Date.current.month, Date.current.day, 0, 0)
+    }))
+    event.valid?
+    event.end_on.hour.should eq 9
   end
 
   it "should find event types" do
@@ -75,65 +86,6 @@ describe Event do
     event.name = @valid_attributes[:name]
     event.save
     event.revision_number.should == 0
-  end
-  
-  context "with attendees" do
-    
-    before(:each) do
-      @event = Event.create!(@valid_attributes)
-      # pending
-      #@contact = mock_model(Contact)
-      #@event.add_attendees([@contact.id])
-      #@event.save
-      #Contact.stub(:find).and_return([@contact])
-    end
-
-    context "adding an attendee" do
-      
-      it "should update attendee_roster" do
-        pending
-        @event.attendee_roster.should == @contact.id.to_s
-      end
-
-      it "should create a new version" do
-        pending
-        @event.revision_number.should == 1
-      end
-
-      it "should have previous set of attendees available through the previous revision" do
-        pending
-        @event.find_revision(:previous).attendees.count.should == 0
-        @event.add_attendees([@contact.id])
-        @event.find_revision(:previous).attendees.count.should == 1
-        @event.attendees.count.should == 2
-      end
-    end
-
-    context "removing an attendee" do
-
-      before(:each) do
-        # pending
-        #@event.attendees.count.should == 1
-        #@attendee = @event.attendees.first
-        #@event.drop_attendees(@attendee.contact_id)
-      end
-      
-      it "should not include the removed attendee in the current collection" do
-        pending
-        @event.attendees.count.should == 0
-      end
-      
-      it "should create a new version" do
-        pending
-        @event.revision_number.should == 2
-      end
-      
-      it "should have previous set of attendees available through the previous revision" do
-        pending
-        @event.find_revision(:previous).attendees.should == @attendee.contact
-      end
-
-    end
   end
   
 end

@@ -59,6 +59,15 @@ module EventCalendar::ApplicationHelper
     end
   end
   
+  def event_times(event)
+    t = []
+    event_times = times_with_zones(event)
+    event_times.first.each_with_index do |z_t, i|
+      t << "#{z_t.last} - #{event_times.last[i].last} " + content_tag(:em, z_t.first)
+    end
+    t.join(" / ").html_safe
+  end
+  
   def times_with_zones(event)
     [
       time_with_zones(event.start_time),

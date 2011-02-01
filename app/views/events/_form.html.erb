@@ -4,10 +4,10 @@
   <%= form.inputs do %>
     <%= form.input :name, :hint => "the name of the event" %>
     <%= form.input :event_type, :hint => "conference, meeting, training, etc" %>
-    <%= form.input :start_time, :as => :time, :minute_step => 15 %>
+    <%= form.input :start_time, :as => :time, :minute_step => 15, :include_blank => false %>
     <%= form.input :start_date, :required => false, :as => :string,
           :input_html => { :value => @event.start_date.to_s } %>
-    <%= form.input :end_time, :as => :time, :minute_step => 15 %>
+    <%= form.input :end_time, :as => :time, :minute_step => 15, :include_blank => false %>
     <%= form.input :end_date, :required => false, :as => :string,
           :input_html => { :value => @event.end_date.to_s } %>
     <%= form.input :timezone, :as => :time_zone, :priority_zones => /^(Eastern|Central|Mountain|Pacific) Time/ %>
