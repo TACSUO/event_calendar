@@ -48,12 +48,12 @@ describe Event do
     event.should_not be_valid
   end
   
-  it "sets end_on to start_on.hour + 1 before_validation if end_on.hour == 0" do
+  it "sets end_on to start_on.hour + 1 before_validation if end_on.hour == 6am" do
     Time.zone = 'Pacific Time (US & Canada)'
     event = Event.new(@valid_attributes.merge!({
       :timezone => 'Pacific Time (US & Canada)',
       :start_on => Time.local(Date.current.year, Date.current.month, Date.current.day, 8, 0),
-      :end_on => Time.local(Date.current.year, Date.current.month, Date.current.day, 0, 0)
+      :end_on => Time.local(Date.current.year, Date.current.month, Date.current.day, 6, 0)
     }))
     event.valid?
     event.end_on.hour.should eq 9

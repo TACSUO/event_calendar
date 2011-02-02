@@ -75,6 +75,30 @@ module EventCalendar::ApplicationHelper
     ]
   end
   
+  def hour_options
+    [
+      ['6 AM','06'],
+      ['7 AM','07'],
+      ['8 AM','08'],
+      ['9 AM','09'],
+      ['10 AM','10'],
+      ['11 AM','11'],
+      ['12 PM','12'],
+      ['1 PM','13'],
+      ['2 PM','14'],
+      ['3 PM','15'],
+      ['4 PM','16'],
+      ['5 PM','17'],
+      ['6 PM','18'],
+      ['7 PM','19'],
+      ['8 PM','20']
+    ]
+  end
+  
+  def minute_options
+    ['00', '15', '30', '45']
+  end
+  
   def link_to_events(wrapper_options={}, link_options={})
     return unless has_authorization?(:read, Event.new)
     link_wrapper(events_path, wrapper_options, link_options.reverse_merge!({

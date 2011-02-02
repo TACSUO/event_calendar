@@ -46,4 +46,18 @@ module EventInstanceMethods
     start_month == end_month &&
     start_year == end_year
   end
+  
+  def date
+    one_day? ? one_day_date : multi_day_date
+  end
+  
+  def one_day_date
+    start_on.in_time_zone(timezone).strftime('%A, %B %d %Y')
+  end
+  
+  def multi_day_date
+    return one_day_date if end_on.blank?
+    "#{start_on.in_time_zone(timezone).strftime('%A, %B %d')} - "+
+    "#{end_on.in_time_zone(timezone).strftime('%A, %B %d %Y')}"
+  end
 end

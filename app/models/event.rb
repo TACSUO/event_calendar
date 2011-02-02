@@ -24,7 +24,7 @@ class Event < ActiveRecord::Base
   validate :sane_dates
   
   before_validation do
-    if end_on.in_time_zone(timezone).hour == 0
+    if end_on.in_time_zone(timezone).hour == 06
       self.end_on = Time.local(nil, start_on.min, start_on.in_time_zone(timezone).hour + 1, start_on.in_time_zone(timezone).day, start_on.in_time_zone(timezone).month, start_on.in_time_zone(timezone).year, nil, nil, nil, timezone)
     end
   end
@@ -46,20 +46,6 @@ class Event < ActiveRecord::Base
     
     def self.existing_event_types
       select('DISTINCT event_type').map(&:event_type).reject { |ev| ev.blank? }.sort
-    end
-    
-    def date
-      one_day? ? one_day_date : multi_day_date
-    end
-    
-    def one_day_date
-      start_on.in_time_zone(timezone).strftime('%A, %B %d %Y')
-    end
-    
-    def multi_day_date
-      return one_day_date if end_on.blank?
-      "#{start_on.in_time_zone(timezone).strftime('%A, %B %d')} - "+
-      "#{end_on.in_time_zone(timezone).strftime('%A, %B %d %Y')}"
     end
     
     def participants
