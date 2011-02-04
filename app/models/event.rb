@@ -24,22 +24,29 @@ class Event < ActiveRecord::Base
   validate :sane_dates
   
   before_validation do
-    if end_on.in_time_zone(timezone).hour == 06
-      self.end_on = Time.local(nil, start_on.min, start_on.in_time_zone(timezone).hour + 1, start_on.in_time_zone(timezone).day, start_on.in_time_zone(timezone).month, start_on.in_time_zone(timezone).year, nil, nil, nil, timezone)
+    if one_day? && (end_on.hour == 06 || end_on.hour == start_on.hour)
+       logger.debug("EVENT TIMES: [start_on: #{start_on}] [end_on: #{end_on}]")
+       self.end_on = start_on + 1.hour
+       logger.debug("EVENT END_ON UPDATED: [end_on: #{end_on}]")
     end
   end
-  #before_save :set_timezone
+  
+  before_save :adjust_to_utc_from_timezone
 
   private
 
     def sane_dates
       if start_on and end_on and start_on > end_on
-        errors.add :end_on, "calculated as #{end_on.in_time_zone(timezone).strftime('%A, %B %d %Y @ %I:%m%p')} but cannot be before the start date #{start_on.in_time_zone(timezone).strftime('%A, %B %d %Y @ %I:%m%p')}"# "cannot be before the start date"
+        errors.add :end_on, "cannot be before the start date"
+        #"calculated as #{end_on.strftime('%A, %B %d %Y @ %I:%m%p')} but cannot be before the start date #{start_on.strftime('%A, %B %d %Y @ %I:%m%p')}"
       end
     end
     
-    def set_timezone
-      Time.zone = timezone
+    def adjust_to_utc_from_timezone
+      tz_offset = start_on.in_time_zone(timezone).utc_offset
+      self.start_on = self.start_on - tz_offset
+      self.end_on = self.end_on - tz_offset
+      logger.debug("EVENT ADJUSTED TO UTC: [start_on: #{start_on}] [end_on: #{end_on}]")
     end
   protected
   public  

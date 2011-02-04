@@ -32,15 +32,16 @@ class EventsController < EventCalendar::ApplicationController
       end_min = params[:event].delete :"end_time(5i)"
       if params[:event][:start_date].present?
         start_date = Date.parse(params[:event][:start_date])
-        params[:event][:start_on] = Time.local(nil, start_min, start_hour, start_date.day, start_date.month, start_date.year, nil, nil, nil, params[:event][:timezone])
+        params[:event][:start_on] = Time.utc(start_date.year, start_date.month, start_date.day, start_hour, start_min)
         if params[:event][:end_date].present?
           end_date = Date.parse(params[:event][:end_date])
         else
           end_date = start_date
         end
-        params[:event][:end_on] = Time.local(nil, end_min, end_hour, end_date.day, end_date.month, end_date.year, nil, nil, nil, params[:event][:timezone])
+        params[:event][:end_on] = Time.utc(end_date.year, end_date.month, end_date.day, end_hour, end_min)
         params[:event][:start_time] = params[:event][:start_on]
         params[:event][:end_time] = params[:event][:end_on]
+        logger.debug("EVENT PARAMS: [start_on: #{params[:event][:start_on]}] [end_on: #{params[:event][:end_on]}]")
       else
         params[:event][:start_time] = ''
         params[:event][:end_time] = ''
@@ -112,6 +113,7 @@ class EventsController < EventCalendar::ApplicationController
         format.html { redirect_to(event_path(@event)) }
         format.xml  { render :xml => @event, :status => :created, :location => @event }
       else
+        flash.now[:notice] = @event.errors.full_messages
         format.html { render :action => "new" }
         format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
       end
@@ -124,12 +126,12 @@ class EventsController < EventCalendar::ApplicationController
     @event = Event.find(params[:id])
 
     respond_to do |format|
-      # if @event.update_attributes(params[:event].merge(:modified_by_user => current_user))
       if @event.update_attributes(params[:event])
         flash[:notice] = 'Event was successfully updated.'
         format.html { redirect_to(@event) }
         format.xml  { head :ok }
       else
+        flash.now[:notice] = @event.errors.full_messages
         format.html { render :action => "edit" }
         format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
       end
