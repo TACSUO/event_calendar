@@ -29,6 +29,22 @@ module EventInstanceMethods
     start_on.present? ? start_on.in_time_zone(timezone).day : start_on
   end
   
+  def start_hour
+    start_on.present? ? start_on.hour : nil
+  end
+  
+  def start_min
+    start_on.present? ? start_on.min : nil
+  end
+  
+  def end_hour
+    end_on.present? ? end_on.hour : nil
+  end
+  
+  def end_min
+    end_on.present? ? end_on.min : nil
+  end
+  
   def end_day
     end_on.present? ? end_on.in_time_zone(timezone).day : end_on
   end

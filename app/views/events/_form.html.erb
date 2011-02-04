@@ -14,13 +14,13 @@
           <li>
             <label for="event_start_time_4i">Hour</label>
             <select id="event_start_time_4i" name="event[start_time(4i)]">
-              <%= options_for_select(hour_options, @event.start_time) %>
+              <%= options_for_select(hour_options, @event.start_hour) %>
             </select>
           </li>
           <li>
             <label for="event_end_time_5i">Minute</label>
             <select id="event_end_time_5i" name="event[start_time(5i)]">
-              <%= options_for_select(minute_options, @event.start_time) %>
+              <%= options_for_select(minute_options, @event.start_min) %>
             </select>
           </li>
         </ol>
@@ -38,13 +38,13 @@
           <li>
             <label for="event_end_time_4i">Hour</label>
             <select id="event_end_time_4i" name="event[end_time(4i)]">
-              <%= options_for_select(hour_options, @event.end_time) %>
+              <%= options_for_select(hour_options, @event.end_hour) %>
             </select>
           </li>
           <li>
             <label for="event_end_time_5i">Minute</label>
             <select id="event_end_time_5i" name="event[end_time(5i)]">
-              <%= options_for_select(minute_options, @event.end_time) %>
+              <%= options_for_select(minute_options, @event.end_min) %>
             </select>
           </li>
         </ol>

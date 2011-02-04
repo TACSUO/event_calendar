@@ -24,10 +24,8 @@ class Event < ActiveRecord::Base
   validate :sane_dates
   
   before_validation do
-    if one_day? && (end_on.hour == 06 || end_on.hour == start_on.hour)
-       logger.debug("EVENT TIMES: [start_on: #{start_on}] [end_on: #{end_on}]")
-       self.end_on = start_on + 1.hour
-       logger.debug("EVENT END_ON UPDATED: [end_on: #{end_on}]")
+    if one_day? && end_on.hour <= start_on.hour
+      self.end_on = start_on + 1.hour
     end
   end
   
@@ -38,7 +36,6 @@ class Event < ActiveRecord::Base
     def sane_dates
       if start_on and end_on and start_on > end_on
         errors.add :end_on, "cannot be before the start date"
-        #"calculated as #{end_on.strftime('%A, %B %d %Y @ %I:%m%p')} but cannot be before the start date #{start_on.strftime('%A, %B %d %Y @ %I:%m%p')}"
       end
     end
     
@@ -46,7 +43,6 @@ class Event < ActiveRecord::Base
       tz_offset = start_on.in_time_zone(timezone).utc_offset
       self.start_on = self.start_on - tz_offset
       self.end_on = self.end_on - tz_offset
-      logger.debug("EVENT ADJUSTED TO UTC: [start_on: #{start_on}] [end_on: #{end_on}]")
     end
   protected
   public  
