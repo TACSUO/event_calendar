@@ -1,4 +1,5 @@
 <%- unless details.one_day? %>
+<%= render :partial => 'events/multi_day_list_event', :object => details %>
 <%= textilize(details.location) %>
 <%= textilize(details.description) %>
 <%- else -%>
