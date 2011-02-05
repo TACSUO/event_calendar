@@ -48,15 +48,29 @@ describe Event do
     event.should_not be_valid
   end
   
-  it "sets end_on to start_on.hour + 1 before_validation if end_on.hour == 6am" do
-    Time.zone = 'UTC'
-    event = Event.new(@valid_attributes.merge!({
-      :timezone => 'Pacific Time (US & Canada)',
-      :start_on => Time.utc(Date.current.year, Date.current.month, Date.current.day, 8, 0),
-      :end_on => Time.utc(Date.current.year, Date.current.month, Date.current.day, 6, 0)
-    }))
-    event.valid?
-    event.end_on.should eq event.start_on + 1.hour
+  context "setting default end_on of start_on + 1.hour if start_on is present and" do
+    before(:each) do
+      Time.zone = 'Pacific Time (US & Canada)'
+    end
+    let(:event) do
+      Event.new(@valid_attributes.merge!({
+        :timezone => 'Pacific Time (US & Canada)',
+        :start_on => 1.hour.from_now,
+        :end_on => nil
+      }))
+    end
+    
+    it "end_on is blank" do
+      event.one_day?.should be_true
+      event.valid?
+      event.end_on.should eq event.start_on + 1.hour
+    end
+    it "end_on <= start_on" do
+      event.end_on = 4.hours.ago
+      event.one_day?.should be_true
+      event.valid?
+      event.end_on.should eq event.start_on + 1.hour
+    end
   end
 
   it "should find event types" do

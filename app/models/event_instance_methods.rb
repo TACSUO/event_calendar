@@ -30,19 +30,27 @@ module EventInstanceMethods
   end
   
   def start_hour
-    start_on.present? ? start_on.hour : nil
+    start_on.present? ? start_on.hour : start_on
   end
   
   def start_min
-    start_on.present? ? start_on.min : nil
+    start_on.present? ? start_on.min : start_on
+  end
+  
+  def end_year
+    end_on.present? ? end_on.year : end_on
+  end
+  
+  def end_month
+    end_on.present? ? end_on.in_time_zone(timezone).strftime("%B") : end_on
   end
   
   def end_hour
-    end_on.present? ? end_on.hour : nil
+    end_on.present? ? end_on.hour : end_on
   end
   
   def end_min
-    end_on.present? ? end_on.min : nil
+    end_on.present? ? end_on.min : end_on
   end
   
   def end_day
@@ -50,6 +58,7 @@ module EventInstanceMethods
   end
   
   def one_day?
+    return true if start_on.blank? || end_on.blank?
     start_on.day == end_on.day &&
     start_on.month== end_on.month &&
     start_on.year == end_on.year

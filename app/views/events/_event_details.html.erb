@@ -5,16 +5,28 @@
   <strong>Time:</strong> <%= event_times(event_details) %>
   <%- end -%>
 </p>
+<% unless event_details.presenters.blank? %>
+<p>
+  <strong>Presenters</strong><br>
+  <%= textilize_without_paragraph event_details.presenters %>
+</p>
+<% end %>
+<% unless event_details.facilitators.blank? %>
+<p>
+  <strong>Facilitators</strong><br>
+  <%= textilize_without_paragraph event_details.facilitators %>
+</p>
+<% end %>
 <% unless event_details.location.blank? %>
 <p>
-  <strong>Location</strong><br/>
+  <strong>Location</strong><br>
   <%= textilize_without_paragraph event_details.location %>
 </p>
 <% end %>
 
 <% unless event_details.description.blank? %>
 <p>
-  <strong>Description/Other Details</strong><br />
+  <strong>Description/Other Details</strong><br>
   <%= textilize_without_paragraph event_details.description %>
 </p>
 <% end %>

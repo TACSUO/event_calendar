@@ -24,7 +24,8 @@ class Event < ActiveRecord::Base
   validate :sane_dates
   
   before_validation do
-    if one_day? && end_on.hour <= start_on.hour
+    if one_day? && ((end_on.present? && start_on.present? && end_on <= start_on) ||
+                    (end_on.blank? && start_on.present?))
       self.end_on = start_on + 1.hour
     end
   end

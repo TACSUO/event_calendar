@@ -53,7 +53,9 @@
     <%= form.input :end_date, :required => false, :as => :string,
           :input_html => { :value => @event.end_date.to_s } %>
     <%= form.input :timezone, :as => :time_zone, :priority_zones => /^(Eastern|Central|Mountain|Pacific) Time/ %>
-    <%= form.input :location, :required => false, :label => 'Location' %>
+    <%= form.input :facilitators, :hint => 'eg Sally Resonant, DSM WRRC' %>
+    <%= form.input :presenters, :hint => 'eg Jane Doe, DSM WRRC' %>
+    <%= form.input :location, :required => false, :hint => 'eg Portland, Oregon USA or http://some.webinar.org', :label => 'Location' %>
     <%= form.input :description, :required => false, :label => 'Description' %>
     <% unless @event.new_record? %>
       <%= form.input :notes, :required => false, :label => 'Notes' %>

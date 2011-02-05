@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101223233354) do
+ActiveRecord::Schema.define(:version => 20110204223256) do
 
   create_table "event_calendar_attendees", :force => true do |t|
     t.integer  "event_id"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(:version => 20101223233354) do
     t.datetime "revisable_deleted_at"
     t.boolean  "revisable_is_current",       :default => true
     t.string   "timezone"
+    t.text     "presenters"
+    t.text     "facilitators"
   end
 
 end

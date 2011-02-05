@@ -7,6 +7,8 @@ Feature: Manage events
     And I fill in "Event type" with "Seminar"
     And I fill in "Start date" with "10/14/2010"
     And I fill in "End date" with "10/17/2010"
+    And I fill in "Facilitators" with "Jonathan Wizzlepod, DSM NPSO"
+    And I fill in "Presenters" with "Jane Doe, Professor Statistical Analysis UO"
     And I fill in "Location" with "Eugene, Oregon"
     And I fill in "Description" with "There will be 4 speakers during 8 hours..."
     And I press "Create Event"

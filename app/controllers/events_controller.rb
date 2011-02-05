@@ -41,7 +41,6 @@ class EventsController < EventCalendar::ApplicationController
         params[:event][:end_on] = Time.utc(end_date.year, end_date.month, end_date.day, end_hour, end_min)
         params[:event][:start_time] = params[:event][:start_on]
         params[:event][:end_time] = params[:event][:end_on]
-        logger.debug("EVENT PARAMS: [start_on: #{params[:event][:start_on]}] [end_on: #{params[:event][:end_on]}]")
       else
         params[:event][:start_time] = ''
         params[:event][:end_time] = ''
