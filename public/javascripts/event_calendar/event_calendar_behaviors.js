@@ -139,14 +139,6 @@ $('#file_attachments').attach(DynamicForm, {
     <input type="hidden" value="<%= form_authenticity_token %>" name="authenticity_token" />
   </div>
   <input type="text" id="file_attachment_name" name="file_attachment[name]" />
-  <select id="file_attachment_file_container" name="file_attachment[file_container]">
-    <%= render({
-      :partial => 'file_attachments/file_container_select',
-      :locals => {
-        :selected => "#{params[:attachable_type]}_#{params[:attachable_id]}"
-      }
-    }) %>
-  </select>
   <textarea id="file_attachment_description" style="height: 70px; width: 69%" name="file_attachment[description]"></textarea>
   <br />
   <input type="submit" value="Update" /> | <a href="#" class="cancel_dynamic_form fake_button">Cancel</a>
@@ -159,20 +151,34 @@ DynamicForm = $.klass({
     this.resourceType = this.formElement.attr('id').replace('_dynamic_form', '');
     this.resourceInputs = this.formElement.find(':input[id^="'+this.resourceType+'"]');
     this.resourcePlural = this.element.attr('id');
+    this.originalAction = this.formElement.attr('action');
+    this.formElement.hide();
   },
   onclick: $.delegate({
-    '.cancel_dynamic_form': function(clickedElement, event) {
+    '.new': function(clickedElement, event) {
       event.preventDefault();
+      this.formElement.clearForm();
+      this.formElement.attr('action', this.originalAction);
+      this.formElement.find(':input[name="_method"]').attr('value', 'post');
+      this.formElement.insertAfter(clickedElement);
+      this.formElement.show();
+    },
+    '.cancel': function(clickedElement, event) {
+      event.preventDefault();
+      this.formElement.clearForm();
+      this.formElement.attr('action', this.originalAction);
+      this.formElement.find(':input[name="_method"]').attr('value', 'post');
       this.formElement.hide();
     },
-    '.link_dynamic_form_link': function(clickedElement, event) {      
+    '.edit': function(clickedElement, event) {
       event.preventDefault();
       
       var resourceContainer = clickedElement.parents('.' + this.resourceType);
       var resourceId = /\d+/.exec(resourceContainer.attr('id'))[0];
       
       // append resourceId to current form action
-      this.formElement.attr("action", "/" + this.resourcePlural + "/" + resourceId);
+      this.formElement.attr("action", this.originalAction + "/" + resourceId);
+      this.formElement.find(':input[name="_method"]').attr('value', 'put');
       
       // clear form input values
       this.formElement.clearForm();
@@ -180,10 +186,12 @@ DynamicForm = $.klass({
       this.formElement.insertBefore(clickedElement);
       
       this.resourceInputs.each(function() {
-        // get resource attr names from form input ids
-        var resourceAttrContainer = resourceContainer.find('.'+this.id);
-        // get resource attr vals from w/in resource container
-        this.value = $.trim(resourceAttrContainer.text());
+        if( this.type != 'submit' ) {
+          // get resource attr names from form input ids
+          var resourceAttrContainer = resourceContainer.find('.'+this.id);
+          // get resource attr vals from w/in resource container
+          this.value = $.trim(resourceAttrContainer.text());
+        }
       });
       
       this.formElement.show();
@@ -209,16 +217,20 @@ var MagicButtons = $.klass({
       this.element.find('.magic').hide();
     }
   },
-  onmouseover: function(e) {
-    if( this.element.find('.magic').size() > 0 ) {
-      this.element.find('.magic').show();
+  onmouseover: $.delegate({
+    'p': function(mousedElement, event) {
+      if( mousedElement.find('.magic').size() > 0 ) {
+        mousedElement.find('.magic').show();
+      }
     }
-  },
-  onmouseout: function(e) {
-    if( this.element.find('.magic').size() > 0 ) {
-      this.element.find('.magic').hide();
+  }),
+  onmouseout: $.delegate({
+    'p': function(mousedElement, event) {
+      if( mousedElement.find('.magic').size() > 0 ) {
+        mousedElement.find('.magic').hide();
+      }
     }
-  }
+  })
 });
 
 var Collapsible = $.klass({

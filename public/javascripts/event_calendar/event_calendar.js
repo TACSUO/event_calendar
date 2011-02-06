@@ -14,7 +14,10 @@ jQuery(function($) {
   $('ul.events').attach(Collapsible);
   $('a.show_hide_link').attach(ShowHideLink);
   $('a.view_events').attach(EventView);
-  $('p.link').attach(MagicButtons);
+  $('div.links').attach(MagicButtons);
+  $('div.links').attach(DynamicForm, {
+    formElement: $('#link_dynamic_form')
+  });
 });
 
 /*

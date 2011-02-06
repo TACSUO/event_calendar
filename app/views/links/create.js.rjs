@@ -1,0 +1,5 @@
+page << %Q{
+  $('div.links > p.new').before('#{escape_javascript(render(@link))}');
+  $('#link_dynamic_form').hide();
+  $('#link_#{@link.id}').find('.magic').hide();
+}

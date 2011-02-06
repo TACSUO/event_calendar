@@ -3,10 +3,5 @@
   
   <%= render :partial => 'events/event_details', :object => event %>
   
-  <p><strong>Materials/Resources</strong></p>
-  <div class="links">
-    <%= render @event.links.all %>
-    <p><strong>New Link</strong></p>
-    <%= render :partial => 'links/form' %>
-  </div>
+  <%= render :partial => 'links/links' %>
 <% end %>

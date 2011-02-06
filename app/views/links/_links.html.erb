@@ -1,0 +1,6 @@
+<p><strong>Materials/Resources</strong></p>
+<div id="links" class="links">
+  <%= render @event.links.all %>
+  <p class="new"><%= link_to 'New Link', new_event_link_path(@event) %></p>
+  <%= render :partial => 'links/form' %>
+</div>

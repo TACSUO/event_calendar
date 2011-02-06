@@ -1,11 +1,17 @@
-<% submission_path = @link.new_record? ? event_links_path(@event) : event_link_path(@event, @link) %>
-<div style="width: 550px;">
-<%= semantic_form_for(@link, :url => submission_path) do |form| %>
+<%- 
+if @link.new_record?
+  submission_path = event_links_path(@event)
+  method = 'post'
+else
+  submission_path = event_link_path(@event, @link)
+  method = 'put'
+end
+-%>
+<%= semantic_form_for(@link, :html => {:class => 'dynamic', :id => 'link_dynamic_form'}, :url => submission_path, :method => 'put') do |form| %>
   <%= form.inputs do %>
+    <input type="hidden" name="_method" value="<%= method %>">
     <%= form.input :name, :hint => "Your External Resource" %>
     <%= form.input :url, :label => 'URL', :hint => "some.domain.tld or http://some.dom..." %>
-    <%= form.submit %>
+    <%= form.submit %> <input type="reset" class="cancel" value="Cancel">
   <% end %>
 <% end %>
-
-</div>

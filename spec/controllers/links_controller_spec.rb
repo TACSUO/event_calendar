@@ -64,7 +64,7 @@ describe LinksController do
         put :update, params
         flash[:notice].should_not be_nil
       end
-      it "redirects to @event" do
+      it "as http: redirects to @event" do
         put :update, params
         response.should redirect_to event_path(event)
       end
@@ -73,10 +73,14 @@ describe LinksController do
       before(:each) do
         link.stub(:update_attributes){ false }
       end
-      it "renders the edit template" do
+      it "as http: renders the edit template" do
         put :update, params
         response.should render_template('links/edit')
       end
+    end
+    it "as xhr: renders update.rjs" do
+      xhr :put, :update, params
+      response.should render_template('links/update')
     end
   end
   describe "POST :create, :event_id => int, :link => {}" do
@@ -98,7 +102,7 @@ describe LinksController do
       event.should_receive(:save!)
       post :create, params
     end
-    it "renders events/show if an ActiveRecord::RecordInvalid exception is raised" do
+    it "as http: renders events/show if an ActiveRecord::RecordInvalid exception is raised" do
       event.stub(:save!){ raise ActiveRecord::RecordInvalid.new(event) }
       post :create, params
       response.should render_template('events/show')
@@ -107,9 +111,13 @@ describe LinksController do
       post :create, params
       flash[:notice].should_not be_nil
     end
-    it "redirects to the event" do
+    it "as http: redirects to the event" do
       post :create, params
       response.should redirect_to event_path(event)
+    end
+    it "as xhr: renders create.rjs" do
+      xhr :post, :create, params
+      response.should render_template('links/create')
     end
   end
   describe "DELETE :destroy, :event_id => int, :id => int" do
@@ -124,9 +132,13 @@ describe LinksController do
       link.should_receive(:destroy)
       delete :destroy, params
     end
-    it "redirects to :event_id" do
+    it "as http: redirects to :event_id" do
       delete :destroy, params
       response.should redirect_to event_path event.id
+    end
+    it "as xhr: renders destroy.rjs" do
+      xhr :delete, :destroy, params
+      response.should render_template('links/destroy')
     end
   end
 end
