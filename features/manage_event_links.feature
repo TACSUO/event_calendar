@@ -8,7 +8,7 @@ Feature: Manage event links
     Then I should see "Link successfully created."
     And I should be on the event page for "Editable Event"
     And I should see "Resource Alpha"
-    And I should see "( http://test.com )"
+    And I should see "http://test.com"
   
   Scenario: edit a link
     Given I am on the event page for "Editable Event"
@@ -19,3 +19,11 @@ Feature: Manage event links
     And I press "Update Link"
     Then I should see "Link successfully updated."
     And I should be on the event page for "Editable Event"
+    And I should see "Updated Link"
+    
+  Scenario: delete a link
+    Given I am on the event page for "Editable Event"
+    When I follow "delete" within "div.event > div.links > p:first-child"
+    Then I should see "Link successfully deleted."
+    And I should be on the event page for "Editable Event"
+    And I should not see "Editable Link"

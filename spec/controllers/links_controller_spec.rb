@@ -112,4 +112,21 @@ describe LinksController do
       response.should redirect_to event_path(event)
     end
   end
+  describe "DELETE :destroy, :event_id => int, :id => int" do
+    let(:params) do
+      {:event_id => event.id, :id => link.id}
+    end
+    before(:each) do
+      link.stub(:destroy){ nil }
+      Link.should_receive(:find){ link }
+    end
+    it "destroys a link" do
+      link.should_receive(:destroy)
+      delete :destroy, params
+    end
+    it "redirects to :event_id" do
+      delete :destroy, params
+      response.should redirect_to event_path event.id
+    end
+  end
 end
