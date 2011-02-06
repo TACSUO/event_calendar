@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20110206000427) do
   create_table "event_calendar_links", :force => true do |t|
     t.string   "name"
     t.string   "url"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

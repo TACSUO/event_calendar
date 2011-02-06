@@ -2,13 +2,14 @@ Feature: Manage event links
 
   Scenario: create a new link
     Given I am on the event page for "Editable Event"
-    When I fill in "Name" with "Resource Alpha"
-    And I fill in "URL" with "test.com"
+    When I fill in "Name" with "H20 is not scarce"
+    And I fill in "URL" with "water.example.com"
+    And I fill in "Description" with "Statistics, Analysis and News regarding the sudden and unexpected rise in the population of water molecules."
     And I press "Create Link"
     Then I should see "Link successfully created."
     And I should be on the event page for "Editable Event"
-    And I should see "Resource Alpha"
-    And I should see "http://test.com"
+    And I should see "H20 is not scarce"
+    And I should see "http://water.example.com"
   
   Scenario: edit a link
     Given I am on the event page for "Editable Event"

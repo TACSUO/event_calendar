@@ -3,6 +3,7 @@ class CreateEventCalendarLinks < ActiveRecord::Migration
     create_table :event_calendar_links do |t|
       t.string :name
       t.string :url
+      t.text :description
       
       t.timestamps
     end
@@ -17,5 +18,6 @@ class CreateEventCalendarLinks < ActiveRecord::Migration
 
   def self.down
     drop_table :event_calendar_links
+    drop_table :event_calendar_events_links
   end
 end

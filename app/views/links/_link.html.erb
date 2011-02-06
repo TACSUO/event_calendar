@@ -1,5 +1,6 @@
-<%= content_tag_for :p, link do %>
+<%= content_tag_for :p, link, :class => 'zoom' do %>
   <%= link_to link.name, link.url, :class => 'link_name' %> <em class="link_url"><%= link.url %></em>
   <%= link_to_edit_link(@event, link, {}, {:class => 'edit fake_button magic'}) %>
-  <%= link_to_delete_link(@event, link, {}, {:class => 'fake_button magic'}) %>
+  <%= link_to_delete_link(@event, link, {}, {:class => 'fake_button magic'}) %><br>
+  <span class="link_description"><%= link.description %></span>
 <% end %>
