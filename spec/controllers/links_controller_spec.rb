@@ -98,8 +98,8 @@ describe LinksController do
       event.links.should_receive(:build).with(link_params.stringify_keys)
       post :create, params.merge!({:link => link_params})
     end
-    it "saves! the @event" do
-      event.should_receive(:save!)
+    it "saves! the @event, without triggering a revision" do
+      event.should_receive(:save!).with(:without_revision => true)
       post :create, params
     end
     it "as http: renders events/show if an ActiveRecord::RecordInvalid exception is raised" do

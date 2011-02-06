@@ -1,8 +1,18 @@
 class LinksController < EventCalendar::ApplicationController  
-  before_filter :event, :only => [:new, :show, :edit]
   private
     def event
       @event ||= Event.find(params[:event_id])
+    end
+    def link
+      @link ||= if params[:id].present?
+                  Link.find(params[:id])
+                else
+                  event.links.build(params[:link])
+                end
+    end
+    def load_resources
+      event
+      link
     end
     def redirect_to_event
       redirect_to event_path params[:event_id]
@@ -16,17 +26,16 @@ class LinksController < EventCalendar::ApplicationController
   protected
   public
     def new
-      @link = event.links.build
+      load_resources
     end
     def show
-      @link = Link.find(params[:id])
+      load_resources
     end
     def edit
-      @link = Link.find(params[:id])
+      load_resources
     end
     def update
-      @link = Link.find(params[:id])
-      if @link.update_attributes(params[:link])
+      if link.update_attributes(params[:link])
         flash[:notice] = "Link successfully updated." unless request.xhr?
         event if request.xhr?
         respond{ redirect_to_event }
@@ -36,17 +45,16 @@ class LinksController < EventCalendar::ApplicationController
       end
     end
     def create
-      @link = event.links.build(params[:link])
+      load_resources
       begin
-        event.save!
-        flash[:notice] = "Link successfully created."
+        event.save!(:without_revision => true)
+        flash[:notice] = "Link successfully created." unless request.xhr?
         respond{ redirect_to_event }
       rescue ActiveRecord::RecordInvalid
         respond{ render 'events/show' and return }
       end
     end
     def destroy
-      link = Link.find(params[:id])
       link.destroy
       flash[:notice] = "Link successfully deleted."
       redirect_to_event
