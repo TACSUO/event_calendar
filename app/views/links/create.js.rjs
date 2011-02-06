@@ -1,5 +1,14 @@
-page << %Q{
-  $('div.links > p.new').before('#{escape_javascript(render(@link))}');
-  $('#link_dynamic_form').hide();
-  $('#link_#{@link.id}').find('.magic').hide();
-}
+if @link.valid?
+  page << %Q{
+    $('div.links > p.new').before('#{escape_javascript(render(@link))}');
+    $('#link_dynamic_form').remove();
+    $('#link_#{@link.id}').find('.magic').hide();
+  }
+else
+  page << %Q{
+    $('#link_dynamic_form').replaceWith('#{escape_javascript(render({
+      :partial => 'links/form'
+    }))}');
+    $('#link_dynamic_form').attach(Remote.Form);
+  }
+end

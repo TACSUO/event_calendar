@@ -129,38 +129,25 @@ ShowHideLink = $.klass({
     return this.doNotStop;
   }
 });
-/*
-$('#file_attachments').attach(DynamicForm, {
-  formElement: $('#file_attachment_dynamic_form')
-});
-<form id="file_attachment_dynamic_form" class="formtastic" method="post" action="<%= file_attachments_path %>" style="display: none; padding: 5px 0;">
-  <div style="margin: 0pt; padding: 0pt; display: inline;">
-    <input type="hidden" value="put" name="_method" />
-    <input type="hidden" value="<%= form_authenticity_token %>" name="authenticity_token" />
-  </div>
-  <input type="text" id="file_attachment_name" name="file_attachment[name]" />
-  <textarea id="file_attachment_description" style="height: 70px; width: 69%" name="file_attachment[description]"></textarea>
-  <br />
-  <input type="submit" value="Update" /> | <a href="#" class="cancel_dynamic_form fake_button">Cancel</a>
-</form>
-*/
+
 DynamicForm = $.klass({
   initialize: function(options) {
     this.formElement = options.formElement;
-    this.formElement.attach(Remote.Form);
     this.resourceType = this.formElement.attr('id').replace('_dynamic_form', '');
     this.resourceInputs = this.formElement.find(':input[id^="'+this.resourceType+'"]');
     this.resourcePlural = this.element.attr('id');
     this.originalAction = this.formElement.attr('action');
-    this.formElement.hide();
+    this.formElement.remove();
   },
   onclick: $.delegate({
     '.new': function(clickedElement, event) {
       event.preventDefault();
+      $('#'+this.formElement.attr('id')).remove();
       this.formElement.clearForm();
       this.formElement.attr('action', this.originalAction);
       this.formElement.find(':input[name="_method"]').attr('value', 'post');
       this.formElement.insertAfter(clickedElement);
+      this.formElement.attach(Remote.Form);
       this.formElement.show();
     },
     '.cancel': function(clickedElement, event) {
@@ -168,10 +155,11 @@ DynamicForm = $.klass({
       this.formElement.clearForm();
       this.formElement.attr('action', this.originalAction);
       this.formElement.find(':input[name="_method"]').attr('value', 'post');
-      this.formElement.hide();
+      $('#'+this.formElement.attr('id')).remove();
     },
     '.edit': function(clickedElement, event) {
       event.preventDefault();
+      $('#'+this.formElement.attr('id')).remove();
       
       var resourceContainer = clickedElement.parents('.' + this.resourceType);
       var resourceId = /\d+/.exec(resourceContainer.attr('id'))[0];
@@ -194,6 +182,7 @@ DynamicForm = $.klass({
         }
       });
       
+      this.formElement.attach(Remote.Form);
       this.formElement.show();
     }
   })
