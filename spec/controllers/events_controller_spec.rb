@@ -10,7 +10,8 @@ describe EventsController do
       :end_on => Date.tomorrow,
       :timezone => 'Pacific Time (US & Canada)',
       :description => 'Some Description',
-      :location => 'Some City'
+      :location => 'Some City',
+      :links => mock('Relation', :build => mock_model(Link))
     })
   end
   let(:params) do

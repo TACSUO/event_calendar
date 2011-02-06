@@ -6,6 +6,7 @@ class Event < ActiveRecord::Base
   include EventInstanceMethods
 
   has_many :attendees
+  has_and_belongs_to_many :links, :join_table => 'event_calendar_events_links'
 
   validates_presence_of :name, :event_type, :start_on
   

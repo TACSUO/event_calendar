@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110204223256) do
+ActiveRecord::Schema.define(:version => 20110206000427) do
 
   create_table "event_calendar_attendees", :force => true do |t|
     t.integer  "event_id"
@@ -43,6 +43,20 @@ ActiveRecord::Schema.define(:version => 20110204223256) do
     t.string   "timezone"
     t.text     "presenters"
     t.text     "facilitators"
+  end
+
+  create_table "event_calendar_events_links", :id => false, :force => true do |t|
+    t.integer "event_id"
+    t.integer "link_id"
+  end
+
+  add_index "event_calendar_events_links", ["event_id", "link_id"], :name => "index_event_calendar_events_links_on_event_id_and_link_id"
+
+  create_table "event_calendar_links", :force => true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

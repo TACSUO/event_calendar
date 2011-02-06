@@ -77,6 +77,7 @@ class EventsController < EventCalendar::ApplicationController
   def show
     # @event = Event.find(params[:id], :include => :file_attachments)
     @event = Event.find(params[:id])
+    @link = @event.links.build
     
     respond_to do |format|
       format.html # show.html.erb

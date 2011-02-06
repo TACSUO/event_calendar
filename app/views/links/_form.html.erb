@@ -1,0 +1,11 @@
+<% submission_path = @link.new_record? ? event_links_path(@event) : event_link_path(@event, @link) %>
+<div style="width: 550px;">
+<%= semantic_form_for(@link, :url => submission_path) do |form| %>
+  <%= form.inputs do %>
+    <%= form.input :name, :hint => "2011 Proposals" %>
+    <%= form.input :url, :label => 'URL', :hint => "tacs.uoregon.edu/proposals/2011 or http://tacs.uor..." %>
+    <%= form.submit %>
+  <% end %>
+<% end %>
+
+</div>
