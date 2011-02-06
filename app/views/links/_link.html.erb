@@ -1,1 +1,1 @@
-<p><a href="<%= link.url %>"><%= link.name %></a> ( <em><%= link.url %></em> )</p>
+<p class="link"><a href="<%= link.url %>"><%= link.name %></a> ( <em><%= link.url %></em> ) <%= link_to_edit_link(@event, link, {}, {:class => 'fake_button magic'}) %> <%= link_to_delete_link(@event, link, {}, {:class => 'fake_button magic'}) %></p>

@@ -13,6 +13,13 @@ module NavigationHelpers
 
     when /the event page for "(.*)"/
       event_path(Event.find_by_name($1))
+      
+    when /the edit link page for "(.*)" "(.*)"/
+      event = Event.find_by_name($1)
+      link = Link.find_by_name($2)
+      p 'event not found' if event.nil?
+      p 'link not found' if link.nil?
+      edit_event_link_path(event.id, link.id)
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

@@ -129,35 +129,69 @@ ShowHideLink = $.klass({
     return this.doNotStop;
   }
 });
-
+/*
+$('#file_attachments').attach(DynamicForm, {
+  formElement: $('#file_attachment_dynamic_form')
+});
+<form id="file_attachment_dynamic_form" class="formtastic" method="post" action="<%= file_attachments_path %>" style="display: none; padding: 5px 0;">
+  <div style="margin: 0pt; padding: 0pt; display: inline;">
+    <input type="hidden" value="put" name="_method" />
+    <input type="hidden" value="<%= form_authenticity_token %>" name="authenticity_token" />
+  </div>
+  <input type="text" id="file_attachment_name" name="file_attachment[name]" />
+  <select id="file_attachment_file_container" name="file_attachment[file_container]">
+    <%= render({
+      :partial => 'file_attachments/file_container_select',
+      :locals => {
+        :selected => "#{params[:attachable_type]}_#{params[:attachable_id]}"
+      }
+    }) %>
+  </select>
+  <textarea id="file_attachment_description" style="height: 70px; width: 69%" name="file_attachment[description]"></textarea>
+  <br />
+  <input type="submit" value="Update" /> | <a href="#" class="cancel_dynamic_form fake_button">Cancel</a>
+</form>
+*/
 DynamicForm = $.klass({
   initialize: function(options) {
-    this.formId = options.formId; // new_description
-    this.formContainer = options.formContainer; // blank_description_form
-    this.targetIdName = options.targetIdName; // file_attachment_id
-    this.targetContentName = options.targetContentName; // file_attachment[description]
-    this.targetContentType = options.targetContentType;
-    this.actionPrefix = options.actionPrefix; // /file_attachments
+    this.formElement = options.formElement;
+    this.formElement.attach(Remote.Form);
+    this.resourceType = this.formElement.attr('id').replace('_dynamic_form', '');
+    this.resourceInputs = this.formElement.find(':input[id^="'+this.resourceType+'"]');
+    this.resourcePlural = this.element.attr('id');
   },
-  onclick: function(e) {
-    e.preventDefault();
-
-    var targetIdValue = this.element.attr(this.targetIdName);
-    var targetContentValue = this.element.attr(this.targetContentName);
-
-    $('#' + this.formId).attr("action", this.actionPrefix + "/" + targetIdValue);
-
-    $('#' + this.formId).clearForm();
-    
-    $('#' + this.formContainer).insertBefore(this.element);
-
-    $(this.targetContentType + '[name='+ this.targetContentName +']').val(targetContentValue);
-
-    $('#' + this.formContainer).show();
-  }
+  onclick: $.delegate({
+    '.cancel_dynamic_form': function(clickedElement, event) {
+      event.preventDefault();
+      this.formElement.hide();
+    },
+    '.link_dynamic_form_link': function(clickedElement, event) {      
+      event.preventDefault();
+      
+      var resourceContainer = clickedElement.parents('.' + this.resourceType);
+      var resourceId = /\d+/.exec(resourceContainer.attr('id'))[0];
+      
+      // append resourceId to current form action
+      this.formElement.attr("action", "/" + this.resourcePlural + "/" + resourceId);
+      
+      // clear form input values
+      this.formElement.clearForm();
+      // move form to resource
+      this.formElement.insertBefore(clickedElement);
+      
+      this.resourceInputs.each(function() {
+        // get resource attr names from form input ids
+        var resourceAttrContainer = resourceContainer.find('.'+this.id);
+        // get resource attr vals from w/in resource container
+        this.value = $.trim(resourceAttrContainer.text());
+      });
+      
+      this.formElement.show();
+    }
+  })
 });
 
-EventView = $.klass({
+var EventView = $.klass({
   onclick: function(e) {
     if( this.element.hasClass('calendar') ) {
       $('#event_list').hide();
@@ -165,6 +199,24 @@ EventView = $.klass({
     } else if( this.element.hasClass('list') ) {
       $('#event_calendar').hide();
       $('#event_list').show();
+    }
+  }
+});
+
+var MagicButtons = $.klass({
+  initialize: function() {
+    if( this.element.find('.magic').size() > 0 ) {
+      this.element.find('.magic').hide();
+    }
+  },
+  onmouseover: function(e) {
+    if( this.element.find('.magic').size() > 0 ) {
+      this.element.find('.magic').show();
+    }
+  },
+  onmouseout: function(e) {
+    if( this.element.find('.magic').size() > 0 ) {
+      this.element.find('.magic').hide();
     }
   }
 });

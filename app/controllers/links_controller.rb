@@ -7,6 +7,18 @@ class LinksController < EventCalendar::ApplicationController
     end
   protected
   public
+    def edit
+      @link = Link.find(params[:id])
+    end
+    def update
+      @link = Link.find(params[:id])
+      if @link.update_attributes(params[:link])
+        flash[:notice] = "Link successfully updated."
+        redirect_to event_path(@event)
+      else
+        render :edit and return
+      end
+    end
     def create
       @link = @event.links.build(params[:link])
       begin

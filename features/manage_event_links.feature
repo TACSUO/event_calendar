@@ -10,5 +10,12 @@ Feature: Manage event links
     And I should see "Resource Alpha"
     And I should see "( http://test.com )"
   
-  
-  
+  Scenario: edit a link
+    Given I am on the event page for "Editable Event"
+    When I follow "edit" within "div.event > div.links > p:first-child"
+    Then I should be on the edit link page for "Editable Event" "Editable Link"
+    When I fill in "Name" with "Updated Link"
+    And I fill in "URL" with "example.com"
+    And I press "Update Link"
+    Then I should see "Link successfully updated."
+    And I should be on the event page for "Editable Event"

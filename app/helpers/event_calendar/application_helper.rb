@@ -144,6 +144,26 @@ module EventCalendar::ApplicationHelper
       :link_text => "Edit <em>#{h(event.name)}</em>".html_safe
     }.merge!(link_options))
   end
+  
+  def link_to_edit_link(event, link, wrapper_options={}, link_options={})
+    return unless has_authorization?(:update, link)
+    link_wrapper(edit_event_link_path(event, link), {
+      :no_wrapper => true
+    }.merge!(wrapper_options), {
+      :link_text => "edit"
+    }.merge!(link_options))
+  end
+  
+  def link_to_delete_link(event, link, wrapper_options={}, link_options={})
+    return unless has_authorization?(:delete, link)
+    link_wrapper(event_link_path(event, link), {
+      :no_wrapper => true
+    }.merge!(wrapper_options), {
+      :link_text => 'delete',
+      :confirm => "Are you sure you want to permanently delete the #{link.name} link?",
+      :method => "delete"
+    }.merge!(link_options))
+  end
 
   def link_to_delete_event(event, wrapper_options={}, link_options={})
     return unless has_authorization?(:delete, event)
