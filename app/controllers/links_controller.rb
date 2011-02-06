@@ -49,6 +49,6 @@ class LinksController < EventCalendar::ApplicationController
       link = Link.find(params[:id])
       link.destroy
       flash[:notice] = "Link successfully deleted."
-      respond{ redirect_to_event }
+      redirect_to_event
     end
 end

@@ -136,9 +136,5 @@ describe LinksController do
       delete :destroy, params
       response.should redirect_to event_path event.id
     end
-    it "as xhr: renders destroy.rjs" do
-      xhr :delete, :destroy, params
-      response.should render_template('links/destroy')
-    end
   end
 end
