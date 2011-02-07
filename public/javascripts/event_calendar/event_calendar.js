@@ -18,7 +18,7 @@ jQuery(function($) {
   $('div.links').attach(QuickZoom);
   $('div.event').attach(QuickZoom);
   $('ul.events').attach(QuickZoom);
-  $('div.links').attach(DynamicForm, {
+  $('div.links').attach(ecDynamicForm, {
     formElement: $('#link_dynamic_form')
   });
 });

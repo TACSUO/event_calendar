@@ -130,7 +130,7 @@ ShowHideLink = $.klass({
   }
 });
 
-DynamicForm = $.klass({
+ecDynamicForm = $.klass({
   initialize: function(options) {
     this.formElement = options.formElement;
     this.resourceType = this.formElement.attr('id').replace('_dynamic_form', '');
