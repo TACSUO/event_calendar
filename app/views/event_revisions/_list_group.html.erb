@@ -6,7 +6,7 @@
       <li><%= month %>
         <ul>
           <% months_events.each do |event| %>
-          <li>
+          <li class="zoom">
             <p>
               <%= link_to event.name, event_revision_path(event) %>
               <%= link_to 'restore', restore_event_revision_path(event),

@@ -50,3 +50,20 @@ Feature: Manage events
     Given I am on the event page for "Editable Event"
     And I follow "Delete Editable Event"
     Then I should be on the events page
+
+  Scenario: deleting then restoring an event
+    Given I am on the event page for "Restorable Event"
+    Then I should see "Time: 09:00 AM - 10:00 AM Eastern / 08:00 AM - 09:00 AM Central / 07:00 AM - 08:00 AM Mountain / 06:00 AM - 07:00 AM Pacific"
+    And I follow "Delete Restorable Event"
+    Then I should be on the events page
+    When I follow "Browse Deleted Events (1)"
+    Then I should be on the event revisions page
+    And I should see "Restorable Event"
+    And I should see "2011"
+    And I should see "February"
+    And I should see "Friday 4th"
+    And I should see "09:00 AM - 10:00 AM Eastern / 08:00 AM - 09:00 AM Central / 07:00 AM - 08:00 AM Mountain / 06:00 AM - 07:00 AM Pacific"
+    When I follow "restore"
+    Then I should be on the event page for "Restorable Event"
+    And I should see "Date: Friday, February 04 2011"
+    And I should see "Time: 09:00 AM - 10:00 AM Eastern / 08:00 AM - 09:00 AM Central / 07:00 AM - 08:00 AM Mountain / 06:00 AM - 07:00 AM Pacific"

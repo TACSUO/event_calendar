@@ -27,7 +27,9 @@ class Event < ActiveRecord::Base
   before_validation do
     if one_day? && ((end_on.present? && start_on.present? && end_on <= start_on) ||
                     (end_on.blank? && start_on.present?))
-      self.end_on = start_on + 1.hour
+      unless changed_attributes.include?(:revisable_deleted_at)
+        self.end_on = start_on + 1.hour
+      end
     end
   end
   
@@ -42,6 +44,7 @@ class Event < ActiveRecord::Base
     end
     
     def adjust_to_utc_from_timezone
+      return true if deleted?
       tz_offset = start_on.in_time_zone(timezone).utc_offset
       self.start_on = self.start_on - tz_offset
       self.end_on = self.end_on - tz_offset

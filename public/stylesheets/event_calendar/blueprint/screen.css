@@ -389,7 +389,7 @@ div.select_popper_box ul li:hover {background:#EEE;}
 ;}
 #event_end_on {width:50%
 ;}
-.enlarge {padding:2px;font-size:115%;-webkit-border-top-right-radius:8px;-webkit-border-top-left-radius:8px;-webkit-border-bottom-right-radius:8px;-webkit-border-bottom-left-radius:8px;-moz-border-radius-topright:8px;-moz-border-radius-topleft:8px;-moz-border-radius-bottomright:8px;-moz-border-radius-bottomleft:8px;border-top-right-radius:8px;border-top-left-radius:8px;border-bottom-right-radius:8px;border-bottom-left-radius:8px;border:1px gray dashed;}
+.enlarge {font-size:115%;}
 
 /* fancy-type */
 p + p {text-indent:2em;margin-top:-1.5em;}

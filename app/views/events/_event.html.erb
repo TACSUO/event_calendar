@@ -3,5 +3,5 @@
   
   <%= render :partial => 'events/event_details', :object => event %>
   
-  <%= render :partial => 'links/links' %>
+  <%= render :partial => 'links/links' if event.current_revision? %>
 <% end %>

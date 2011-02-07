@@ -15,7 +15,7 @@ class EventRevisionsController < EventCalendar::ApplicationController
   
   def restore
     @event_revision = EventRevision.find(params[:id])
-    if @event_revision.restore    
+    if @event_revision.restore
       flash[:notice] = "Event <em>#{@event_revision.name}</em> restored.".html_safe
       redirect_to(event_path(@event_revision))
     else
