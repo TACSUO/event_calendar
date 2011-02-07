@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{event_calendar_engine}
-  s.version = "0.1.11"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jason LaPier", "Jeremiah Heller"]
-  s.date = %q{2011-01-27}
+  s.date = %q{2011-02-06}
   s.description = %q{Provides basic event management features with versioned history of changes.}
   s.email = ["jason.lapier@gmail.com", "jeremiah@inertialbit.net"]
   s.extra_rdoc_files = [
@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
     "app/controllers/event_calendar/application_controller.rb",
     "app/controllers/event_revisions_controller.rb",
     "app/controllers/events_controller.rb",
+    "app/controllers/links_controller.rb",
     "app/helpers/event_calendar/application_helper.rb",
     "app/helpers/events_helper.rb",
     "app/models/attendee.rb",
@@ -33,6 +34,7 @@ Gem::Specification.new do |s|
     "app/models/event.rb",
     "app/models/event_instance_methods.rb",
     "app/models/event_revision.rb",
+    "app/models/link.rb",
     "app/models/participant.rb",
     "app/models/participator.rb",
     "app/views/attendees/_add_attendees.html.erb",
@@ -56,7 +58,6 @@ Gem::Specification.new do |s|
     "app/views/events/_list_group.html.erb",
     "app/views/events/_multi_day_list_event.html.erb",
     "app/views/events/_one_day_list_event.html.erb",
-    "app/views/events/_times.html.erb",
     "app/views/events/attendees.html.erb",
     "app/views/events/edit.html.erb",
     "app/views/events/index.html.erb",
@@ -64,6 +65,14 @@ Gem::Specification.new do |s|
     "app/views/events/search.html.erb",
     "app/views/events/show.html.erb",
     "app/views/layouts/application.html.erb",
+    "app/views/links/_form.html.erb",
+    "app/views/links/_link.html.erb",
+    "app/views/links/_links.html.erb",
+    "app/views/links/create.js.rjs",
+    "app/views/links/edit.html.erb",
+    "app/views/links/new.html.erb",
+    "app/views/links/show.html.erb",
+    "app/views/links/update.js.rjs",
     "config/application.rb",
     "config/blueprint_settings.yml",
     "config/boot.rb",
@@ -87,6 +96,8 @@ Gem::Specification.new do |s|
     "db/migrate/20101011200048_make_events_revisable.rb",
     "db/migrate/20101223221015_change_start_on_end_on_to_timestamp.rb",
     "db/migrate/20101223233354_add_timezone_to_events.rb",
+    "db/migrate/20110204223256_add_presenters_facilitators_to_events.rb",
+    "db/migrate/20110206000427_create_event_calendar_links.rb",
     "db/schema.rb",
     "db/seeds.rb",
     "lib/event_calendar.rb",
@@ -181,12 +192,18 @@ Gem::Specification.new do |s|
     "spec/controllers/attendees_controller_spec.rb",
     "spec/controllers/event_revisions_controller_spec.rb",
     "spec/controllers/events_controller_spec.rb",
+    "spec/controllers/links_controller_spec.rb",
     "spec/fixtures/event_calendar_events.yml",
+    "spec/fixtures/event_calendar_events_links.yml",
+    "spec/fixtures/event_calendar_links.yml",
     "spec/helpers/event_calendar/application_helper_spec.rb",
     "spec/models/deletable_instance_methods_spec.rb",
+    "spec/models/event_instance_methods_spec.rb",
     "spec/models/event_revision_spec.rb",
     "spec/models/event_spec.rb",
+    "spec/models/link_spec.rb",
     "spec/spec_helper.rb",
+    "spec/spec_helpers/helpers.rb",
     "spec/spec_helpers/mocks.rb"
   ]
 
