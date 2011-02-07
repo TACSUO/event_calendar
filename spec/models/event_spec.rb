@@ -48,29 +48,23 @@ describe Event do
     event.should_not be_valid
   end
   
-  context "setting default end_on of start_on + 1.hour if start_on is present and" do
-    before(:each) do
-      Time.zone = 'Pacific Time (US & Canada)'
-    end
-    let(:event) do
-      Event.new(@valid_attributes.merge!({
-        :timezone => 'Pacific Time (US & Canada)',
-        :start_on => 1.hour.from_now,
-        :end_on => nil
-      }))
-    end
-    
-    it "end_on is blank" do
-      event.one_day?.should be_true
-      event.valid?
-      event.end_on.should eq event.start_on + 1.hour
-    end
-    it "end_on <= start_on" do
-      event.end_on = 4.hours.ago
-      event.one_day?.should be_true
-      event.valid?
-      event.end_on.should eq event.start_on + 1.hour
-    end
+  it "adjusts start_on and end_on to utc from timezone when adjust_to_utc == true" do
+    Time.zone = 'Pacific Time (US & Canada)' # mimic default rails behavior
+    f = '%A %B %d %Y @ %H%M'
+    pac_start = 2.hours.from_now
+    pac_end = 4.hours.from_now
+    event = Event.new(@valid_attributes.merge!({
+      :timezone => 'Pacific Time (US & Canada)',
+      :start_on => pac_start,
+      :end_on => pac_end
+    }))
+    event.save!
+    event.start_on.strftime(f).should eq pac_start.strftime(f)
+    event.end_on.strftime(f).should eq pac_end.strftime(f)
+    event.adjust_to_utc = true
+    event.save!
+    event.start_on.strftime(f).should eq pac_start.utc.strftime(f)
+    event.end_on.strftime(f).should eq pac_end.utc.strftime(f)
   end
 
   it "should find event types" do
@@ -101,5 +95,28 @@ describe Event do
     event.save
     event.revision_number.should == 0
   end
-  
+  context "setting default end_on of start_on + 1.hour if start_on is present and" do
+    before(:each) do
+      Time.zone = 'Pacific Time (US & Canada)'
+    end
+    let(:event) do
+      Event.new(@valid_attributes.merge!({
+        :timezone => 'Pacific Time (US & Canada)',
+        :start_on => 1.hour.from_now,
+        :end_on => nil
+      }))
+    end
+    
+    it "end_on is blank" do
+      event.one_day?.should be_true
+      event.valid?
+      event.end_on.should eq event.start_on + 1.hour
+    end
+    it "end_on <= start_on" do
+      event.end_on = 4.hours.ago
+      event.one_day?.should be_true
+      event.valid?
+      event.end_on.should eq event.start_on + 1.hour
+    end
+  end  
 end

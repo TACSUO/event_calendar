@@ -106,7 +106,7 @@ class EventsController < EventCalendar::ApplicationController
   # POST /events.xml
   def create
     @event = Event.new(params[:event])
-    
+    @event.adjust_to_utc = true
     respond_to do |format|
       if @event.save
         flash[:notice] = 'Event was successfully created.'
@@ -124,7 +124,7 @@ class EventsController < EventCalendar::ApplicationController
   # PUT /events/1.xml
   def update
     @event = Event.find(params[:id])
-
+    @event.adjust_to_utc = true
     respond_to do |format|
       if @event.update_attributes(params[:event])
         flash[:notice] = 'Event was successfully updated.'

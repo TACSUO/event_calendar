@@ -11,14 +11,6 @@ module EventCalendar::ApplicationHelper
     link_text = link_options.delete(:link_text) || path
     highlight = wrapper_options.delete(:highlight)
   
-    unless path.blank?
-      if current_page?(path) && (highlight.nil? || highlight)
-        wrapper_options.merge!({
-          :class => (wrapper_options[:class] || '') + " nav_highlight"
-        })
-      end
-    end
-  
     unless wrapper_options.delete(:no_wrapper)
       return content_tag(tag, wrapper_options) do
         link_to(link_text, path, link_options)
@@ -142,6 +134,14 @@ module EventCalendar::ApplicationHelper
     return unless has_authorization?(:update, event)
     link_wrapper(edit_event_path(event), wrapper_options, {
       :link_text => "Edit <em>#{h(event.name)}</em>".html_safe
+    }.merge!(link_options))
+  end
+  
+  def link_to_new_link(event, wrapper_options={}, link_options={})
+    return unless has_authorization?(:create, Link.new)
+    link_wrapper(new_event_link_path(event), wrapper_options, {
+      :link_text => 'New link',
+      :class => 'fake_button'
     }.merge!(link_options))
   end
   

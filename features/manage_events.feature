@@ -36,15 +36,24 @@ Feature: Manage events
     Then I should see "Event was successfully created."
     And I should see "Some implied start and end time"
     And I should see "Date: Friday, March 04 2011"
-    And I should see "Time: 09:00 AM - 10:00 AM Eastern / 08:00 AM - 09:00 AM Central / 07:00 AM - 08:00 AM Mountain / 06:00 AM - 07:00 AM Pacific"
-    
+    And I should see "Time: 09:00 AM - 10:00 AM Eastern / 08:00 AM - 09:00 AM Central / 07:00 AM - 08:00 AM Mountain / 06:00 AM - 07:00 AM Pacific"    
   
-  Scenario: update an event
+  Scenario: update a multi day event
     Given I am on the event page for "Editable Event"
     And I follow "Edit Editable Event"
     And I fill in "Name" with "Updated Event"
     And I press "Update Event"
     Then I should see "Event was successfully updated."
+    
+  Scenario: update a single day event
+    Given I am on the event page for "Linkable Event"
+    And I follow "Edit Linkable Event"
+    And I fill in "Start date" with "02/23/2011"
+    And I fill in "End date" with "02/23/2011"
+    And I select "Pacific Time (US & Canada)" from "Timezone"
+    And I press "Update Event"
+    Then I should be on the event page for "Linkable Event"
+    And I should see "Time: 09:00 AM - 10:00 AM Eastern / 08:00 AM - 09:00 AM Central / 07:00 AM - 08:00 AM Mountain / 06:00 AM - 07:00 AM Pacific"
     
   Scenario: delete an event
     Given I am on the event page for "Editable Event"

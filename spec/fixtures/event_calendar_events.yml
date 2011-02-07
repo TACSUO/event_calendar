@@ -16,3 +16,12 @@ restorable_event:
   start_on: 2011-02-04 14:00:00.000000
   end_on: 2011-02-04 15:00:00.000000
   timezone: 'Pacific Time (US & Canada)'
+  
+linkable_event:
+  id: <%= Fixtures.identify :linkable_event %>
+  name: Linkable Event
+  event_type: Meeting
+  location: "Portland, Oregon"
+  start_on: 2011-02-04 14:00:00.000000
+  end_on: 2011-02-04 15:00:00.000000
+  timezone: 'Pacific Time (US & Canada)'

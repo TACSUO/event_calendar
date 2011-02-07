@@ -1,6 +1,8 @@
 class Event < ActiveRecord::Base
   set_table_name "event_calendar_events"
   
+  attr_accessor :adjust_to_utc
+  
   include ActionView::Helpers::TextHelper
   
   include EventInstanceMethods
@@ -44,7 +46,7 @@ class Event < ActiveRecord::Base
     end
     
     def adjust_to_utc_from_timezone
-      return true if deleted?
+      return true unless adjust_to_utc
       tz_offset = start_on.in_time_zone(timezone).utc_offset
       self.start_on = self.start_on - tz_offset
       self.end_on = self.end_on - tz_offset

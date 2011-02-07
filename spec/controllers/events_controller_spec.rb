@@ -11,7 +11,8 @@ describe EventsController do
       :timezone => 'Pacific Time (US & Canada)',
       :description => 'Some Description',
       :location => 'Some City',
-      :links => mock('Relation', :build => mock_model(Link))
+      :links => mock('Relation', :build => mock_model(Link)),
+      :adjust_to_utc= => nil
     })
   end
   let(:params) do
@@ -78,6 +79,7 @@ describe EventsController do
       end
       before(:each) do
         event.stub(:save){ true }
+        event.stub(:adjust_to_utc=){ true }
         subject.stub(:new){ event }
       end
       describe "with valid params" do
@@ -85,7 +87,10 @@ describe EventsController do
           post :create, params
           assigns(:event).should eq event
         end
-
+        it "sets adjust_to_utc to true" do
+          event.should_receive(:adjust_to_utc=).with(true)
+          post :create, params
+        end
         it "redirects to the created event" do
           post :create, params
           response.should redirect_to event_url event
@@ -122,13 +127,21 @@ describe EventsController do
       before(:each) do
         subject.stub(:find).with("37"){ event }
         event.stub(:update_attributes){ nil }
-      end  
-      it "updates the requested event" do
+        event.stub(:adjust_to_utc=){ true }
+      end
+      it "loads the @event" do
         Event.should_receive(:find).with("37"){ event }
+        put :update, params
+        assigns(:event).should eq event
+      end
+      it "sets adjust_to_utc to true" do
+        event.should_receive(:adjust_to_utc=).with(true)
+        put :update, params
+      end
+      it "updates the requested event" do
         event.should_receive(:update_attributes)
         put :update, params
       end
-
       it "assigns the requested event as @event" do
         put :update, params
         assigns(:event).should eq event
