@@ -3,5 +3,6 @@
   
   <%= render :partial => 'events/event_details', :object => event %>
   
+  <p><strong>Materials/Resources</strong></p>
   <%= render :partial => 'links/links' if event.current_revision? %>
 <% end %>

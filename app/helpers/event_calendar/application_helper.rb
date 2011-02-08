@@ -9,7 +9,6 @@ module EventCalendar::ApplicationHelper
   def link_wrapper(path, wrapper_options={}, link_options={})
     tag       = wrapper_options.delete(:tag) || :p
     link_text = link_options.delete(:link_text) || path
-    highlight = wrapper_options.delete(:highlight)
   
     unless wrapper_options.delete(:no_wrapper)
       return content_tag(tag, wrapper_options) do
