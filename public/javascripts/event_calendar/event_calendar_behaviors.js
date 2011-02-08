@@ -245,8 +245,8 @@ var Collapsible = $.klass({
   },
   onclick: $.delegate({
     '.collapsible': function(clickedElement, event) {
-      expanded = clickedElement.siblings().find(':visible').size();
-      if( expanded < 1 ) {
+      collapsed = clickedElement.parent().find(':hidden').size();
+      if( collapsed > 0 ) {
         event.preventDefault();
       }
       clickedElement.siblings().toggle();
