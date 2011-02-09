@@ -4,7 +4,7 @@ gem 'rails', "3.0.3"
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
-gem 'RedCloth'
+gem 'RedCloth', :require => 'redcloth'
 gem 'prarupa'
 gem 'will_paginate', '~> 3.0.pre2'
 gem 'formtastic'
