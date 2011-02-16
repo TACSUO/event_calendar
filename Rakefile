@@ -8,7 +8,7 @@ EventCalendar::Application.load_tasks
 
 excluded_files = %w(config/database.yml)
 
-Engineer::Tasks.new do |gem|
+Jeweler::Tasks.new do |gem|
   gem.name = "event_calendar_engine"
   gem.summary = %Q{Simple versioned event management for Rails 3.}
   gem.description = %Q{Provides basic event management features with versioned history of changes.}
@@ -24,16 +24,20 @@ Engineer::Tasks.new do |gem|
   gem.test_files = FileList["spec/**/*"]
   excluded_files.each{|f| gem.files.exclude(f)}
 
-  # Include Bundler dependencies
-  Bundler.definition.dependencies.each do |dependency|
-    next if dependency.name == "engineer"
-
-    if (dependency.groups & [:default, :production]).any?
-      gem.add_dependency dependency.name, *dependency.requirement.as_list
-    else
-      gem.add_development_dependency dependency.name, *dependency.requirement.as_list
-    end
-  end
+  gem.add_dependency 'rails', '3.0.3'
+  gem.add_dependency 'RedCloth'
+  gem.add_dependency 'prarupa'
+  gem.add_dependency 'formtastic'
+  gem.add_dependency 'acts_as_revisable'
+  gem.add_dependency 'will_paginate', '~> 3.0.pre2'
+  
+  gem.add_development_dependency 'jeweler'
+  gem.add_development_dependency 'rspec-rails'
+  gem.add_development_dependency 'cucumber-rails'
+  gem.add_development_dependency 'capybara'
+  gem.add_development_dependency 'acts_as_fu'
+  gem.add_development_dependency 'rcov'
+  gem.add_development_dependency 'sqlite3'
 
   # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
 end
