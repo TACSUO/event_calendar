@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{event_calendar_engine}
-  s.version = "0.2.6"
+  s.version = "0.2.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jason LaPier", "Jeremiah Heller"]
@@ -212,6 +212,9 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<formtastic>, [">= 0"])
+      s.add_runtime_dependency(%q<RedCloth>, [">= 0"])
+      s.add_runtime_dependency(%q<prarupa>, [">= 0"])
       s.add_runtime_dependency(%q<event_calendar_engine>, [">= 0"])
       s.add_runtime_dependency(%q<acts_as_revisable>, [">= 0"])
       s.add_development_dependency(%q<engineer>, [">= 0"])
@@ -225,6 +228,13 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<capybara>, [">= 0"])
       s.add_development_dependency(%q<acts_as_fu>, [">= 0"])
       s.add_development_dependency(%q<rcov>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, [">= 0"])
+      s.add_development_dependency(%q<rspec-rails>, [">= 0"])
+      s.add_development_dependency(%q<cucumber-rails>, [">= 0"])
+      s.add_development_dependency(%q<capybara>, [">= 0"])
+      s.add_development_dependency(%q<acts_as_fu>, [">= 0"])
+      s.add_development_dependency(%q<rcov>, [">= 0"])
+      s.add_development_dependency(%q<sqlite3>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, [">= 0"])
       s.add_development_dependency(%q<rspec-rails>, [">= 0"])
       s.add_development_dependency(%q<cucumber-rails>, [">= 0"])
@@ -267,6 +277,9 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rcov>, [">= 0"])
       s.add_development_dependency(%q<sqlite3>, [">= 0"])
     else
+      s.add_dependency(%q<formtastic>, [">= 0"])
+      s.add_dependency(%q<RedCloth>, [">= 0"])
+      s.add_dependency(%q<prarupa>, [">= 0"])
       s.add_dependency(%q<event_calendar_engine>, [">= 0"])
       s.add_dependency(%q<acts_as_revisable>, [">= 0"])
       s.add_dependency(%q<engineer>, [">= 0"])
@@ -280,6 +293,13 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<capybara>, [">= 0"])
       s.add_dependency(%q<acts_as_fu>, [">= 0"])
       s.add_dependency(%q<rcov>, [">= 0"])
+      s.add_dependency(%q<jeweler>, [">= 0"])
+      s.add_dependency(%q<rspec-rails>, [">= 0"])
+      s.add_dependency(%q<cucumber-rails>, [">= 0"])
+      s.add_dependency(%q<capybara>, [">= 0"])
+      s.add_dependency(%q<acts_as_fu>, [">= 0"])
+      s.add_dependency(%q<rcov>, [">= 0"])
+      s.add_dependency(%q<sqlite3>, [">= 0"])
       s.add_dependency(%q<jeweler>, [">= 0"])
       s.add_dependency(%q<rspec-rails>, [">= 0"])
       s.add_dependency(%q<cucumber-rails>, [">= 0"])
@@ -323,6 +343,9 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<sqlite3>, [">= 0"])
     end
   else
+    s.add_dependency(%q<formtastic>, [">= 0"])
+    s.add_dependency(%q<RedCloth>, [">= 0"])
+    s.add_dependency(%q<prarupa>, [">= 0"])
     s.add_dependency(%q<event_calendar_engine>, [">= 0"])
     s.add_dependency(%q<acts_as_revisable>, [">= 0"])
     s.add_dependency(%q<engineer>, [">= 0"])
@@ -336,6 +359,13 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<capybara>, [">= 0"])
     s.add_dependency(%q<acts_as_fu>, [">= 0"])
     s.add_dependency(%q<rcov>, [">= 0"])
+    s.add_dependency(%q<jeweler>, [">= 0"])
+    s.add_dependency(%q<rspec-rails>, [">= 0"])
+    s.add_dependency(%q<cucumber-rails>, [">= 0"])
+    s.add_dependency(%q<capybara>, [">= 0"])
+    s.add_dependency(%q<acts_as_fu>, [">= 0"])
+    s.add_dependency(%q<rcov>, [">= 0"])
+    s.add_dependency(%q<sqlite3>, [">= 0"])
     s.add_dependency(%q<jeweler>, [">= 0"])
     s.add_dependency(%q<rspec-rails>, [">= 0"])
     s.add_dependency(%q<cucumber-rails>, [">= 0"])
