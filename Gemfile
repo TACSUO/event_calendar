@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 gem 'formtastic'
 gem 'RedCloth'
 gem 'prarupa'
+gem 'will_paginate', '~> 3.0.pre2'
 
 gemspec :path => File.expand_path("..", __FILE__)
 

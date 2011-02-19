@@ -67,9 +67,10 @@ class EventsController < EventCalendar::ApplicationController
   end
 
   def search
-    # TODO render a search results page instead of a calendar
-    @events = Event.search(params[:q],
-      :narrow_fields => params[:fields] ? params[:fields].keys : nil).paginate :page => params[:page]
+    @events = Event.search(params[:q], {
+      # :narrow_fields => params[:fields] ? params[:fields].keys : nil
+    }).paginate :page => params[:page]
+    @link = Link.new
   end
   
   # GET /events/1

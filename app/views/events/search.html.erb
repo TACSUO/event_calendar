@@ -1,11 +1,10 @@
+<%= render :partial => 'events/search_form' %>
+
 <div class="span-16">
-  <h1>Search Results</h1>
-  
-  <% unless @events.empty? %>
-    <%= render :partial => 'event', :collection => @events %>
+  <h4><%= pluralize(@events.count, 'Result') %> Found</h4>
+  <% if @events.present? and @events.any? %>
+    <%= render 'events/list_group', :events => @events, :closed_or_open => 'open' %>
   <% else %>
     <p>Sorry no events could be located, try broadening your search terms or using partial words.</p>
   <% end %>
 </div>
-
-<%= render :partial => 'sidebar' %>

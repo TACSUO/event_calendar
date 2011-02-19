@@ -1,0 +1,7 @@
+<div class="span-16 last">
+  <h4>Search Events</h4>
+  <%= form_tag search_events_path, :method => :get do %>
+    <%= text_field_tag 'q', params[:q] %>
+    <%= submit_tag 'go', :class => 'fake_button' %><br/>
+  <% end %>
+</div>

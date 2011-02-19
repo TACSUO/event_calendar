@@ -13,6 +13,7 @@ restorable_event:
   name: Restorable Event
   event_type: Meeting
   location: "Portland, Oregon"
+  description: "Focus group to gather requirements for new reporting system."
   start_on: 2011-02-04 14:00:00.000000
   end_on: 2011-02-04 15:00:00.000000
   timezone: 'Pacific Time (US & Canada)'
@@ -22,6 +23,7 @@ linkable_event:
   name: Linkable Event
   event_type: Meeting
   location: "Portland, Oregon"
+  description: "Overview of work done and work still to do. Snacks/drinks provided."
   start_on: 2011-02-04 14:00:00.000000
   end_on: 2011-02-04 15:00:00.000000
   timezone: 'Pacific Time (US & Canada)'
