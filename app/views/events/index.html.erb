@@ -1,11 +1,19 @@
-<p style="float: right;">
-  <a href="#" class="fake_button view_events calendar">Calendar</a>
-  <a href="#" class="fake_button view_events list">List</a>
-</p>
+<div class="span-16 last">
+  <div style="float:left"><%= render :partial => 'search_form' %></div>
+  <p style="float: right;">
+    <a href="#" class="fake_button view_events calendar">Calendar</a>
+    <a href="#" class="fake_button view_events list">List</a>
+  </p>
+</div>
+
+<div style="clear:both;"></div>
+
 <div id="event_calendar">
   <%= render :partial => 'calendar' %>
 </div>
 <div id="event_list" style="display: none;">
   <%= render :partial => 'list' %>
 </div>
-<%= render :partial => 'search_form' %>
+
+<div style="clear:both;"></div>
+

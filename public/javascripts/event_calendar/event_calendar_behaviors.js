@@ -250,6 +250,7 @@ var Collapsible = $.klass({
         event.preventDefault();
       }
       clickedElement.siblings().toggle();
+      clickedElement.toggleClass('open closed');
     }
   })
 });

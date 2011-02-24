@@ -15,9 +15,14 @@ jQuery(function($) {
   $('a.show_hide_link').attach(ShowHideLink);
   $('a.view_events').attach(EventView);
   $('div.links').attach(MagicButtons);
-  $('div.links').attach(QuickZoom);
-  $('div.event').attach(QuickZoom);
-  $('ul.events').attach(QuickZoom);
+
+  /* I'm taking these zooms out - fonts that change size are a first class
+   * ticket to getting slapped by our graphic designer
+   * - Jason 
+   *  $('div.links').attach(QuickZoom);
+   *  $('div.event').attach(QuickZoom);
+   *  $('ul.events').attach(QuickZoom);
+   */
   $('div.links').attach(ecDynamicForm, {
     formElement: $('#link_dynamic_form')
   });

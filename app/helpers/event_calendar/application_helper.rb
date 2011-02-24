@@ -139,7 +139,7 @@ module EventCalendar::ApplicationHelper
   def link_to_new_link(event, wrapper_options={}, link_options={})
     return unless has_authorization?(:create, Link.new)
     link_wrapper(new_event_link_path(event), wrapper_options, {
-      :link_text => 'New link',
+      :link_text => 'Add a new link to this event',
       :class => 'fake_button'
     }.merge!(link_options))
   end
