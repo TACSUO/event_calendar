@@ -13,6 +13,8 @@ class EventsController < EventCalendar::ApplicationController
           :start => event.start_on.in_time_zone(event.timezone),
           :end => event.end_on.in_time_zone(event.timezone),
           :url => event_path(event),
+          :className => "event_#{event.event_type.gsub(' ', '_')}",
+          :allDay => !event.one_day?,
           :details => render_to_string(:partial => 'events/details', :object => event)
         }
       end
@@ -54,9 +56,16 @@ class EventsController < EventCalendar::ApplicationController
   def index
     if params[:start] && params[:end]
       @events = Event.between(Time.at(params[:start].to_i), Time.at(params[:end].to_i))
+      unless params[:event_type].blank?
+        @events = @events.where(:event_type => params[:event_type])
+      end
     else
       @past_events = Event.past.order("start_on ASC")
       @current_events = Event.current.order("start_on ASC")
+      unless params[:event_type].blank?
+        @past_events = @past_events.where(:event_type => params[:event_type])
+        @current_events = @current_events.where(:event_type => params[:event_type])
+      end
     end
 
     respond_to do |format|

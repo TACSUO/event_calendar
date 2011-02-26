@@ -9,3 +9,13 @@
 	border: 0 !important; /* important overrides pre jquery ui 1.7 styles */
 	background: url(data:image/gif;base64,AAAA) !important; /* hover fix for IE */
 	}
+
+.fc td { text-align: center; }
+
+.event_conference,
+  .fc-agenda .event_conference .fc-event-time,
+  .event_conference a { background-color: #0A0; border-color: #090; color: white; }
+
+.event_meeting,
+  .fc-agenda .event_meeting .fc-event-time,
+  .event_meeting a { background-color: #C00; border-color: #900; color: white; }
