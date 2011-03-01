@@ -1,3 +1,9 @@
+<% if params[:event_type].blank? %>
+  <h1>All Events</h1>
+<% else %>
+  <h1>Events: <%= params[:event_type] %></h1>
+<% end %>
+
 <div class="span-16 last">
   <div style="float:left"><%= render :partial => 'search_form' %></div>
   <p style="float: right;">
@@ -13,6 +19,14 @@
 </div>
 <div id="event_list" style="display: none;">
   <%= render :partial => 'list' %>
+</div>
+
+<div style="clear:both;">
+  Events filter: 
+  <%= form_tag events_path, :method => :get, :style => 'display:inline' do %>
+    <%= select_tag :event_type, '<option value="">all</option>'.html_safe + options_for_select(Event.existing_event_types, params[:event_type]) %>
+    <%= submit_tag "go" %>
+  <% end %>
 </div>
 
 <div style="clear:both;"></div>
