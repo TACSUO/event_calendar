@@ -7,13 +7,8 @@
       <li><span class="collapsible <%= closed_or_open %>"><%= month %></span>
         <ul>
           <% months_events.each do |event| %>
-          <li class="zoom">
-            <p class="collapsible closed"><%= event.name %> (<%= event.start_on.strftime("%a") %> <%= event.start_day.ordinalize %>)</p>
-            <%- if event.one_day? -%>
-            <%= render :partial => 'events/one_day_list_event', :object => event %>
-            <%- else -%>
-            <%= render :partial => 'events/multi_day_list_event', :object => event %>
-            <%- end -%>
+          <li>
+            <%= event_one_liner(event) %>
           </li>
           <% end %>
         </ul>
