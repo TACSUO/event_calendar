@@ -1,5 +1,7 @@
 class EventRevisionsController < EventCalendar::ApplicationController
   
+  helper EventCalendar::EventsHelper
+  
   def index
     if params[:id]
       redirect_to(event_revision_path(params[:id]))
