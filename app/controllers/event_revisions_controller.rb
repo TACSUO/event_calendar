@@ -1,6 +1,6 @@
 class EventRevisionsController < EventCalendar::ApplicationController
   
-  helper EventCalendar::EventsHelper
+  helper EventsHelper
   
   def index
     if params[:id]
