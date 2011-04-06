@@ -6,9 +6,10 @@
 
 <div class="span-16 last">
   <div style="float:left"><%= render :partial => 'search_form' %></div>
-  <p style="float: right;">
+  <p style="float: right; text-align: center;">
     <a href="#" class="fake_button view_events calendar">Calendar</a>
     <a href="#" class="fake_button view_events list">List</a>
+    <%= link_to_new_event({}, {:class => 'fake_button'}) %>
   </p>
 </div>
 
