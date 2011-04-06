@@ -12,4 +12,25 @@ describe EventCalendar::ApplicationHelper do
       ]
     end
   end
+  
+  describe "open_if_current_month..." do
+    let(:month_names) do
+      %w(January February March April May June July August September October
+        November December)
+    end
+    let(:current_month){Date.current.strftime("%B")}
+    let(:non_current_month){month_names.select{|m| m != current_month}.first}
+    it "returns 'closed' given a non-current-month and nil open_or_closed" do
+      helper.open_if_current_month(non_current_month, nil).should eq 'closed'
+    end
+    it "returns 'open' given a current-month and any open_or_closed" do
+      helper.open_if_current_month(current_month, nil).should eq 'open'
+      helper.open_if_current_month(current_month, 'closed').should eq 'open'
+      helper.open_if_current_month(current_month, 'open').should eq 'open'
+    end
+    it "returns given open_or_closed when it is not nil and a non-current-month" do
+      helper.open_if_current_month(non_current_month, 'open').should eq 'open'
+      helper.open_if_current_month(non_current_month, 'closed').should eq 'closed'
+    end
+  end
 end

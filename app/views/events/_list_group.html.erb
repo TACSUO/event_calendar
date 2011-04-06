@@ -1,10 +1,14 @@
-<%- closed_or_open = closed_or_open.present? ? closed_or_open : 'closed' -%>
+<% closed_or_open = closed_or_open.presence %>
 <ul class="events">
   <% events.group_by(&:start_year).each do |year, years_events| %>
   <li><span class="collapsible open"><%= year %></span>
     <ul>
       <% years_events.group_by(&:start_month).each do |month, months_events| %>
-      <li><span class="collapsible <%= closed_or_open %>"><%= month %></span>
+      <li>
+        <span class="collapsible <%= open_if_current_month(month,
+                                                          closed_or_open) %>">
+          <%= month %>
+        </span>
         <ul>
           <% months_events.each do |event| %>
           <li>

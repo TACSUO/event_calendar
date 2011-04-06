@@ -19,6 +19,13 @@ module EventCalendar::ApplicationHelper
     end
   end
   
+  def open_if_current_month(month, closed_or_open)
+    # setting closed_or_open='closed' in args does not seem to work when a
+    # nil val is passed as the closed_or_open arg
+    closed_or_open = closed_or_open.blank? ? 'closed' : closed_or_open
+    Date.current.strftime("%B") == month ? 'open' : closed_or_open
+  end
+  
   def time_with_zones(time=Time.now)
     out = []
     ActiveSupport::TimeZone.us_zones.map(&:name).each do |us_zone|
