@@ -3,7 +3,7 @@ module EventsHelper
     [
       h(event.name),
       event_abbrev_date(event),
-      event_type_label(event),
+      event_type_label(event.event_type),
       event_details_link(event)
     ].
     join(" ").html_safe
@@ -22,9 +22,23 @@ module EventsHelper
     "<span class=\"fake_button\">#{link_to('Details', send(path, event))}</span>".html_safe
   end
   
-  def event_type_label(event)
-    event_type_css_class = event.event_type.parameterize('_').downcase +
-                           "_category_label"
-    "<span class=\"category_label #{h(event_type_css_class)}\">#{h(event.event_type)}</span>".html_safe
+  def event_type_label(event_type)
+    "<span class=\"category_label #{event_type_css_class(event_type)}\">#{h(event_type)}</span>".html_safe
+  end
+  
+  def event_type_css_class(event_type)
+    css_class = event_type.parameterize('_').downcase
+    h("#{css_class}_event")
+  end
+  
+  def event_type_legend(wrapper_css_class, wrapper_css_style='')
+    return '' unless @event_types.any?
+    
+    content_tag :ul, :class => "#{wrapper_css_class} legend", :style => wrapper_css_style do
+      @event_types.map do |event_type|
+        css_class = event_type_css_class(event_type)
+        content_tag :li, h(event_type), :class => "#{css_class} category_label"
+      end.join("\n").html_safe
+    end
   end
 end

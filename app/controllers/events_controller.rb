@@ -3,6 +3,8 @@ class EventsController < EventCalendar::ApplicationController
   # before_filter :load_and_authorize_current_user, :except => [:index, :show]
   before_filter :parse_dates_from_params, :only => [:create, :update]
   
+  include EventsHelper
+  
   private
     def events_to_json
       return {} unless @events
@@ -14,7 +16,7 @@ class EventsController < EventCalendar::ApplicationController
           :start => event.start_on.in_time_zone(event.timezone),
           :end => event.end_on.in_time_zone(event.timezone),
           :url => event_path(event),
-          :className => "event_#{event.event_type.gsub(' ', '_')}",
+          :className => event_type_css_class(event.event_type),
           :allDay => !event.one_day?,
           :details => render_to_string(:partial => 'events/details', :object => event)
         }
@@ -55,6 +57,7 @@ class EventsController < EventCalendar::ApplicationController
   # GET /events
   # GET /events.xml
   def index
+    @event_types = Event.event_types
     if params[:start] && params[:end]
       @events = Event.between(Time.at(params[:start].to_i), Time.at(params[:end].to_i))
       unless params[:event_type].blank?

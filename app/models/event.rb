@@ -23,6 +23,7 @@ class Event < ActiveRecord::Base
     where(["start_on BETWEEN ? AND ? OR end_on BETWEEN ? AND ?",
       start_datetime, end_datetime, start_datetime, end_datetime])
   }
+  scope :existing_event_types, select('DISTINCT event_type')
   
   validate :sane_dates
   
@@ -54,8 +55,8 @@ class Event < ActiveRecord::Base
   protected
   public  
     
-    def self.existing_event_types
-      select('DISTINCT event_type').map(&:event_type).reject { |ev| ev.blank? }.sort
+    def self.event_types
+      existing_event_types.map(&:event_type).reject { |ev| ev.blank? }.sort
     end
     
     def participants

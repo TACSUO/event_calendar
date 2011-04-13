@@ -1,7 +1,7 @@
 /* resizable */
 /* taken directly from fullcalendar.css - here cuz blueprint's compress.rb
   does not properly compress this style and it results in a syntax error
-  preventing the subsequent styles to not get defined */
+  preventing subsequent styles from being defined */
 .fc .ui-resizable-handle {
 	display: block;
 	position: absolute;
@@ -12,10 +12,32 @@
 
 .fc td { text-align: center; }
 
-.event_conference,
-  .fc-agenda .event_conference .fc-event-time,
-  .event_conference a { background-color: #0A0; border-color: #090; color: white; }
+.fc-event a:link,
+.fc-event a:visited,
+.fc-event a:active {
+  color: white;
+}
 
-.event_meeting,
-  .fc-agenda .event_meeting .fc-event-time,
-  .event_meeting a { background-color: #C00; border-color: #900; color: white; }
+.conference_event,
+  .conference_event a:link,
+  .conference_event a:visited,
+  .conference_event a:active {
+  background-color: #0A0;
+  border-color: #090;
+}
+
+.meeting_event,
+  .meeting_event a:link,
+  .meeting_event a:visited,
+  .meeting_event a:active {
+  background-color: #C00;
+  border-color: #900;
+}
+
+.training_event,
+  .training_event a:link,
+  .training_event a:visited,
+  .training_event a:active {
+  background-color: #F30;
+  border-color: #003;
+}

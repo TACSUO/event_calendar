@@ -70,7 +70,7 @@ describe Event do
   it "should find event types" do
     Event.create!(@valid_attributes)
     Event.create!(@valid_attributes.merge :event_type => 'Conference')
-    Event.existing_event_types.should == ['Conference', 'Meeting']
+    Event.event_types.should == ['Conference', 'Meeting']
   end
   
   it "should create a new version when an attribute is updated" do

@@ -15,17 +15,22 @@
 
 <div style="clear:both;"></div>
 
-<div id="event_calendar">
-  <%= render :partial => 'calendar' %>
-</div>
-<div id="event_list" style="display: none;">
+<div id="event_list" class="event_list">
   <%= render :partial => 'list' %>
 </div>
+<div id="event_calendar" class="event_calendar" style="display: none;">
+  <%= render :partial => 'calendar' %>
+</div>
 
-<div style="clear:both;">
+<div style="clear: both; float: right;">
+  <%= event_type_legend("event_list") %>
+  <%= event_type_legend('event_calendar', 'display: none;') %>
+</div>
+
+<div>
   Events filter: 
   <%= form_tag events_path, :method => :get, :style => 'display:inline' do %>
-    <%= select_tag :event_type, '<option value="">all</option>'.html_safe + options_for_select(Event.existing_event_types, params[:event_type]) %>
+    <%= select_tag :event_type, '<option value="">all</option>'.html_safe + options_for_select(@event_types, params[:event_type]) %>
     <%= submit_tag "go" %>
   <% end %>
 </div>
