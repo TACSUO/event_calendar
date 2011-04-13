@@ -5,9 +5,11 @@ describe EventsController do
   let(:event) do
     mock_model(Event, {
       :name => 'Some Event',
+      :event_type => 'Meeting',
       :start_on => 4.hours.from_now,
       :start_time= => 4.hours.from_now,
-      :end_on => Date.tomorrow,
+      :end_on => 24.hours.from_now,
+      :one_day? => true,
       :timezone => 'Pacific Time (US & Canada)',
       :description => 'Some Description',
       :location => 'Some City',
@@ -37,11 +39,32 @@ describe EventsController do
       end
     end
     
-    describe "GET index as json" do
-      it "renders @events as json" do
-        subject.stub(:between).and_return([event])
-        get :index, :format => 'js'
-        response.should be_success
+    describe "GET index as JSON" do
+      context "no @events are found" do
+        it "renders empty JSON container" do
+          subject.stub(:between){ [] }
+          get :index, :format => 'js'
+          response.body.should eq("{}")
+        end
+      end
+      context "some @events are found" do
+        before(:each) do
+          subject.stub(:between){ [event] }
+        end
+        it "renders a collection of JSON containers" do
+          get :index, :start => Time.now,
+                      :end => Time.now,
+                      :format => 'js'
+          response.body.should =~ /^\[\{.*\}\]$/
+        end
+        %w(id title eventType start end url className allDay details).each do |json_key|
+          it "adds #{json_key} to rendered JSON" do
+            get :index, :start => Time.now,
+                        :end => Time.now,
+                        :format => 'js'
+            response.body.should include("\"#{json_key}\":")
+          end
+        end
       end
     end
 

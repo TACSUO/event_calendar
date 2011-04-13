@@ -10,6 +10,7 @@ class EventsController < EventCalendar::ApplicationController
         {
           :id => event.id,
           :title => event.name,
+          :eventType => event.event_type,
           :start => event.start_on.in_time_zone(event.timezone),
           :end => event.end_on.in_time_zone(event.timezone),
           :url => event_path(event),

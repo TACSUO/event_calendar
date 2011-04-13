@@ -3,7 +3,7 @@ var updateEventDescription = function(event, jsEvent) {
   $("#event_quick_description").empty();
   $("#event_quick_description").append(
     $("<h3/>").append(
-      $('<a/>', { text : event.title, href : event.url })
+      $('<a/>', { text : event.title+' ('+event.eventType+')', href : event.url })
     )
   ).append(event.details);
   $("#event_quick_description").show();
