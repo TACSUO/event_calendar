@@ -24,7 +24,7 @@ Jeweler::Tasks.new do |gem|
   gem.test_files = FileList["spec/**/*"]
   excluded_files.each{|f| gem.files.exclude(f)}
 
-  gem.add_dependency 'rails', '3.0.3'
+  gem.add_dependency 'rails', '~> 3.0.7'
   gem.add_dependency 'RedCloth'
   gem.add_dependency 'prarupa'
   gem.add_dependency 'formtastic'
