@@ -15,7 +15,7 @@ Feature: Manage event links
   
   Scenario: edit a link
     Given I am on the event page for "Linkable Event"
-    When I follow "edit" within "div.event > div.links > p:first-child"
+    When I follow "update" within "div.event > div.links > p:first-child"
     Then I should be on the edit link page for "Linkable Event" "Editable Link"
     When I fill in "Name" with "Updated Link"
     And I fill in "URL" with "example.com"

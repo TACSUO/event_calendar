@@ -156,7 +156,7 @@ module EventCalendar::ApplicationHelper
     link_wrapper(edit_event_link_path(event, link), {
       :no_wrapper => true
     }.merge!(wrapper_options), {
-      :link_text => "edit"
+      :link_text => "update"
     }.merge!(link_options))
   end
   
@@ -187,7 +187,7 @@ module EventCalendar::ApplicationHelper
     link_to_edit_event(event, {
       :no_wrapper => true
     }.merge!(wrapper_options), {
-      :link_text => 'edit'
+      :link_text => 'update'
     }.merge!(link_options)) + " " +
     link_to_delete_event(event, {
       :no_wrapper => true

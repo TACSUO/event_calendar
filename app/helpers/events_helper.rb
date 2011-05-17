@@ -37,7 +37,9 @@ module EventsHelper
     content_tag :ul, :class => "#{wrapper_css_class} legend", :style => wrapper_css_style do
       @event_types.map do |event_type|
         css_class = event_type_css_class(event_type)
-        content_tag :li, h(event_type), :class => "#{css_class} category_label"
+        content_tag :li, :class => "#{css_class} category_label" do
+          link_to h(event_type), events_path(:event_type => event_type)
+        end
       end.join("\n").html_safe
     end
   end

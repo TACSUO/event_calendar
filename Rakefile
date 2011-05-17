@@ -36,6 +36,7 @@ Jeweler::Tasks.new do |gem|
   gem.add_development_dependency 'cucumber-rails'
   gem.add_development_dependency 'capybara'
   gem.add_development_dependency 'acts_as_fu'
+  gem.add_development_dependency 'database_cleaner'
   gem.add_development_dependency 'rcov'
   gem.add_development_dependency 'sqlite3'
 

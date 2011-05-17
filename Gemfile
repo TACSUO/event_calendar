@@ -1,8 +1,12 @@
 source 'http://rubygems.org'
-gem 'formtastic'
-gem 'RedCloth'
-gem 'prarupa'
-gem 'will_paginate', '~> 3.0.pre2'
+group :development, :test do
+  gem 'formtastic'
+  gem 'RedCloth'
+  gem 'prarupa'
+  gem 'will_paginate', '~> 3.0.pre2'
+  gem 'database_cleaner'
+  gem 'capybara'
+end
 
 gemspec :path => File.expand_path("..", __FILE__)
 
