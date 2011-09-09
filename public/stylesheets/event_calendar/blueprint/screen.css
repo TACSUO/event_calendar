@@ -374,6 +374,8 @@ table.fc-header {width:100%;}
 .fc-event-vert .ui-resizable-s {bottom:0 !important;width:100% !important;height:8px !important;line-height:8px !important;font-size:11px !important;font-family:monospace;text-align:center;cursor:s-resize;}
 .calendars {padding-right:20px;}
 #event_quick_description {clear:both;border:1px solid #999;background:#FFC;padding:12px;margin-top:15px;}
+#event_mini_description {width: 250px;max-height:300px;background:#F9F9F9;padding: 4px 8px;border:1px solid #999;overflow:auto;font-size:0.9em;z-index:99;box-shadow:#999 0px 5px 5px;}
+#event_mini_description a {cursor:pointer; color:#900;text-decoration:none;font-weight:bold;}
 .fc-grid table {margin-bottom:0
 ;}
 .fc table {margin-bottom:0;}

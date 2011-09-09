@@ -18,6 +18,7 @@ class EventsController < EventCalendar::ApplicationController
           :url => event_path(event),
           :className => event_type_css_class(event.event_type),
           :allDay => !event.one_day?,
+          :brief => "<em>#{event.event_type}:</em> #{event.description}",
           :details => render_to_string(:partial => 'events/details', :object => event)
         }
       end

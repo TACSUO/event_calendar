@@ -224,7 +224,7 @@ module EventCalendar::ApplicationHelper
   def event_calendar_javascript_includes
     list = [
       "#{event_calendar_asset_prefix}jquery.tablesorter.min.js",
-      "#{event_calendar_asset_prefix}jquery-ui-1.7.2.custom.min.js",
+      "#{event_calendar_asset_prefix}jquery-ui-1.8.16.custom.min.js",
       "#{event_calendar_asset_prefix}jquery.string.1.0-min.js",
       "#{event_calendar_asset_prefix}jquery.clonePosition.js",
       "#{event_calendar_asset_prefix}lowpro.jquery.js",

@@ -7,6 +7,15 @@ var updateEventDescription = function(event, jsEvent) {
     )
   ).append(event.details);
   $("#event_quick_description").show();
+  $("#event_mini_description").empty();
+  $("#event_mini_description").append(
+      $('<div/>', { style : 'float:right' }).append(
+        $('<a/>', { text : 'X', onclick : '$("#event_mini_description").hide()' })
+      )
+  ).append(event.brief);
+  $("#event_mini_description").show();
+  $("#event_mini_description").position({
+    my: "left top", at: "center bottom", of: $(jsEvent.target) });
 }
 
 
@@ -15,14 +24,6 @@ jQuery(function($) {
   $('a.show_hide_link').attach(ShowHideLink);
   $('a.view_events').attach(EventView);
   $('div.links').attach(MagicButtons);
-
-  /* I'm taking these zooms out - fonts that change size are a first class
-   * ticket to getting slapped by our graphic designer
-   * - Jason 
-   *  $('div.links').attach(QuickZoom);
-   *  $('div.event').attach(QuickZoom);
-   *  $('ul.events').attach(QuickZoom);
-   */
   $('div.links').attach(ecDynamicForm, {
     formElement: $('#link_dynamic_form')
   });
