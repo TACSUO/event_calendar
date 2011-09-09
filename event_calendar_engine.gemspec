@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jason LaPier", "Jeremiah Heller"]
-  s.date = %q{2011-05-17}
+  s.date = %q{2011-09-09}
   s.description = %q{Provides basic event management features with versioned history of changes.}
   s.email = ["jason.lapier@gmail.com", "jeremiah@inertialbit.net"]
   s.extra_rdoc_files = [
@@ -115,7 +115,9 @@ Gem::Specification.new do |s|
     "public/javascripts/event_calendar/event_calendar.js",
     "public/javascripts/event_calendar/event_calendar_behaviors.js",
     "public/javascripts/event_calendar/fullcalendar.js",
+    "public/javascripts/event_calendar/jquery-1.4.2.js",
     "public/javascripts/event_calendar/jquery-ui-1.7.2.custom.min.js",
+    "public/javascripts/event_calendar/jquery-ui-1.8.16.custom.min.js",
     "public/javascripts/event_calendar/jquery.clonePosition.js",
     "public/javascripts/event_calendar/jquery.js",
     "public/javascripts/event_calendar/jquery.qtip-1.0.0-rc3.js",
@@ -187,9 +189,9 @@ Gem::Specification.new do |s|
   ]
   s.homepage = %q{http://github.com/inertialbit/event_calendar}
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.5.2}
+  s.rubygems_version = %q{1.5.0}
   s.summary = %q{Simple versioned event management for Rails 3.}
-  s.test_files = ["spec/controllers", "spec/controllers/attendees_controller_spec.rb", "spec/controllers/event_revisions_controller_spec.rb", "spec/controllers/events_controller_spec.rb", "spec/controllers/links_controller_spec.rb", "spec/fixtures", "spec/fixtures/event_calendar_events.yml", "spec/fixtures/event_calendar_events_links.yml", "spec/fixtures/event_calendar_links.yml", "spec/helpers", "spec/helpers/event_calendar", "spec/helpers/event_calendar/application_helper_spec.rb", "spec/models", "spec/models/deletable_instance_methods_spec.rb", "spec/models/event_instance_methods_spec.rb", "spec/models/event_revision_spec.rb", "spec/models/event_spec.rb", "spec/models/link_spec.rb", "spec/spec_helper.rb", "spec/spec_helpers", "spec/spec_helpers/helpers.rb", "spec/spec_helpers/mocks.rb"]
+  s.test_files = ["spec/fixtures", "spec/fixtures/event_calendar_links.yml", "spec/fixtures/event_calendar_events_links.yml", "spec/fixtures/event_calendar_events.yml", "spec/models", "spec/models/deletable_instance_methods_spec.rb", "spec/models/event_spec.rb", "spec/models/event_revision_spec.rb", "spec/models/link_spec.rb", "spec/models/event_instance_methods_spec.rb", "spec/spec_helper.rb", "spec/spec_helpers", "spec/spec_helpers/helpers.rb", "spec/spec_helpers/mocks.rb", "spec/controllers", "spec/controllers/event_revisions_controller_spec.rb", "spec/controllers/events_controller_spec.rb", "spec/controllers/attendees_controller_spec.rb", "spec/controllers/links_controller_spec.rb", "spec/helpers", "spec/helpers/event_calendar", "spec/helpers/event_calendar/application_helper_spec.rb"]
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
@@ -197,6 +199,12 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<event_calendar_engine>, [">= 0"])
       s.add_runtime_dependency(%q<acts_as_revisable>, [">= 0"])
+      s.add_development_dependency(%q<formtastic>, [">= 0"])
+      s.add_development_dependency(%q<RedCloth>, [">= 0"])
+      s.add_development_dependency(%q<prarupa>, [">= 0"])
+      s.add_development_dependency(%q<will_paginate>, ["~> 3.0.pre2"])
+      s.add_development_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_development_dependency(%q<capybara>, [">= 0"])
       s.add_development_dependency(%q<formtastic>, [">= 0"])
       s.add_development_dependency(%q<RedCloth>, [">= 0"])
       s.add_development_dependency(%q<prarupa>, [">= 0"])
@@ -319,6 +327,14 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<acts_as_fu>, [">= 0"])
       s.add_development_dependency(%q<rcov>, [">= 0"])
       s.add_development_dependency(%q<sqlite3>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, [">= 0"])
+      s.add_development_dependency(%q<rspec-rails>, [">= 0"])
+      s.add_development_dependency(%q<cucumber-rails>, [">= 0"])
+      s.add_development_dependency(%q<capybara>, [">= 0"])
+      s.add_development_dependency(%q<acts_as_fu>, [">= 0"])
+      s.add_development_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_development_dependency(%q<rcov>, [">= 0"])
+      s.add_development_dependency(%q<sqlite3>, [">= 0"])
       s.add_runtime_dependency(%q<rails>, ["~> 3.0.7"])
       s.add_runtime_dependency(%q<RedCloth>, [">= 0"])
       s.add_runtime_dependency(%q<prarupa>, [">= 0"])
@@ -336,6 +352,12 @@ Gem::Specification.new do |s|
     else
       s.add_dependency(%q<event_calendar_engine>, [">= 0"])
       s.add_dependency(%q<acts_as_revisable>, [">= 0"])
+      s.add_dependency(%q<formtastic>, [">= 0"])
+      s.add_dependency(%q<RedCloth>, [">= 0"])
+      s.add_dependency(%q<prarupa>, [">= 0"])
+      s.add_dependency(%q<will_paginate>, ["~> 3.0.pre2"])
+      s.add_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_dependency(%q<capybara>, [">= 0"])
       s.add_dependency(%q<formtastic>, [">= 0"])
       s.add_dependency(%q<RedCloth>, [">= 0"])
       s.add_dependency(%q<prarupa>, [">= 0"])
@@ -458,6 +480,14 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<acts_as_fu>, [">= 0"])
       s.add_dependency(%q<rcov>, [">= 0"])
       s.add_dependency(%q<sqlite3>, [">= 0"])
+      s.add_dependency(%q<jeweler>, [">= 0"])
+      s.add_dependency(%q<rspec-rails>, [">= 0"])
+      s.add_dependency(%q<cucumber-rails>, [">= 0"])
+      s.add_dependency(%q<capybara>, [">= 0"])
+      s.add_dependency(%q<acts_as_fu>, [">= 0"])
+      s.add_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_dependency(%q<rcov>, [">= 0"])
+      s.add_dependency(%q<sqlite3>, [">= 0"])
       s.add_dependency(%q<rails>, ["~> 3.0.7"])
       s.add_dependency(%q<RedCloth>, [">= 0"])
       s.add_dependency(%q<prarupa>, [">= 0"])
@@ -476,6 +506,12 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<event_calendar_engine>, [">= 0"])
     s.add_dependency(%q<acts_as_revisable>, [">= 0"])
+    s.add_dependency(%q<formtastic>, [">= 0"])
+    s.add_dependency(%q<RedCloth>, [">= 0"])
+    s.add_dependency(%q<prarupa>, [">= 0"])
+    s.add_dependency(%q<will_paginate>, ["~> 3.0.pre2"])
+    s.add_dependency(%q<database_cleaner>, [">= 0"])
+    s.add_dependency(%q<capybara>, [">= 0"])
     s.add_dependency(%q<formtastic>, [">= 0"])
     s.add_dependency(%q<RedCloth>, [">= 0"])
     s.add_dependency(%q<prarupa>, [">= 0"])
@@ -596,6 +632,14 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<cucumber-rails>, [">= 0"])
     s.add_dependency(%q<capybara>, [">= 0"])
     s.add_dependency(%q<acts_as_fu>, [">= 0"])
+    s.add_dependency(%q<rcov>, [">= 0"])
+    s.add_dependency(%q<sqlite3>, [">= 0"])
+    s.add_dependency(%q<jeweler>, [">= 0"])
+    s.add_dependency(%q<rspec-rails>, [">= 0"])
+    s.add_dependency(%q<cucumber-rails>, [">= 0"])
+    s.add_dependency(%q<capybara>, [">= 0"])
+    s.add_dependency(%q<acts_as_fu>, [">= 0"])
+    s.add_dependency(%q<database_cleaner>, [">= 0"])
     s.add_dependency(%q<rcov>, [">= 0"])
     s.add_dependency(%q<sqlite3>, [">= 0"])
     s.add_dependency(%q<rails>, ["~> 3.0.7"])
