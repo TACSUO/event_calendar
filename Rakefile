@@ -13,7 +13,7 @@ Jeweler::Tasks.new do |gem|
   gem.summary = %Q{Simple versioned event management for Rails 3.}
   gem.description = %Q{Provides basic event management features with versioned history of changes.}
   gem.email = ["jason.lapier@gmail.com", "jeremiah@inertialbit.net"]
-  gem.homepage = "http://github.com/inertialbit/event_calendar"
+  gem.homepage = "https://github.com/TACSUO/event_calendar"
   gem.authors = ["Jason LaPier", "Jeremiah Heller"]
   gem.require_path = 'lib'
   gem.files =  FileList[
